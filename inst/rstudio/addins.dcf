@@ -1,0 +1,4 @@
+Name: Syntax for SAS
+Description: Convert a path for SAS to syntax and stick  at curser.
+Binding: io_sas_path_to_syntax
+Interactive: false

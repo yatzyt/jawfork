@@ -1,0 +1,13 @@
+Package: jaw
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.1.1
+Author: Trevor Olsen <trevorlewisolsen@gmail.com> [aut, cre]
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: GPL-3
+Encoding: UTF-8
+Imports: dplyr, magrittr, rlang, utils, RGtk2, clipr,  haven, sjlabelled, datapasta, lubridate, rstudioapi, stringr
+LazyData: true
+RoxygenNote: 7.1.1
