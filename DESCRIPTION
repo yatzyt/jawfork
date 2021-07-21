@@ -1,11 +1,10 @@
 Package: jaw
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.1
-Author: Trevor Olsen <trevorlewisolsen@gmail.com> [aut, cre]
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Title: Just Another Wrapper
+Version: 0.1.2
+Authors@R: person("Trevor", "Olsen", email = "trevorlewisolsen@gmail.com", role = c("aut", "cre"))
+Description: jaw (Just Another Wrapper) is a data viewer built using GTK in R.
+Depends: R (>= 4.1.0)
 License: GPL-3
 Encoding: UTF-8
 Imports: dplyr, magrittr, rlang, utils, RGtk2, clipr,  haven, sjlabelled, datapasta, lubridate, rstudioapi, stringr
