@@ -14,10 +14,13 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
       message("File does not exists.")
       return(F)
     }
-    if (grepl("\\.sas7bdat$", sas_file_path) == F) {
-      message("Only works on files ending in .sas7bdat.")
+    passed_ext <- z__file_ext(sas_file_path)
+    okay_files <- c("sas7bdat","sav","rds")
+    if ((passed_ext %in% okay_files) == F) {
+      message(paste0("Only works on files ending in: ",paste0(okay_files, collapse=", ")))
       return(F)
     }
+    
   }
 
   tryCatch(
@@ -50,6 +53,8 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
         outer_env$close_all_windows(session_name)
         return(T)
       }, data = list(session_name, outer_env))
+
+      outer_env[[session_name]]$passed_ext <- passed_ext
 
 
 
@@ -1123,7 +1128,7 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
 
       outer_env[[session_name]]$export_name_entry <- RGtk2::gtkEntry()
 
-      export_name <- make.names(gsub("\\.sas7bdat", "", outer_env[[session_name]]$sas_file_basename))
+      export_name <- make.names(gsub(paste0("\\.",outer_env[[session_name]]$passed_ext), "", outer_env[[session_name]]$sas_file_basename))
 
 
       RGtk2::gtkEntrySetText(outer_env[[session_name]]$export_name_entry, export_name)
@@ -1197,7 +1202,7 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
         outer_env$show_load_window()
 
         title <- paste0(
-          gsub("\\.sas7bdat", "", outer_env[[session_name]]$sas_file_basename),
+          gsub(paste0("\\.",outer_env[[session_name]]$passed_ext), "", outer_env[[session_name]]$sas_file_basename),
           " | ", outer_env[[session_name]]$sas_file_path, " | ", as.character(Sys.time())
         )
         RGtk2::gtkWindowSetTitle(outer_env[[session_name]]$windows$main_window, title)

@@ -10,8 +10,30 @@
 e__load_dataset <- function(session_name,outer_env=totem) {
   ls_content <- ls(name = .GlobalEnv)
   if ((outer_env[[session_name]]$sas_file_path %in% ls_content) == F) {
-    outer_env[[session_name]]$data1 <- as.data.frame(haven::read_sas(data_file = outer_env[[session_name]]$sas_file_path))
-    outer_env[[session_name]]$data1_contents <- sas_contents(outer_env[[session_name]]$sas_file_path)
+    if(outer_env[[session_name]]$passed_ext=="sas7bdat"){
+      outer_env[[session_name]]$data1 <- as.data.frame(haven::read_sas(data_file = outer_env[[session_name]]$sas_file_path))
+      outer_env[[session_name]]$data1_contents <- sas_contents(outer_env[[session_name]]$sas_file_path)
+    }else if(outer_env[[session_name]]$passed_ext=="sav"){
+      outer_env[[session_name]]$data1 <- as.data.frame(sjlabelled::unlabel(haven::read_sav(outer_env[[session_name]]$sas_file_path)),stringsAsFactors = FALSE) 
+      outer_env[[session_name]]$data1_contents <- data.frame(
+          "variable" = colnames(outer_env[[session_name]]$data1),
+          "length" = NA,
+          "type" = NA,
+          "label" = NA,
+          "n" = NA,
+          stringsAsFactors = FALSE
+        )
+    }else if(outer_env[[session_name]]$passed_ext=="rds"){
+      outer_env[[session_name]]$data1 <- as.data.frame(readRDS(file=outer_env[[session_name]]$sas_file_path),stringsAsFactors = FALSE) 
+      outer_env[[session_name]]$data1_contents <- data.frame(
+          "variable" = colnames(outer_env[[session_name]]$data1),
+          "length" = NA,
+          "type" = NA,
+          "label" = NA,
+          "n" = NA,
+          stringsAsFactors = FALSE
+        )
+    }
   } else {
     outer_env[[session_name]]$data1 <- as.data.frame(get(x = outer_env[[session_name]]$sas_file_path, envir = .GlobalEnv))
 
@@ -30,7 +52,7 @@ e__load_dataset <- function(session_name,outer_env=totem) {
     "latest" = T,
     "mtime" = file.info(outer_env[[session_name]]$sas_file_path, extra_cols = TRUE)$mtime,
     "load_time" = as.character(Sys.time()),
-    "dataset" = gsub("\\.sas7bdat", "", outer_env[[session_name]]$sas_file_basename),
+    "dataset" = gsub(paste0("\\.",outer_env[[session_name]]$passed_ext), "", outer_env[[session_name]]$sas_file_basename),
     "full_path" = outer_env[[session_name]]$sas_file_path,
     stringsAsFactors = FALSE
   ), totem$settings_list$file_history)
@@ -220,7 +242,7 @@ e__load_dataset_filter_inner <- function(session_name,outer_env=totem) {
         eval(parse(text = cmd), envir = outer_env[[session_name]]$e)
         previous_code <- rbind(data.frame(
           "time" = as.character(Sys.time()),
-          "dataset" = gsub("\\.sas7bdat", "", outer_env[[session_name]]$sas_file_basename),
+          "dataset" = gsub(paste0("\\.",outer_env[[session_name]]$passed_ext), "", outer_env[[session_name]]$sas_file_basename),
           "code" = cmd,
           "full_path" = outer_env[[session_name]]$sas_file_path,
           stringsAsFactors = FALSE
