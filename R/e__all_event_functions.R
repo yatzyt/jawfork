@@ -118,6 +118,10 @@ e__all_event_functions <- function(outer_env = totem) {
     obj_env$df_obj$copy_full()
   }
 
+  i__all_event_functions[["Copy"]][["Table full to file"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env) {
+    obj_env$df_obj$copy_full_to_file()
+  }
+
   i__all_event_functions[["Copy"]][["Table filtered"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env) {
     obj_env$df_obj$copy_filter()
   }
