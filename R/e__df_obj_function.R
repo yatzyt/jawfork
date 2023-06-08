@@ -123,6 +123,28 @@ e__df_obj_function <- function(box, outer_env = totem,obj_env=inner_env) {
     }
   }
 
+  copy_full_to_file <- function(pass_columns = NULL, vector = F) {
+    temp_df<- data.frame(
+      stringsAsFactors = FALSE,
+      A = c(1L, 2L, 3L),
+      B = c("q", "w", "e"),
+      C = c(45L, 34L, 23L)
+    )
+    if (is.null(pass_columns) == T) {
+      temp_df<- obj_env$df_obj_list$full_df
+    } else {
+      if (vector == F) {
+        temp_df<- obj_env$df_obj_list$full_df[, pass_columns, drop = F]
+      } else {
+        temp_df<-  datapasta::vector_construct(obj_env$df_obj_list$full_df[, pass_columns, drop = T])
+      }
+    }
+
+    temp <- tempfile(fileext = ".csv")
+    write.csv(temp_df, file=temp)
+    shell.exec(temp)
+  }
+
   copy_filter <- function(pass_columns = NULL, vector = F) {
     if (is.null(pass_columns) == T) {
       clipr::write_clip(obj_env$df_obj_list$filtered_df, allow_non_interactive = T)
@@ -166,7 +188,7 @@ e__df_obj_function <- function(box, outer_env = totem,obj_env=inner_env) {
     full_data = full_data, get_filtered_df_nrow = get_filtered_df_nrow, update_filter = update_filter,
     draw_table = draw_table, call_generate_full_df = call_generate_full_df,
     current_data = current_data, get_current_row = get_current_row, clear_filters = clear_filters,
-    view = view, copy_full = copy_full, copy_filter = copy_filter,
+    view = view, copy_full = copy_full, copy_full_to_file = copy_full_to_file, copy_filter = copy_filter,
     copy_dataset_layout = copy_dataset_layout, copy_keep = copy_keep,
     copy_label = copy_label, copy_length = copy_length, get_column_classes = get_column_classes, get_column_values = get_column_values
   ))
