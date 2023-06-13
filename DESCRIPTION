@@ -7,6 +7,6 @@ Description: jaw (Just Another Wrapper) is a data viewer built using GTK in R.
 Depends: R (>= 4.1.0)
 License: GPL-3
 Encoding: UTF-8
-Imports: dplyr, magrittr, rlang, utils, RGtk2, clipr,  haven, sjlabelled, datapasta, lubridate, rstudioapi, stringr
+Imports: dplyr, magrittr, rlang, utils, RGtk2, clipr,  haven, sjlabelled, datapasta, lubridate, rstudioapi, stringr, dplyr
 LazyData: true
 RoxygenNote: 7.1.1
