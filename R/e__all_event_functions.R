@@ -251,10 +251,6 @@ e__all_event_functions <- function(outer_env = totem) {
     outer_env$u__inverted_view(session_name, current_row)
   }
 
-  i__all_event_functions[["Summary Table"]][["Open Summary View"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env) {
-    outer_env$u__summary_view(session_name, current_row)
-  }
-
   i__all_event_functions[["Summary Table"]][["Add to Main Filter"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env) {
     outer_env$u__add_before_filter(session_name, current_row)
   }
