@@ -235,6 +235,10 @@ e__all_event_functions <- function(outer_env = totem) {
   i__all_event_functions[["Full Data Table"]][["Add Count to df"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env) {
     outer_env$u__add_count_to_df_summary(session_name, obj_env$table_objects_list$current_row$column)
   }
+  
+  i__all_event_functions[["Full Data Table"]][["Get Summary"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env) {
+    outer_env$u__get_summary(session_name, obj_env$table_objects_list$current_row$column)
+  }
 
 
   #--------------------------------------------
