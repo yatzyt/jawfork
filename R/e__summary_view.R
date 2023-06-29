@@ -17,17 +17,19 @@ e__summary_view <- function(session_name, current_row,outer_env=totem) {
 
   my_filter <- rep(T, nrow(temp_df))
   my_title <- ""
-  
+
   for (x in cross_tab_names) {
     my_title <- paste0(my_title, "| ", x, "==", current_row$row[, x, drop = T])
     my_filter <- my_filter & (temp_df2[, x, drop = T] %in% current_row$row[, x, drop = T])
   }
   
   
-  
-  y <- temp_df2[my_filter, , drop = F]
 
-  outer_env$u__df_view(y, paste0("Summary: ", outer_env[[session_name]]$sas_file_basename, " (", nrow(y), " x ", ncol(y), ")", my_title, "|", as.character(Sys.time())),
-    height = 500, width = 500
+  y <- temp_df[my_filter, , drop = F]
+
+  outer_env$u__df_view(y,
+    paste0("Summary: ", outer_env[[session_name]]$sas_file_basename, " (", nrow(y), " x ", ncol(y), ")", my_title, "|", as.character(Sys.time())),
+    height = 300, width = 500
   )
 }
+
