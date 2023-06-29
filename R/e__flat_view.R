@@ -29,11 +29,11 @@ e__flat_view <- function(session_name, current_row,outer_env=totem) {
   utils::writeClipboard(str = as.vector(cross_tab_names), format = 1)
 
   y <- temp_df[my_filter, , drop = F]
-  z <- y[ , current_row$column]
+  z <- y[current_row$column]
   
 
 
-  outer_env$u__df_view(y,
+  outer_env$u__df_view(z,
     paste0("Flat: ", outer_env[[session_name]]$sas_file_basename, " (", nrow(y), " x ", ncol(y), ")", my_title, "|", as.character(Sys.time())),
     height = 300, width = 500
   )
