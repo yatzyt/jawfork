@@ -26,8 +26,7 @@ e__flat_view <- function(session_name, current_row,outer_env=totem) {
     my_filter <- my_filter & (temp_df2[, x, drop = T] %in% current_row$row[, x, drop = T])
   }
 
-  test <- as.vector("Test copy")
-  utils::writeClipboard(str = test, format = 1)
+  my_filter <- my_filter[, current_row$column]
 
   y <- temp_df[my_filter, , drop = F]
 
