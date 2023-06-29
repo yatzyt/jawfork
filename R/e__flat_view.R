@@ -13,27 +13,21 @@ e__flat_view <- function(session_name, current_row,outer_env=totem) {
   temp_df <- temp_df[, -ncol(temp_df)]
   temp_df2 <- temp_df2[, -ncol(temp_df2)]
 
-
   cross_tab_names <- setdiff(colnames(current_row$row), c("r__", "n", "freq", "lines"))
 
   my_filter <- rep(T, nrow(temp_df))
-
   my_title <- ""
 
   for (x in cross_tab_names) {
     my_title <- paste0(my_title, "| ", x, "==", current_row$row[, x, drop = T])
-
     my_filter <- my_filter & (temp_df2[, x, drop = T] %in% current_row$row[, x, drop = T])
   }
-
-  utils::writeClipboard(str = as.vector(cross_tab_names), format = 1)
-
-  y <- temp_df[my_filter, , drop = F]
-  z <- y[current_row$column]
+  
   
 
+  y <- temp_df[my_filter, , drop = F]
 
-  outer_env$u__df_view(z,
+  outer_env$u__df_view(y,
     paste0("Flat: ", outer_env[[session_name]]$sas_file_basename, " (", nrow(y), " x ", ncol(y), ")", my_title, "|", as.character(Sys.time())),
     height = 300, width = 500
   )
