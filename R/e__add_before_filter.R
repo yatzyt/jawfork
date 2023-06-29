@@ -175,6 +175,19 @@ e__add_count_to_df_summary <- function(session_name, cross_tab_names, outer_env 
   outer_env$u__append_before_code(session_name, cmd)
 }
 
+#' e__get_summary
+#'
+#' @param session_name TODO
+#' @param cross_tab_names TODO
+#' @param outer_env TODO
+#'
+#' @return TODO
+
+e__get_summary <- function(session_name, cross_tab_names, outer_env = totem) {
+  cmd <- paste0("df$n__1 <- add_cross_counts(df, c(\"", paste0(cross_tab_names, collapse = "\", \""), "\"))")
+  outer_env$u__append_before_code(session_name, cmd)
+}
+
 #' e__append_before_code
 #'
 #' @param session_name TODO
