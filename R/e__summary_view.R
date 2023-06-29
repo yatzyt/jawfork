@@ -25,19 +25,19 @@ e__summary_view <- function(session_name, current_row,outer_env=totem) {
   
   
   
-  y <- temp_df2[my_filter, , drop = F]
+  y <- temp_df3[my_filter, , drop = F]
 
-  y <- t(y)
-  y <- as.data.frame(y)
+  #y <- t(y)
+  #y <- as.data.frame(y)
 
-  y_cols <- colnames(y)
-  y_rows <- row.names(y)
+  #y_cols <- colnames(y)
+  #y_rows <- row.names(y)
 
-  y$names <- y_rows
-  y <- y[c("names", y_cols)]
+  #y$names <- y_rows
+  #y <- y[c("names", y_cols)]
 
 
   outer_env$u__df_view(y, paste0("Summary: ", outer_env[[session_name]]$sas_file_basename, " (", nrow(y), " x ", ncol(y), ")", my_title, "|", as.character(Sys.time())),
-    height = 500, width = 300
+    height = 500, width = 500
   )
 }
