@@ -25,7 +25,7 @@ e__summary_view <- function(session_name, current_row,outer_env=totem) {
   
   
   
-  y <- temp_df3[my_filter, , drop = F]
+  y <- temp_df2[my_filter, , drop = F]
 
   #y <- t(y)
   #y <- as.data.frame(y)
