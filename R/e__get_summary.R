@@ -29,7 +29,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
   col <- temp_df[[current_row$column]]
   Statistic <- c("N", "Mean (SD)", "Median", "(Q1, Q3)", "Min, Max")
   quantiles <- quantile(col, prob = c(0.50, 0.25, 0.75, 0.00, 1.00), type = 1, na.rm = T, names = F)
-  Value <- as.character(c(sum(!is.na(col)), paste0(mean(col, na.rm = T), " (", sd(col, na.rm = T), ")"), quantiles[1], paste0("(", quantiles[2], ", ", quantiles[3], ")"), paste0(quantiles[4], ", ", quantiles[5])))
+  Value <- as.character(c(sum(!is.na(col)), paste0(round(mean(col, na.rm = T, digits = 4)), " (", round(sd(col, na.rm = T, digits = 4)), ")"), quantiles[1], paste0("(", quantiles[2], ", ", quantiles[3], ")"), paste0(quantiles[4], ", ", quantiles[5])))
   y <- data.frame(Statistic, Value)
   
 
