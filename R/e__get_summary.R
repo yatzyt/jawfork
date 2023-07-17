@@ -33,7 +33,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
   
 
   outer_env$u__df_view(y,
-    paste0("Summary: ", outer_env[[session_name]]$sas_file_basename, " (", nrow(y), " x ", ncol(y), ")", my_title, "|", as.character(Sys.time())),
+    paste0("Summary: ", outer_env[[session_name]]$sas_file_basename, "|", as.character(Sys.time())),
     height = 300, width = 500
   )
 }
