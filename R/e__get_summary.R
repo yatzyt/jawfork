@@ -25,7 +25,8 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
   
   
 
-  y <- temp_df[my_filter, , drop = F]
+  #y <- temp_df[my_filter, , drop = F]
+  y <- temp_df
 
   outer_env$u__df_view(y,
     paste0("Summary: ", outer_env[[session_name]]$sas_file_basename, " (", nrow(y), " x ", ncol(y), ")", my_title, "|", as.character(Sys.time())),
