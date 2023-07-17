@@ -27,9 +27,11 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
 
   #y <- temp_df[my_filter, , drop = F]
   col <- temp_df[[current_row$column]]
-  Statistic <- c("Mean", "Placeholder")
-  Value <- c(mean(col, na.rm = T), 18)
+  Statistic <- c("Mean")
+  Value <- c(mean(col, na.rm = T))
   y <- data.frame(Statistic, Value)
+  y <- rbind(y, c("SD", sd(col, na.rm = T))
+  y <- rbind(y, c("Median", median(col, na.rm = T))
   
 
   outer_env$u__df_view(y,
