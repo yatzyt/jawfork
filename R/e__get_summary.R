@@ -23,10 +23,14 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
     my_filter <- my_filter & (temp_df2[, x, drop = T] %in% current_row$row[, x, drop = T])
   }
   
-  
+  # Begin JNEFF code, I do not even want to touch anything above
 
   #y <- temp_df[my_filter, , drop = F]
-  y <- select(temp_df, current_row$column)
+  col <- select(temp_df, current_row$column)
+  statistic <- c("Mean")
+  value <- c(mean(col))
+  y <- data.frame(statistic, value)
+  
 
   outer_env$u__df_view(y,
     paste0("Summary: ", outer_env[[session_name]]$sas_file_basename, " (", nrow(y), " x ", ncol(y), ")", my_title, "|", as.character(Sys.time())),
