@@ -28,7 +28,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
   #y <- temp_df[my_filter, , drop = F]
   col <- select(temp_df, current_row$column)
   Statistic <- c("Mean")
-  Value <- mean(col)
+  Value <- mean(col, na.rm = T)
   y <- data.frame(Statistic, Value)
   
 
