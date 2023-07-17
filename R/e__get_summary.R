@@ -26,7 +26,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
   # Begin JNEFF code, I do not even want to touch anything above
 
   #y <- temp_df[my_filter, , drop = F]
-  col <- as.numeric(c(select(temp_df, current_row$column)))
+  col <- temp_df[[current_row$column]]
   Statistic <- c("Mean", "Placeholder")
   Value <- c(mean(col, na.rm = T), 18)
   y <- data.frame(Statistic, Value)
