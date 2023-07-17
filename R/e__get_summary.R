@@ -28,7 +28,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
   #y <- temp_df[my_filter, , drop = F]
   col <- temp_df[[current_row$column]]
   Statistic <- c("N", "Mean", "SD", "Median", "Q1", "Q3", "Min", "Max")
-  Value <- c(sum(!is.na(col)), mean(col, na.rm = T), sd(col, na.rm = T), quantile(col, prob = c(0.50, 0.25, 0.75, 0.00, 1.00), type = 1)
+  Value <- c(sum(!is.na(col)), mean(col, na.rm = T), sd(col, na.rm = T), quantile(col, prob = c(0.50, 0.25, 0.75, 0.00, 1.00), type = 1, na.rm = T, names = F))
   y <- data.frame(Statistic, Value)
   
 
