@@ -27,13 +27,14 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
 
   #y <- temp_df[my_filter, , drop = F]
   col <- temp_df[[current_row$column]]
-  Statistic <- c("N", "Mean", "SD", "Median", "Q1", "Q3", "Min", "Max")
-  Value <- c(sum(!is.na(col)), mean(col, na.rm = T), sd(col, na.rm = T), quantile(col, prob = c(0.50, 0.25, 0.75, 0.00, 1.00), type = 1, na.rm = T, names = F))
+  Statistic <- c("N", "Mean (SD)", "Median", "(Q1, Q3)", "Min, Max")
+  quantiles <- quantile(col, prob = c(0.50, 0.25, 0.75, 0.00, 1.00), type = 1, na.rm = T, names = F)
+  Value <- as.character(c(sum(!is.na(col)), paste0(mean(col, na.rm = T), " (", sd(col, na.rm = T), ")"), quantiles[1], paste0("(", quantiles[2], ", ", quantiles[3], ")"), paste0(quantiles[4], ", ", quantiles[5])))
   y <- data.frame(Statistic, Value)
   
 
   outer_env$u__df_view(y,
-    paste0("Summary: ", outer_env[[session_name]]$sas_file_basename, "|", as.character(Sys.time())),
+    paste0("Summary: ", outer_env[[session_name]]$sas_file_basename, " | ", as.character(Sys.time())),
     height = 300, width = 500
   )
 }
