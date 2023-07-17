@@ -46,6 +46,7 @@ jaw <- function(settings_dir=NULL) {
 
   totem$u__df_tree <- e__with_env(e__df_tree)
   totem$u__flat_view <- e__with_env(e__flat_view)
+  totem$u__get_summary <- e__with_env(e__get_summary)
   totem$u__inverted_view <- e__with_env(e__inverted_view)
   totem$u__df_view <- e__with_env(e__df_view)
 
