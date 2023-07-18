@@ -32,9 +32,9 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
   Value <- as.character(c(sum(!is.na(col)), paste0(round(mean(col, na.rm = T), digits = 4), " (", round(sd(col, na.rm = T), digits = 4), ")"), quantiles[1], paste0("(", quantiles[2], ", ", quantiles[3], ")"), paste0(quantiles[4], ", ", quantiles[5])))
   group_by_entry <- RGtk2::gtkEntryGetText(outer_env[[session_name]]$data_view_list$group_by_entry)
   if (group_by_entry != "") {
-    Groupby <- c("Empty")
+    Groupby <- c(group_by_entry)
   } else {
-    Groupby <- c("Not empty")
+    Groupby <- c("Empty")
   }
   y <- data.frame(Statistic, Value, Groupby)
   
