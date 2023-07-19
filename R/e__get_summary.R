@@ -35,7 +35,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
   
   if (group_by_entry != "") {
     clipr::write_clip(group_by_entry)
-    Output <- temp_df %>% group_by(group_by_entry) %>% summarise(Mean = mean(current_row$column, na.rm = T)
+    Output <- temp_df %>% group_by(group_by_entry) %>% summarise(Mean = mean(current_row$column, na.rm = T))
     
     y <- data.frame(Output)
   } else {
