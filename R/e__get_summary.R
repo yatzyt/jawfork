@@ -49,7 +49,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
     Labels[nrow(tOutput) - 2] <- "Median"
     Labels[nrow(tOutput) - 3] <- "Mean (SD)"
     Labels[nrow(tOutput) - 4] <- "N"
-    tOutput$Labels <- Labels
+    #tOutput$Labels <- Labels
         
     y <- data.frame(tOutput)
   } else {    
