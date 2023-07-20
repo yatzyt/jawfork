@@ -40,9 +40,10 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
                                                                                                         Min =    quantile(eval(parse(text = current_row$column)), prob = c(0.00), type = 1, na.rm = T, names = F),
                                                                                                         Max =    quantile(eval(parse(text = current_row$column)), prob = c(1.00), type = 1, na.rm = T, names = F))
     Output$MeanSD <- paste0(round(Output$Mean, digits = 4), " (", round(Output$SD, digits = 4), ")")
+    Output$Mean <- Output$MeanSD
     Output$Q1Q3 <- paste0("(", Output$Q1, ", ", Output$Q3, ")")
     Output$MinMax <- paste0(Output$Min, ", ", Output$Max)
-    tOutput <- t(Output[, !names(Output) %in% c("Mean", "SD", "Q1", "Q3", "Min", "Max")])
+    tOutput <- t(Output[, !names(Output) %in% c("SD", "Q1", "Q3", "Min", "Max")])
     Labels <- vector("character", nrow(tOutput))
     Labels[nrow(tOutput)] <- "Min, Max"
     Labels[nrow(tOutput) - 1] <- "(Q1, Q3)"
