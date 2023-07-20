@@ -29,7 +29,6 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
   group_by_entry <- RGtk2::gtkEntryGetText(outer_env[[session_name]]$data_view_list$group_by_entry)
   
   if (group_by_entry != "") {
-    clipr::write_clip(current_row$column, allow_non_interactive = T)
     #Output <- temp_df %>% group_by_at(group_by_entry) %>% summarise(Mean = mean(current_row$column, na.rm = T))
     Output <- temp_df %>% group_by_(.dots = stringr::str_split(group_by_entry, ", ")[[1]]) %>% summarise(N = sum(!is.na(eval(parse(text = current_row$column)))),
                                                                                                         Mean = mean(eval(parse(text = current_row$column)), na.rm = T),
@@ -44,13 +43,16 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
     Output$Q1Q3 <- paste0("(", Output$Q1, ", ", Output$Q3, ")")
     Output$MinMax <- paste0(Output$Min, ", ", Output$Max)
     tOutput <- t(Output[, !names(Output) %in% c("MeanSD", "SD", "Q1", "Q3", "Min", "Max")])
-    Labels <- vector("character", nrow(tOutput))
-    Labels[nrow(tOutput)] <- "Min, Max"
-    Labels[nrow(tOutput) - 1] <- "(Q1, Q3)"
-    Labels[nrow(tOutput) - 2] <- "Median"
-    Labels[nrow(tOutput) - 3] <- "Mean (SD)"
-    Labels[nrow(tOutput) - 4] <- "N"
-    tOutput <- cbind(Labels, tOutput)
+    Label <- vector("character", nrow(tOutput))
+    Label[nrow(tOutput)] <- "Min, Max"
+    Label[nrow(tOutput) - 1] <- "(Q1, Q3)"
+    Label[nrow(tOutput) - 2] <- "Median"
+    Label[nrow(tOutput) - 3] <- "Mean (SD)"
+    Label[nrow(tOutput) - 4] <- "N"
+    n_groups <- stringr::str_count(group_by_entry, ",") + 1
+    tOutput <- cbind(Label, tOutput)
+    
+    clipr::write_clip(n_groups, allow_non_interactive = T)
         
     y <- data.frame(tOutput)
   } else {    
