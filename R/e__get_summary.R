@@ -44,7 +44,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
     Output$MinMax <- paste0(Output$Min, ", ", Output$Max)
     tOutput <- t(Output[, !names(Output) %in% c("Mean", "SD", "Q1", "Q3", "Min", "Max")])
     rownames(tOutput) <- colnames(Output)
-    colnames(tOutput) <- rownames(Output)
+    #colnames(tOutput) <- rownames(Output)
         
     y <- data.frame(tOutput)
   } else {    
