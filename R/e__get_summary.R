@@ -26,23 +26,21 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
   #y <- temp_df[my_filter, , drop = F]
   
   # Begin JNEFF code, I do not even want to touch anything above
-  col <- temp_df[[current_row$column]]
-  Statistic <- c("N", "Mean (SD)", "Median", "(Q1, Q3)", "Min, Max")
-  quantiles <- quantile(col, prob = c(0.50, 0.25, 0.75, 0.00, 1.00), type = 1, na.rm = T, names = F)
-  Value <- as.character(c(sum(!is.na(col)), paste0(round(mean(col, na.rm = T), digits = 4), " (", round(sd(col, na.rm = T), digits = 4), ")"), quantiles[1], paste0("(", quantiles[2], ", ", quantiles[3], ")"), paste0(quantiles[4], ", ", quantiles[5])))
-  
   group_by_entry <- RGtk2::gtkEntryGetText(outer_env[[session_name]]$data_view_list$group_by_entry)
   
   if (group_by_entry != "") {
-    clipr::write_clip(group_by_entry, allow_non_interactive = T)
+    clipr::write_clip(current_row$column, allow_non_interactive = T)
     #Output <- temp_df %>% group_by_at(group_by_entry) %>% summarise(Mean = mean(current_row$column, na.rm = T))
-    Output <- temp_df %>% group_by_(.dots = stringr::str_split(group_by_entry, ", ")[[1]]) %>% summarise(Mean = mean(current_row[column], na.rm = T))
+    Output <- temp_df %>% group_by_(.dots = stringr::str_split(group_by_entry, ", ")[[1]]) %>% summarise(Mean = mean(current_row$column, na.rm = T))
     
     y <- data.frame(Output)
-  } else {
-    Groupby <- c("Empty")
+  } else {    
+    col <- temp_df[[current_row$column]]
+    Statistic <- c("N", "Mean (SD)", "Median", "(Q1, Q3)", "Min, Max")
+    quantiles <- quantile(col, prob = c(0.50, 0.25, 0.75, 0.00, 1.00), type = 1, na.rm = T, names = F)
+    Value <- as.character(c(sum(!is.na(col)), paste0(round(mean(col, na.rm = T), digits = 4), " (", round(sd(col, na.rm = T), digits = 4), ")"), quantiles[1], paste0("(", quantiles[2], ", ", quantiles[3], ")"), paste0(quantiles[4], ", ", quantiles[5])))
     
-    y <- data.frame(Statistic, Value, Groupby)
+    y <- data.frame(Statistic, Value)
   }
   
   
