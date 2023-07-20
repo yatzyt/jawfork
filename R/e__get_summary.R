@@ -43,8 +43,13 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
     Output$Q1Q3 <- paste0("(", Output$Q1, ", ", Output$Q3, ")")
     Output$MinMax <- paste0(Output$Min, ", ", Output$Max)
     tOutput <- t(Output[, !names(Output) %in% c("Mean", "SD", "Q1", "Q3", "Min", "Max")])
-    #rownames(tOutput) <- colnames(Output)
-    #colnames(tOutput) <- rownames(Output)
+    Labels <- vector("character", nrow(tOutput))
+    Labels[nrow(tOutput)] <- "Min, Max"
+    Labels[nrow(tOutput) - 1] <- "(Q1, Q3)"
+    Labels[nrow(tOutput) - 2] <- "Median"
+    Labels[nrow(tOutput) - 3] <- "Mean (SD)"
+    Labels[nrow(tOutput) - 4] <- "N"
+    tOutput$Labels <- Labels
         
     y <- data.frame(tOutput)
   } else {    
