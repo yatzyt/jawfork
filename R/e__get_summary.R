@@ -43,6 +43,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
     Output$Q1Q3 <- paste0("(", Output$Q1, ", ", Output$Q3, ")")
     Output$MinMax <- paste0(Output$Min, ", ", Output$Max)
     tOutput <- t(Output[, !names(Output) %in% c("MeanSD", "SD", "Q1", "Q3", "Min", "Max")])
+    
     Label <- vector("character", nrow(tOutput))
     Label[nrow(tOutput)] <- "Min, Max"
     Label[nrow(tOutput) - 1] <- "(Q1, Q3)"
@@ -50,6 +51,10 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
     Label[nrow(tOutput) - 3] <- "Mean (SD)"
     Label[nrow(tOutput) - 4] <- "N"
     n_groups <- stringr::str_count(group_by_entry, ",") + 1
+    for (i in 1:n_groups) {
+      Label[i] <- word(group_by_entry, start = i, end = i, sep = ",")  
+    }    
+    
     tOutput <- cbind(Label, tOutput)
     
     clipr::write_clip(n_groups, allow_non_interactive = T)
