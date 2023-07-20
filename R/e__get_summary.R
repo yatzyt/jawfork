@@ -52,7 +52,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
     Label[nrow(tOutput) - 4] <- "N"
     n_groups <- stringr::str_count(group_by_entry, ",") + 1
     for (i in 1:n_groups) {
-      Label[i] <- word(group_by_entry, start = i, end = i, sep = ",")  
+      Label[i] <- stringr::word(group_by_entry, start = i, end = i, sep = ",")  
     }    
     
     tOutput <- cbind(Label, tOutput)
