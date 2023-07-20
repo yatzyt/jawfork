@@ -43,7 +43,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
     Output$Q1Q3 <- paste0("(", Output$Q1, ", ", Output$Q3, ")")
     Output$MinMax <- paste0(Output$Min, ", ", Output$Max)
     tOutput <- t(Output[, !names(Output) %in% c("Mean", "SD", "Q1", "Q3", "Min", "Max")])
-    rownames(tOutput) <- colnames(Output)
+    #rownames(tOutput) <- colnames(Output)
     #colnames(tOutput) <- rownames(Output)
         
     y <- data.frame(tOutput)
