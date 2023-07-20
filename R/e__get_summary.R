@@ -36,8 +36,9 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
                                                                                                         SD = sd(eval(parse(text = current_row$column)), na.rm = T),
                                                                                                         Quantiles = quantile(eval(parse(text = current_row$column)), prob = c(0.50, 0.25, 0.75, 0.00, 1.00), type = 1, na.rm = T, names = F))
     Output$MeanSD <- paste0(round(Output$Mean, digits = 4), " (", round(Output$SD, digits = 4), ")")
+    tOutput <- t(Output[, !names(Output) %in% c("Mean", "SD")])
         
-    y <- data.frame(Output)
+    y <- data.frame(tOutput)
   } else {    
     col <- temp_df[[current_row$column]]
     Statistic <- c("N", "Mean (SD)", "Median", "(Q1, Q3)", "Min, Max")
