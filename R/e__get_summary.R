@@ -31,7 +31,10 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
   if (group_by_entry != "") {
     clipr::write_clip(current_row$column, allow_non_interactive = T)
     #Output <- temp_df %>% group_by_at(group_by_entry) %>% summarise(Mean = mean(current_row$column, na.rm = T))
-    Output <- temp_df %>% group_by_(.dots = stringr::str_split(group_by_entry, ", ")[[1]]) %>% summarise(Mean = mean(eval(parse(text = current_row$column)), na.rm = T))
+    Output <- temp_df %>% group_by_(.dots = stringr::str_split(group_by_entry, ", ")[[1]]) %>% summarise(N = sum(!is.na(eval(parse(text = current_row$column)))),
+                                                                                                        Mean = mean(eval(parse(text = current_row$column)), na.rm = T),
+                                                                                                        SD = sd(eval(parse(text = current_row$column)), na.rm = T),
+                                                                                                        Quantiles = quantile(eval(parse(text = current_row$column)), prob = c(0.50, 0.25, 0.75, 0.00, 1.00), type = 1, na.rm = T, names = F))
     
     y <- data.frame(Output)
   } else {    
@@ -40,7 +43,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
     quantiles <- quantile(col, prob = c(0.50, 0.25, 0.75, 0.00, 1.00), type = 1, na.rm = T, names = F)
     eval(parse(text= current_row$column)) <- as.character(c(sum(!is.na(col)), paste0(round(mean(col, na.rm = T), digits = 4), " (", round(sd(col, na.rm = T), digits = 4), ")"), quantiles[1], paste0("(", quantiles[2], ", ", quantiles[3], ")"), paste0(quantiles[4], ", ", quantiles[5])))
     
-    y <- data.frame(Statistic, Value)
+    y <- data.frame(Statistic, eval(parse(text= current_row$column)))
   }
   
   
