@@ -55,9 +55,9 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
       Label[i] <- stringr::word(group_by_entry, start = i, end = i, sep = ",")  
     }    
     
-    tOutput <- cbind(Label, tOutput)
+    clipr::write_clip(Label, allow_non_interactive = T)
     
-    clipr::write_clip(n_groups, allow_non_interactive = T)
+    tOutput <- cbind(Label, tOutput)
         
     y <- data.frame(tOutput)
   } else {    
