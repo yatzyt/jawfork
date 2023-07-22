@@ -22,14 +22,11 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
     my_title <- paste0(my_title, "| ", x, "==", current_row$row[, x, drop = T])
     my_filter <- my_filter & (temp_df2[, x, drop = T] %in% current_row$row[, x, drop = T])
   }
-
-  #y <- temp_df[my_filter, , drop = F]
   
   # Begin JNEFF code, I do not even want to touch anything above
   group_by_entry <- RGtk2::gtkEntryGetText(outer_env[[session_name]]$data_view_list$group_by_entry)
   
   if (group_by_entry != "") {
-    #Output <- temp_df %>% group_by_at(group_by_entry) %>% summarise(Mean = mean(current_row$column, na.rm = T))
     Output <- temp_df %>% group_by_(.dots = stringr::str_split(group_by_entry, ", ")[[1]]) %>% summarise(N = sum(!is.na(eval(parse(text = current_row$column)))),
                                                                                                         Mean = mean(eval(parse(text = current_row$column)), na.rm = T),
                                                                                                         SD = sd(eval(parse(text = current_row$column)), na.rm = T),
@@ -53,9 +50,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
     n_groups <- stringr::str_count(group_by_entry, ",") + 1
     for (i in 1:n_groups) {
       Label[i] <- stringr::word(group_by_entry, start = i, end = i, sep = ", ")  
-    }    
-    
-    clipr::write_clip(Label, allow_non_interactive = T)
+    }   
     
     tOutput <- cbind(Label, tOutput)
         
