@@ -615,13 +615,13 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
       #----------------------------------------
 
 
-      outer_env[[session_name]]$data_view_list$file_source_cb <- RGtk2::gtkCheckButtonNewWithLabel("Source", show = TRUE)
+      outer_env[[session_name]]$data_view_list$file_source_cb <- RGtk2::gtkCheckButtonNewWithLabel("Source", show = FALSE)
       RGtk2::gtkBoxPackStart(outer_env[[session_name]]$data_view_list$file_source_bar, outer_env[[session_name]]$data_view_list$file_source_cb, F, F, padding = 1)
 
 
       u__button(
         box = outer_env[[session_name]]$data_view_list$file_source_bar,
-        start = T, padding = 2,
+        start = F, padding = 2,
         stock_id = "gtk-open",
         tool_tip = "Open",
         call_back_fct = function(widget, event, data) {
@@ -641,7 +641,7 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
 
       u__button(
         box = outer_env[[session_name]]$data_view_list$file_source_bar,
-        start = T, padding = 2,
+        start = F, padding = 2,
         stock_id = "gtk-add",
         tool_tip = "Add session block to code.R",
         call_back_fct = function(widget, event, data) {
