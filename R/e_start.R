@@ -619,40 +619,40 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
       RGtk2::gtkBoxPackStart(outer_env[[session_name]]$data_view_list$file_source_bar, outer_env[[session_name]]$data_view_list$file_source_cb, F, F, padding = 1)
 
 
-      u__button(
-        box = outer_env[[session_name]]$data_view_list$file_source_bar,
-        start = F, padding = 2,
-        stock_id = "gtk-open",
-        tool_tip = "Open",
-        call_back_fct = function(widget, event, data) {
-          session_name <- data[[1]]
-          outer_env <- data[[2]]
+      #u__button(
+      #  box = outer_env[[session_name]]$data_view_list$file_source_bar,
+      #  start = T, padding = 2,
+      #  stock_id = "gtk-open",
+      #  tool_tip = "Open",
+      #  call_back_fct = function(widget, event, data) {
+      #    session_name <- data[[1]]
+      #    outer_env <- data[[2]]
 
-          utils::file.edit(totem$code_R)
+      #    utils::file.edit(totem$code_R)
 
-          return(FALSE)
-        }, data = list(session_name, outer_env)
-      )
-
-
+      #    return(FALSE)
+      #  }, data = list(session_name, outer_env)
+      #)
 
 
 
 
-      u__button(
-        box = outer_env[[session_name]]$data_view_list$file_source_bar,
-        start = F, padding = 2,
-        stock_id = "gtk-add",
-        tool_tip = "Add session block to code.R",
-        call_back_fct = function(widget, event, data) {
-          session_name <- data[[1]]
-          outer_env <- data[[2]]
-          outer_env$u__code_r_add(session_name)
-          utils::file.edit(totem$code_R)
 
-          return(FALSE)
-        }, data = list(session_name, outer_env)
-      )
+
+      #u__button(
+      #  box = outer_env[[session_name]]$data_view_list$file_source_bar,
+      #  start = T, padding = 2,
+      #  stock_id = "gtk-add",
+      #  tool_tip = "Add session block to code.R",
+      #  call_back_fct = function(widget, event, data) {
+      #    session_name <- data[[1]]
+      #    outer_env <- data[[2]]
+      #    outer_env$u__code_r_add(session_name)
+      #    utils::file.edit(totem$code_R)
+
+      #    return(FALSE)
+      #  }, data = list(session_name, outer_env)
+      #)
 
 
 
