@@ -93,9 +93,9 @@ check_settings <- function(settings) {
   settings$default_table_events <- list(
     "General" = list(
 
-      "View" = "right+alt",
-      "Add to filter" = "right+ctrl",
-      "Add to arrange" = "right+shift",
+      #"View" = "right+alt",
+      #"Add to filter" = "right+ctrl",
+      #"Add to arrange" = "right+shift",
       "Open Context Menu" = "right+none"
     ),
     "Copy" = list(
@@ -107,12 +107,17 @@ check_settings <- function(settings) {
 
     ),
     "Full Data Table" = list(
-      "Trigger Value Summary" = "left+none"
+      "Trigger Value Summary" = "left+none",
+      "Trigger Value Summary with Group By" = "left+ctrl",
+      "Add to Main Filter" = "right+ctrl",
+      "Add to Main Filter Exclude" = "right+ctrl+shift",
+      "Get Summary" = "middle+ctrl"
     ),
     "Summary Table" = list(
-      "Open Flat View" = "left+alt",
-      "Open Inverted View" = "left+ctrl",
-      "Add to Main Filter" = "left+shift"
+      #"Open Flat View" = "left+alt",
+      #"Open Inverted View" = "left+ctrl",
+      "Add to Main Filter" = "right+ctrl",
+      "Add to Main Filter Exclude" = "right+ctrl+shift"
     ),
     "Past Code Table" = list(
       "Load Code" = "left+none"
