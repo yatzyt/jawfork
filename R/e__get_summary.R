@@ -30,11 +30,11 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
     Output <- temp_df %>% group_by_(.dots = stringr::str_split(group_by_entry, ", ")[[1]]) %>% summarise(N = sum(!is.na(eval(parse(text = current_row$column)))),
                                                                                                         Mean = mean(eval(parse(text = current_row$column)), na.rm = T),
                                                                                                         SD = sd(eval(parse(text = current_row$column)), na.rm = T),
-                                                                                                        Median = quantile(eval(parse(text = current_row$column)), prob = c(0.50), type = 1, na.rm = T, names = F),
-                                                                                                        Q1 =     quantile(eval(parse(text = current_row$column)), prob = c(0.25), type = 1, na.rm = T, names = F),
-                                                                                                        Q3 =     quantile(eval(parse(text = current_row$column)), prob = c(0.75), type = 1, na.rm = T, names = F),
-                                                                                                        Min =    quantile(eval(parse(text = current_row$column)), prob = c(0.00), type = 1, na.rm = T, names = F),
-                                                                                                        Max =    quantile(eval(parse(text = current_row$column)), prob = c(1.00), type = 1, na.rm = T, names = F))
+                                                                                                        Median = quantile(eval(parse(text = current_row$column)), prob = c(0.50), type = 2, na.rm = T, names = F),
+                                                                                                        Q1 =     quantile(eval(parse(text = current_row$column)), prob = c(0.25), type = 2, na.rm = T, names = F),
+                                                                                                        Q3 =     quantile(eval(parse(text = current_row$column)), prob = c(0.75), type = 2, na.rm = T, names = F),
+                                                                                                        Min =    quantile(eval(parse(text = current_row$column)), prob = c(0.00), type = 2, na.rm = T, names = F),
+                                                                                                        Max =    quantile(eval(parse(text = current_row$column)), prob = c(1.00), type = 2, na.rm = T, names = F))
     Output$MeanSD <- paste0(round(Output$Mean, digits = 4), " (", round(Output$SD, digits = 4), ")")
     Output$Mean <- Output$MeanSD
     Output$Q1Q3 <- paste0("(", Output$Q1, ", ", Output$Q3, ")")
@@ -58,7 +58,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
   } else {    
     col <- temp_df[[current_row$column]]
     Label <- c("N", "Mean (SD)", "Median", "(Q1, Q3)", "Min, Max")
-    quantiles <- quantile(col, prob = c(0.50, 0.25, 0.75, 0.00, 1.00), type = 1, na.rm = T, names = F)
+    quantiles <- quantile(col, prob = c(0.50, 0.25, 0.75, 0.00, 1.00), type = 2, na.rm = T, names = F)
     Value <- as.character(c(sum(!is.na(col)), paste0(round(mean(col, na.rm = T), digits = 4), " (", round(sd(col, na.rm = T), digits = 4), ")"), quantiles[1], paste0("(", quantiles[2], ", ", quantiles[3], ")"), paste0(quantiles[4], ", ", quantiles[5])))
     
     y <- data.frame(Label, Value)
