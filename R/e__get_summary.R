@@ -34,7 +34,8 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
                                                                                                         Q1 =     quantile(eval(parse(text = current_row$column)), prob = c(0.25), type = 2, na.rm = T, names = F),
                                                                                                         Q3 =     quantile(eval(parse(text = current_row$column)), prob = c(0.75), type = 2, na.rm = T, names = F),
                                                                                                         Min =    quantile(eval(parse(text = current_row$column)), prob = c(0.00), type = 2, na.rm = T, names = F),
-                                                                                                        Max =    quantile(eval(parse(text = current_row$column)), prob = c(1.00), type = 2, na.rm = T, names = F))
+                                                                                                        Max =    quantile(eval(parse(text = current_row$column)), prob = c(1.00), type = 2, na.rm = T, names = F),
+                                                                                                        Sum = sum(eval(parse(text = current_row$column))))
     Output$MeanSD <- paste0(round(Output$Mean, digits = 4), " (", round(Output$SD, digits = 4), ")")
     Output$Mean <- Output$MeanSD
     Output$Q1Q3 <- paste0("(", Output$Q1, ", ", Output$Q3, ")")
@@ -47,6 +48,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
     Label[nrow(tOutput) - 2] <- "Median"
     Label[nrow(tOutput) - 3] <- "Mean (SD)"
     Label[nrow(tOutput) - 4] <- "N"
+    Label[nrow(tOutput) - 5] <- "Sum"
     n_groups <- stringr::str_count(group_by_entry, ",") + 1
     for (i in 1:n_groups) {
       Label[i] <- stringr::word(group_by_entry, start = i, end = i, sep = ", ")  
@@ -57,9 +59,9 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
     y <- data.frame(tOutput)
   } else {    
     col <- temp_df[[current_row$column]]
-    Label <- c("N", "Mean (SD)", "Median", "(Q1, Q3)", "Min, Max")
+    Label <- c("N", "Mean (SD)", "Median", "(Q1, Q3)", "Min, Max", "Sum")
     quantiles <- quantile(col, prob = c(0.50, 0.25, 0.75, 0.00, 1.00), type = 2, na.rm = T, names = F)
-    Value <- as.character(c(sum(!is.na(col)), paste0(round(mean(col, na.rm = T), digits = 4), " (", round(sd(col, na.rm = T), digits = 4), ")"), quantiles[1], paste0("(", quantiles[2], ", ", quantiles[3], ")"), paste0(quantiles[4], ", ", quantiles[5])))
+    Value <- as.character(c(sum(!is.na(col)), paste0(round(mean(col, na.rm = T), digits = 4), " (", round(sd(col, na.rm = T), digits = 4), ")"), quantiles[1], paste0("(", quantiles[2], ", ", quantiles[3], ")"), paste0(quantiles[4], ", ", quantiles[5]), sum((col)))
     
     y <- data.frame(Label, Value)
   }
