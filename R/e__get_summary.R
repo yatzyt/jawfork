@@ -44,8 +44,6 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
     Output$Q1Q3 <- paste0("(", Output$Q1, ", ", Output$Q3, ")")
     Output$MinMax <- paste0(Output$Min, ", ", Output$Max)
     tOutput <- t(Output[, !names(Output) %in% c("MeanSD", "SD", "Q1", "Q3", "Min", "Max")])
-
-    utils::writeClipboard(str = class(current_row$column), format = 1)
     
     Label <- vector("character", nrow(tOutput))
     Label[nrow(tOutput)] <- "Min, Max"
@@ -70,6 +68,8 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
     Label <- c("N", "Mean (SD)", "Median", "(Q1, Q3)", "Min, Max", "Sum")
     quantiles <- quantile(col, prob = c(0.50, 0.25, 0.75, 0.00, 1.00), type = 2, na.rm = T, names = F)
     Value <- as.character(c(sum(!is.na(col)), paste0(round(mean(col, na.rm = T), digits = 4), " (", round(sd(col, na.rm = T), digits = 4), ")"), quantiles[1], paste0("(", quantiles[2], ", ", quantiles[3], ")"), paste0(quantiles[4], ", ", quantiles[5]), sum(col)))
+
+    utils::writeClipboard(str = class(current_row$column), format = 1)
     
     y <- data.frame(Label, Value)
   }
