@@ -25,22 +25,27 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
   
   # Begin JNEFF code, I do not even want to touch anything above
   group_by_entry <- RGtk2::gtkEntryGetText(outer_env[[session_name]]$data_view_list$group_by_entry)
-  
+
+  ################################################
+  # Get summary stats when group_by is not blank #
+  ################################################
   if (group_by_entry != "") {
     Output <- temp_df %>% group_by_(.dots = stringr::str_split(group_by_entry, ", ")[[1]]) %>% summarise(N = sum(!is.na(eval(parse(text = current_row$column)))),
-                                                                                                        Mean = mean(eval(parse(text = current_row$column)), na.rm = T),
-                                                                                                        SD = sd(eval(parse(text = current_row$column)), na.rm = T),
-                                                                                                        Median = quantile(eval(parse(text = current_row$column)), prob = c(0.50), type = 2, na.rm = T, names = F),
-                                                                                                        Q1 =     quantile(eval(parse(text = current_row$column)), prob = c(0.25), type = 2, na.rm = T, names = F),
-                                                                                                        Q3 =     quantile(eval(parse(text = current_row$column)), prob = c(0.75), type = 2, na.rm = T, names = F),
-                                                                                                        Min =    quantile(eval(parse(text = current_row$column)), prob = c(0.00), type = 2, na.rm = T, names = F),
-                                                                                                        Max =    quantile(eval(parse(text = current_row$column)), prob = c(1.00), type = 2, na.rm = T, names = F),
-                                                                                                        Sum = sum(eval(parse(text = current_row$column))))
+                                                                                                  Mean = mean(eval(parse(text = current_row$column)), na.rm = T),
+                                                                                                  SD = sd(eval(parse(text = current_row$column)), na.rm = T),
+                                                                                                  Median = quantile(eval(parse(text = current_row$column)), prob = c(0.50), type = 2, na.rm = T, names = F),
+                                                                                                  Q1 =     quantile(eval(parse(text = current_row$column)), prob = c(0.25), type = 2, na.rm = T, names = F),
+                                                                                                  Q3 =     quantile(eval(parse(text = current_row$column)), prob = c(0.75), type = 2, na.rm = T, names = F),
+                                                                                                  Min =    quantile(eval(parse(text = current_row$column)), prob = c(0.00), type = 2, na.rm = T, names = F),
+                                                                                                  Max =    quantile(eval(parse(text = current_row$column)), prob = c(1.00), type = 2, na.rm = T, names = F))
+                                                                                                  #,Sum = sum(eval(parse(text = current_row$column)))
     Output$MeanSD <- paste0(round(Output$Mean, digits = 4), " (", round(Output$SD, digits = 4), ")")
     Output$Mean <- Output$MeanSD
     Output$Q1Q3 <- paste0("(", Output$Q1, ", ", Output$Q3, ")")
     Output$MinMax <- paste0(Output$Min, ", ", Output$Max)
     tOutput <- t(Output[, !names(Output) %in% c("MeanSD", "SD", "Q1", "Q3", "Min", "Max")])
+
+    utils::writeClipboard(str = charToRaw(class(current_row$column)), format = 1)
     
     Label <- vector("character", nrow(tOutput))
     Label[nrow(tOutput)] <- "Min, Max"
@@ -48,7 +53,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
     Label[nrow(tOutput) - 2] <- "Median"
     Label[nrow(tOutput) - 3] <- "Mean (SD)"
     Label[nrow(tOutput) - 4] <- "N"
-    Label[nrow(tOutput) - 5] <- "Sum"
+    #Label[nrow(tOutput) - 5] <- "Sum"
     n_groups <- stringr::str_count(group_by_entry, ",") + 1
     for (i in 1:n_groups) {
       Label[i] <- stringr::word(group_by_entry, start = i, end = i, sep = ", ")  
@@ -57,6 +62,9 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
     tOutput <- cbind(Label, tOutput)
         
     y <- data.frame(tOutput)
+  ############################################
+  # Get summary stats when group_by is blank #
+  ############################################
   } else {    
     col <- temp_df[[current_row$column]]
     Label <- c("N", "Mean (SD)", "Median", "(Q1, Q3)", "Min, Max", "Sum")
