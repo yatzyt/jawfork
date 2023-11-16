@@ -45,7 +45,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
     Output$MinMax <- paste0(Output$Min, ", ", Output$Max)
     tOutput <- t(Output[, !names(Output) %in% c("MeanSD", "SD", "Q1", "Q3", "Min", "Max")])
 
-    utils::writeClipboard(str = charToRaw(class(current_row$column)), format = 1)
+    utils::writeClipboard(str = class(current_row$column), format = 1)
     
     Label <- vector("character", nrow(tOutput))
     Label[nrow(tOutput)] <- "Min, Max"
