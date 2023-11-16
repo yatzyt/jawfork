@@ -71,7 +71,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
     #Value <- as.character(c(sum(!is.na(col)), paste0(round(mean(col, na.rm = T), digits = 4), " (", round(sd(col, na.rm = T), digits = 4), ")"), quantiles[1], paste0("(", quantiles[2], ", ", quantiles[3], ")"), paste0(quantiles[4], ", ", quantiles[5]), sum(col)))
     Value <- as.character(c(sum(!is.na(col)), paste0(round(mean(col, na.rm = T), digits = 4), " (", round(sd(col, na.rm = T), digits = 4), ")"), quantiles[1], paste0("(", quantiles[2], ", ", quantiles[3], ")"), paste0(quantiles[4], ", ", quantiles[5])))
 
-    utils::writeClipboard(str = class(current_row$column), format = 1)
+    #utils::writeClipboard(str = class(current_row$column), format = 1)
     
     y <- data.frame(Label, Value)
   }
