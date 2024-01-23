@@ -39,19 +39,21 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
                                                                                                           Q1 =     quantile(eval(parse(text = current_row$column)), prob = c(0.25), type = 2, na.rm = T, names = F),
                                                                                                           Q3 =     quantile(eval(parse(text = current_row$column)), prob = c(0.75), type = 2, na.rm = T, names = F),
                                                                                                           Min =    quantile(eval(parse(text = current_row$column)), prob = c(0.00), type = 2, na.rm = T, names = F),
-                                                                                                          Max =    quantile(eval(parse(text = current_row$column)), prob = c(1.00), type = 2, na.rm = T, names = F))
+                                                                                                          Max =    quantile(eval(parse(text = current_row$column)), prob = c(1.00), type = 2, na.rm = T, names = F),
+                                                                                                          Sum = sum(eval(parse(text = current_row$column)), na.rm = T))
       Output$MeanSD <- paste0(round(Output$Mean, digits = 4), " (", round(Output$SD, digits = 4), ")")
       Output$Mean <- Output$MeanSD
       Output$Q1Q3 <- paste0("(", Output$Q1, ", ", Output$Q3, ")")
       Output$MinMax <- paste0(Output$Min, ", ", Output$Max)
-      tOutput <- t(Output[, !names(Output) %in% c("MeanSD", "SD", "Q1", "Q3", "Min", "Max")])
+      tOutput <- t(Output[, !names(Output) %in% c("MeanSD", "SD", "Q1", "Q3", "Min", "Max", "Sum")])
       
       Label <- vector("character", nrow(tOutput))
-      Label[nrow(tOutput)] <- "Min, Max"
-      Label[nrow(tOutput) - 1] <- "(Q1, Q3)"
-      Label[nrow(tOutput) - 2] <- "Median"
-      Label[nrow(tOutput) - 3] <- "Mean (SD)"
-      Label[nrow(tOutput) - 4] <- "N"
+      Label[nrow(tOutput)] <- "Sum"
+      Label[nrow(tOutput) - 1] <- "Min, Max"
+      Label[nrow(tOutput) - 2] <- "(Q1, Q3)"
+      Label[nrow(tOutput) - 3] <- "Median"
+      Label[nrow(tOutput) - 4] <- "Mean (SD)"
+      Label[nrow(tOutput) - 5] <- "N"
       n_groups <- stringr::str_count(group_by_entry, ",") + 1
       for (i in 1:n_groups) {
         Label[i] <- stringr::word(group_by_entry, start = i, end = i, sep = ", ")  
