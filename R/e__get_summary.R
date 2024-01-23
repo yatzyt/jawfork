@@ -55,7 +55,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
     tOutput <- cbind(Label, tOutput)
         
     y <- data.frame(tOutput)
-  } else if (class(col) %in% c("numeric", "integer")) {    
+  } else if (class(temp_df[[current_row$column]]) %in% c("numeric", "integer")) {    
     col <- temp_df[[current_row$column]]
     Label <- c("N", "Mean (SD)", "Median", "(Q1, Q3)", "Min, Max", "Sum")
     quantiles <- quantile(col, prob = c(0.50, 0.25, 0.75, 0.00, 1.00), type = 2, na.rm = T, names = F)
