@@ -46,7 +46,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
       Output$Q1Q3 <- paste0("(", Output$Q1, ", ", Output$Q3, ")")
       Output$MinMax <- paste0(Output$Min, ", ", Output$Max)
       Output$Sum <- Output$preSum
-      tOutput <- t(Output[, !names(Output) %in% c("MeanSD", "SD", "Q1", "Q3", "Min", "Max")])
+      tOutput <- t(Output[, !names(Output) %in% c("MeanSD", "SD", "Q1", "Q3", "Min", "Max", "preSum")])
       
       Label <- vector("character", nrow(tOutput))
       Label[nrow(tOutput)] <- "Sum"
