@@ -32,7 +32,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
   if (group_by_entry != "") {
     ### Get sum if the selected column is numeric ###
     if (class(temp_df[[current_row$column]]) %in% c("numeric", "integer")) {
-      utils::writeClipbaord(str = "Group by, target column is numeric", format = 1)
+      utils::writeClipboard(str = "Group by, target column is numeric", format = 1)
       Output <- temp_df %>% group_by_(.dots = stringr::str_split(group_by_entry, ", ")[[1]]) %>% summarise(N = sum(!is.na(eval(parse(text = current_row$column)))),
                                                                                                           Mean = mean(eval(parse(text = current_row$column)), na.rm = T),
                                                                                                           SD = sd(eval(parse(text = current_row$column)), na.rm = T),
@@ -67,7 +67,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
     }
     ### Otherwise no sum ###
     else {
-      utils::writeClipbaord(str = "Group by, target column is not numeric", format = 1)
+      utils::writeClipboard(str = "Group by, target column is not numeric", format = 1)
       Output <- temp_df %>% group_by_(.dots = stringr::str_split(group_by_entry, ", ")[[1]]) %>% summarise(N = sum(!is.na(eval(parse(text = current_row$column)))),
                                                                                                           Mean = mean(eval(parse(text = current_row$column)), na.rm = T),
                                                                                                           SD = sd(eval(parse(text = current_row$column)), na.rm = T),
@@ -101,7 +101,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
   } else {
     ### Get sum if the selected column is numeric ###
     if (class(temp_df[[current_row$column]]) %in% c("numeric", "integer")) {   
-      utils::writeClipbaord(str = "Target column is numeric", format = 1) 
+      utils::writeClipboard(str = "Target column is numeric", format = 1) 
       col <- temp_df[[current_row$column]]
       Label <- c("N", "Mean (SD)", "Median", "(Q1, Q3)", "Min, Max", "Sum")
       quantiles <- quantile(col, prob = c(0.50, 0.25, 0.75, 0.00, 1.00), type = 2, na.rm = T, names = F)
@@ -110,7 +110,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
       y <- data.frame(Label, Value)
     ### Otherwise no sum ###
     } else {    
-      utils::writeClipbaord(str = "Target column is not numeric", format = 1) 
+      utils::writeClipboard(str = "Target column is not numeric", format = 1) 
       col <- temp_df[[current_row$column]]
       Label <- c("N", "Mean (SD)", "Median", "(Q1, Q3)", "Min, Max")
       quantiles <- quantile(col, prob = c(0.50, 0.25, 0.75, 0.00, 1.00), type = 2, na.rm = T, names = F)
