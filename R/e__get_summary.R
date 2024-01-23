@@ -32,7 +32,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
   if (group_by_entry != "") {
     ### Get sum if the selected column is numeric ###
     if (class(temp_df[[current_row$column]]) %in% c("numeric", "integer")) {
-      utils::writeClipboard(str = "Group by, target column is numeric", format = 1)
+      #utils::writeClipboard(str = "Group by, target column is numeric", format = 1)
       Output <- temp_df %>% group_by_(.dots = stringr::str_split(group_by_entry, ", ")[[1]]) %>% summarise(N = sum(!is.na(eval(parse(text = current_row$column)))),
                                                                                                           Mean = mean(eval(parse(text = current_row$column)), na.rm = T),
                                                                                                           SD = sd(eval(parse(text = current_row$column)), na.rm = T),
@@ -48,7 +48,6 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
       Output$MinMax <- paste0(Output$Min, ", ", Output$Max)
       Output$Sum <- Output$preSum
       tOutput <- t(Output[, !names(Output) %in% c("MeanSD", "SD", "Q1", "Q3", "Min", "Max", "preSum")])
-      utils::writeClipboard(str = "Checkpoint 1", format = 1)
       
       Label <- vector("character", nrow(tOutput))
       Label[nrow(tOutput)] <- "Sum"
@@ -61,15 +60,13 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
       for (i in 1:n_groups) {
         Label[i] <- stringr::word(group_by_entry, start = i, end = i, sep = ", ")  
       }   
-      utils::writeClipboard(str = "Checkpoint 2", format = 1)
       
       tOutput <- cbind(Label, tOutput)
           
       y <- data.frame(tOutput)
-    }
     ### Otherwise no sum ###
-    else {
-      #utils::writeClipboard(str = "Group by, target column is not numeric", format = 1)
+    } else {
+      utils::writeClipboard(str = "Group by, target column is not numeric", format = 1)
       Output <- temp_df %>% group_by_(.dots = stringr::str_split(group_by_entry, ", ")[[1]]) %>% summarise(N = sum(!is.na(eval(parse(text = current_row$column)))),
                                                                                                           Mean = mean(eval(parse(text = current_row$column)), na.rm = T),
                                                                                                           SD = sd(eval(parse(text = current_row$column)), na.rm = T),
@@ -83,6 +80,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
       Output$Q1Q3 <- paste0("(", Output$Q1, ", ", Output$Q3, ")")
       Output$MinMax <- paste0(Output$Min, ", ", Output$Max)
       tOutput <- t(Output[, !names(Output) %in% c("MeanSD", "SD", "Q1", "Q3", "Min", "Max")])
+      utils::writeClipboard(str = "Checkpoint 1", format = 1)
       
       Label <- vector("character", nrow(tOutput))
       Label[nrow(tOutput)] <- "Min, Max"
@@ -94,6 +92,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
       for (i in 1:n_groups) {
         Label[i] <- stringr::word(group_by_entry, start = i, end = i, sep = ", ")  
       }   
+      utils::writeClipboard(str = "Checkpoint 2", format = 1)
       
       tOutput <- cbind(Label, tOutput)
           
