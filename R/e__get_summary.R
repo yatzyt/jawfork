@@ -32,6 +32,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
   if (group_by_entry != "") {
     ### Get sum if the selected column is numeric ###
     if (class(temp_df[[current_row$column]]) %in% c("numeric", "integer")) {
+      utils::writeClipbaord("Target column is numeric")
       Output <- temp_df %>% group_by_(.dots = stringr::str_split(group_by_entry, ", ")[[1]]) %>% summarise(N = sum(!is.na(eval(parse(text = current_row$column)))),
                                                                                                           Mean = mean(eval(parse(text = current_row$column)), na.rm = T),
                                                                                                           SD = sd(eval(parse(text = current_row$column)), na.rm = T),
@@ -66,6 +67,7 @@ e__get_summary <- function(session_name, current_row,outer_env=totem) {
     }
     ### Otherwise no sum ###
     else {
+      utils::writeClipbaord("Target column is not numeric")
       Output <- temp_df %>% group_by_(.dots = stringr::str_split(group_by_entry, ", ")[[1]]) %>% summarise(N = sum(!is.na(eval(parse(text = current_row$column)))),
                                                                                                           Mean = mean(eval(parse(text = current_row$column)), na.rm = T),
                                                                                                           SD = sd(eval(parse(text = current_row$column)), na.rm = T),
