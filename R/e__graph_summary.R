@@ -1,4 +1,4 @@
-#' e__get_summary
+#' e__graph_summary
 #'
 #' @param session_name TODO
 #' @param current_row TODO
@@ -6,7 +6,7 @@
 #'
 #' @return TODO
 
-e__get_summary <- function(session_name, current_row,outer_env=totem) {
+e__graph_summary <- function(session_name, current_row,outer_env=totem) {
   temp_df <- outer_env[[session_name]]$data2
   temp_df$random_char_str <- "a"
   temp_df2 <- as.matrix(temp_df)
