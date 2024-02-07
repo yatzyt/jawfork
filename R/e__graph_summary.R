@@ -123,6 +123,9 @@ e__graph_summary <- function(session_name, current_row,outer_env=totem) {
   w <- RGtk2::gtkWindow(show = F)
   w["title"] <- "Test"
 
+  frame <- RGtk2::gtkFrameNew("Boxplot")
+  w$add(frame)
+
   RGtk2::gtkWidgetSetSizeRequest(w, 500, 300)
 
   RGtk2::gtkWidgetShow(w)
