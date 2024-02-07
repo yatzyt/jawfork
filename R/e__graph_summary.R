@@ -120,13 +120,15 @@ e__graph_summary <- function(session_name, current_row,outer_env=totem) {
   }
     
   ### Create gtk output ###
+  require("RGtk2")
+  
   #Create window, assign title
-  win <- RGtk2::gtkWindow(show = F)
+  win <- gtkWindow(show = F)
   win["title"] <- "Test"
 
   #Set up graphics
   utils::writeClipboard(str = 'Test 0', format = 1)
-  graphics <- RGtk2::gtkDrawingArea()
+  graphics <- gtkDrawingArea()
   utils::writeClipboard(str = 'Test 1', format = 1)
   vbox <- RGtk2::gtkVBox()
   utils::writeClipboard(str = 'Test 2', format = 1)
