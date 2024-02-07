@@ -120,13 +120,24 @@ e__graph_summary <- function(session_name, current_row,outer_env=totem) {
   }
     
   ### Create gtk output ###
-  w <- RGtk2::gtkWindow(show = F)
-  w["title"] <- "Test"
+  #Create window, assign title
+  win <- RGtk2::gtkWindow(show = F)
+  win["title"] <- "Test"
 
-  frame <- RGtk2::gtkFrameNew()
-  w$add(frame)
+  #Set up graphics
+  utils::writeClipboard(str = ‘Test 0’, format = 1)
+  graphics <- RGtk2::gtkDrawingArea()
+  utils::writeClipboard(str = ‘Test 1’, format = 1)
+  vbox <- RGtk2::gtkVBox()
+  utils::writeClipboard(str = ‘Test 2’, format = 1)
+  vbox$packStart(graphics, expand = TRUE, fill = TRUE, padding = 0)
+  utils::writeClipboard(str = ‘Test 3’, format = 1)
+  win$add(vbox)
+  utils::writeClipboard(str = ‘Test 4’, format = 1)
 
-  RGtk2::gtkWidgetSetSizeRequest(w, 500, 300)
+  #Set win size
+  RGtk2::gtkWidgetSetSizeRequest(win, 500, 300)
 
-  RGtk2::gtkWidgetShow(w)
+  #Display win
+  RGtk2::gtkWidgetShow(win)
 }
