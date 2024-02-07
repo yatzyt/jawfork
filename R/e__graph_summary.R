@@ -120,8 +120,10 @@ e__graph_summary <- function(session_name, current_row,outer_env=totem) {
   }
     
   ### Create gtk output ###
-  outer_env$u__df_view(y,
-    paste0(current_row$column, " Summary: ", outer_env[[session_name]]$sas_file_basename, " | ", as.character(Sys.time())),
-    height = 300, width = 500
-  )
+  w <- RGtk2::gtkWindow(show = F)
+  w["title"] <- "Test"
+
+  RGtk2::gtkWidgetSetSizeRequest(w, 500, 300)
+
+  RGtk2::gtkWidgetShow(w)
 }
