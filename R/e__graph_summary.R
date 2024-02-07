@@ -120,6 +120,8 @@ e__graph_summary <- function(session_name, current_row,outer_env=totem) {
   }
     
   ### Create gtk output ###
+  #Require the package so I don't have to lead every function with RGtk2::
+  #I think this was messing up $ methods, this was very important
   require("RGtk2")
   
   #Create window, assign title
@@ -127,19 +129,16 @@ e__graph_summary <- function(session_name, current_row,outer_env=totem) {
   win["title"] <- "Test"
 
   #Set up graphics
-  utils::writeClipboard(str = 'Test 0', format = 1)
   graphics <- gtkDrawingArea()
-  utils::writeClipboard(str = 'Test 1', format = 1)
   vbox <- RGtk2::gtkVBox()
-  utils::writeClipboard(str = 'Test 2', format = 1)
   vbox$packStart(graphics, expand = TRUE, fill = TRUE, padding = 0)
-  utils::writeClipboard(str = 'Test 3', format = 1)
   win$add(vbox)
-  utils::writeClipboard(str = 'Test 4', format = 1)
+
+  boxplot(temp_df$AGE)
 
   #Set win size
-  RGtk2::gtkWidgetSetSizeRequest(win, 500, 300)
+  gtkWidgetSetSizeRequest(win, 500, 300)
 
   #Display win
-  RGtk2::gtkWidgetShow(win)
+  gtkWidgetShow(win)
 }
