@@ -26,13 +26,16 @@ e__graph_summary <- function(session_name, current_row,outer_env=totem) {
   ################################################################
   # Begin JNEFF code, I do not even want to touch anything above #
   ################################################################
+  #Output graphics in separate window
+  options(device = "windows")
+  
   group_by_entry <- RGtk2::gtkEntryGetText(outer_env[[session_name]]$data_view_list$group_by_entry)
 
   ### Handle when there are grouping variables ###
   if (group_by_entry != "") {
     ### Get sum if the selected column is numeric ###
     if (class(temp_df[[current_row$column]]) %in% c("numeric", "integer")) {
-      #utils::writeClipboard(str = "Group by, target column is numeric", format = 1)
+      utils::writeClipboard(str = "Group by, target column is numeric", format = 1)
       Output <- temp_df %>% group_by_(.dots = stringr::str_split(group_by_entry, ", ")[[1]]) %>% summarise(N = sum(!is.na(eval(parse(text = current_row$column)))),
                                                                                                           Mean = mean(eval(parse(text = current_row$column)), na.rm = T),
                                                                                                           SD = sd(eval(parse(text = current_row$column)), na.rm = T),
@@ -66,7 +69,7 @@ e__graph_summary <- function(session_name, current_row,outer_env=totem) {
       y <- data.frame(tOutput)
     ### Otherwise no sum ###
     } else {
-      #utils::writeClipboard(str = "Group by, target column is not numeric", format = 1)
+      utils::writeClipboard(str = "Group by, target column is not numeric", format = 1)
       Output <- temp_df %>% group_by_(.dots = stringr::str_split(group_by_entry, ", ")[[1]]) %>% summarise(N = sum(!is.na(eval(parse(text = current_row$column)))),
                                                                                                           Mean = mean(eval(parse(text = current_row$column)), na.rm = T),
                                                                                                           SD = sd(eval(parse(text = current_row$column)), na.rm = T),
@@ -100,12 +103,12 @@ e__graph_summary <- function(session_name, current_row,outer_env=totem) {
   } else {
     ### Make boxplot if the selected column is numeric ###
     if (class(temp_df[[current_row$column]]) %in% c("numeric", "integer")) {   
-      #utils::writeClipboard(str = "Target column is numeric", format = 1) 
+      utils::writeClipboard(str = "Target column is numeric", format = 1) 
 
       boxplot(temp_df[[current_row$column]])
     ### Otherwise no sum ###
     } else {    
-      #utils::writeClipboard(str = "Target column is not numeric", format = 1)
+      utils::writeClipboard(str = "Target column is not numeric", format = 1)
 
       stop('Cannot produce boxplot of character values')
     }
