@@ -52,7 +52,7 @@ e__graph_summary <- function(session_name, current_row,outer_env=totem) {
       #utils::writeClipboard(str = "Target column is numeric", format = 1) 
 
       #boxplot(temp_df[[current_row$column]])
-      eval(parse(text = sprintf('boxplot(temp_df[[current_row$column]], xlab = "", ylab = "%s", main = "%s")', parse(text = current_row$column), parse(text = current_row$column))))
+      eval(parse(text = sprintf('boxplot(temp_df[[current_row$column]], xlab = "", ylab = "%s", main = "%s")', current_row$column, parse(text = current_row$column))))
     ### Otherwise no boxplot ###
     } else {    
       #utils::writeClipboard(str = "Target column is not numeric", format = 1)
