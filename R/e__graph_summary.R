@@ -36,16 +36,12 @@ e__graph_summary <- function(session_name, current_row,outer_env=totem) {
     ### Get sum if the selected column is numeric ###
     if (class(temp_df[[current_row$column]]) %in% c("numeric", "integer")) {
       #utils::writeClipboard(str = "Group by, target column is numeric", format = 1)
-      #utils::writeClipboard(str = typeof(group_by_entry), format = 1)
 
       group_by_entry_asterisks <- gsub(", ", "*", group_by_entry)
-      utils::writeClipboard(str = group_by_entry_asterisks, format = 1)
-
       eval(parse(text = sprintf('boxplot(%s ~ %s, temp_df)', current_row$column, group_by_entry_asterisks)))
-      #boxplot(eval(parse(text = current_row$column)) ~ eval(parse(text = group_by_entry_asterisks)), temp_df)
     ### Otherwise no boxplot ###
     } else {   
-      utils::writeClipboard(str = "Target column is not numeric", format = 1)
+      #utils::writeClipboard(str = "Group by, target column is not numeric", format = 1)
 
       stop('Cannot produce boxplot of character values')
     }
@@ -53,12 +49,12 @@ e__graph_summary <- function(session_name, current_row,outer_env=totem) {
   } else {
     ### Make boxplot if the selected column is numeric ###
     if (class(temp_df[[current_row$column]]) %in% c("numeric", "integer")) {   
-      utils::writeClipboard(str = "Target column is numeric", format = 1) 
+      #utils::writeClipboard(str = "Target column is numeric", format = 1) 
 
       boxplot(temp_df[[current_row$column]])
     ### Otherwise no boxplot ###
     } else {    
-      utils::writeClipboard(str = "Target column is not numeric", format = 1)
+      #utils::writeClipboard(str = "Target column is not numeric", format = 1)
 
       stop('Cannot produce boxplot of character values')
     }
