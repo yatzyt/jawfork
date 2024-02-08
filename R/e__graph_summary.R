@@ -41,7 +41,8 @@ e__graph_summary <- function(session_name, current_row,outer_env=totem) {
       group_by_entry_asterisks <- gsub(", ", "*", group_by_entry)
       utils::writeClipboard(str = group_by_entry_asterisks, format = 1)
 
-      boxplot(eval(parse(text = current_row$column)) ~ eval(parse(text = group_by_entry_asterisks)), temp_df)
+      eval(parse(text = sprintf('boxplot(%s ~ %s, temp_df)', current_row$column, group_by_entry_asterisks)))
+      #boxplot(eval(parse(text = current_row$column)) ~ eval(parse(text = group_by_entry_asterisks)), temp_df)
     ### Otherwise no boxplot ###
     } else {   
       utils::writeClipboard(str = "Target column is not numeric", format = 1)
