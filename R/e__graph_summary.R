@@ -36,18 +36,11 @@ e__graph_summary <- function(session_name, current_row,outer_env=totem) {
     ### Get sum if the selected column is numeric ###
     if (class(temp_df[[current_row$column]]) %in% c("numeric", "integer")) {
       #utils::writeClipboard(str = "Group by, target column is numeric", format = 1)
-      utils::writeClipboard(str = group_by_entry, format = 1)
-      Output <- temp_df %>% group_by_(.dots = stringr::str_split(group_by_entry, ", ")[[1]]) %>% summarise(N = sum(!is.na(eval(parse(text = current_row$column)))),
-                                                                                                          Mean = mean(eval(parse(text = current_row$column)), na.rm = T),
-                                                                                                          SD = sd(eval(parse(text = current_row$column)), na.rm = T),
-                                                                                                          Median = quantile(eval(parse(text = current_row$column)), prob = c(0.50), type = 2, na.rm = T, names = F),
-                                                                                                          Q1 =     quantile(eval(parse(text = current_row$column)), prob = c(0.25), type = 2, na.rm = T, names = F),
-                                                                                                          Q3 =     quantile(eval(parse(text = current_row$column)), prob = c(0.75), type = 2, na.rm = T, names = F),
-                                                                                                          Min =    quantile(eval(parse(text = current_row$column)), prob = c(0.00), type = 2, na.rm = T, names = F),
-                                                                                                          Max =    quantile(eval(parse(text = current_row$column)), prob = c(1.00), type = 2, na.rm = T, names = F),
-                                                                                                          preSum = sum(eval(parse(text = current_row$column)), na.rm = T))
 
-      boxplot(eval(parse(text = current_row$column)) ~ eval(parse(text = group_by_entry)), temp_df)
+      group_by_entry_asterisks <- gsub(", ", "*", group_by_entry)
+      utils::writeClipboard(str = group_by_entry_asterisks, format = 1)
+
+      boxplot(eval(parse(text = current_row$column)) ~ eval(parse(text = group_by_entry_asterisks)), temp_df)
     ### Otherwise no boxplot ###
     } else {   
       utils::writeClipboard(str = "Target column is not numeric", format = 1)
