@@ -46,6 +46,8 @@ e__graph_summary <- function(session_name, current_row,outer_env=totem) {
                                                                                                           Min =    quantile(eval(parse(text = current_row$column)), prob = c(0.00), type = 2, na.rm = T, names = F),
                                                                                                           Max =    quantile(eval(parse(text = current_row$column)), prob = c(1.00), type = 2, na.rm = T, names = F),
                                                                                                           preSum = sum(eval(parse(text = current_row$column)), na.rm = T))
+
+      boxplot(eval(parse(text = current_row$column)) ~ eval(parse(text = group_by_entry)), temp_df)
     ### Otherwise no boxplot ###
     } else {   
       utils::writeClipboard(str = "Target column is not numeric", format = 1)
