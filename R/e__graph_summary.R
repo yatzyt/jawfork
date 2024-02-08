@@ -98,50 +98,16 @@ e__graph_summary <- function(session_name, current_row,outer_env=totem) {
     }
   ### Handle when there are no grouping variables ###
   } else {
-    ### Get sum if the selected column is numeric ###
+    ### Make boxplot if the selected column is numeric ###
     if (class(temp_df[[current_row$column]]) %in% c("numeric", "integer")) {   
       #utils::writeClipboard(str = "Target column is numeric", format = 1) 
-      col <- temp_df[[current_row$column]]
-      Label <- c("N", "Mean (SD)", "Median", "(Q1, Q3)", "Min, Max", "Sum")
-      quantiles <- quantile(col, prob = c(0.50, 0.25, 0.75, 0.00, 1.00), type = 2, na.rm = T, names = F)
-      Value <- as.character(c(sum(!is.na(col)), paste0(round(mean(col, na.rm = T), digits = 4), " (", round(sd(col, na.rm = T), digits = 4), ")"), quantiles[1], paste0("(", quantiles[2], ", ", quantiles[3], ")"), paste0(quantiles[4], ", ", quantiles[5]), sum(col, na.rm = T)))
-      
-      y <- data.frame(Label, Value)
+
+      boxplot(temp_df[[current_row$column]])
     ### Otherwise no sum ###
     } else {    
-      #utils::writeClipboard(str = "Target column is not numeric", format = 1) 
-      col <- temp_df[[current_row$column]]
-      Label <- c("N", "Mean (SD)", "Median", "(Q1, Q3)", "Min, Max")
-      quantiles <- quantile(col, prob = c(0.50, 0.25, 0.75, 0.00, 1.00), type = 2, na.rm = T, names = F)
-      Value <- as.character(c(sum(!is.na(col)), paste0(round(mean(col, na.rm = T), digits = 4), " (", round(sd(col, na.rm = T), digits = 4), ")"), quantiles[1], paste0("(", quantiles[2], ", ", quantiles[3], ")"), paste0(quantiles[4], ", ", quantiles[5])))
-      
-      y <- data.frame(Label, Value)
+      #utils::writeClipboard(str = "Target column is not numeric", format = 1)
+
+      stop('Cannot produce boxplot of character values')
     }
   }
-    
-  ### Create gtk output ###
-  #Require the package so I don't have to lead every function with RGtk2::
-  #I think this was messing up $ methods, this was very important
-  require("RGtk2")
-  
-  #Create window, assign title
-  win <- gtkWindow(show = F)
-  win["title"] <- "Test"
-
-  #Set up graphics
-  graphics <- gtkDrawingArea()
-  vbox <- RGtk2::gtkVBox()
-  vbox$packStart(graphics, expand = TRUE, fill = TRUE, padding = 0)
-  win$add(vbox)
-
-  #boxplot(temp_df$AGE)
-
-  #Set win size
-  gtkWidgetSetSizeRequest(win, 500, 300)
-
-  #Display win
-  #gtkWidgetShow(win)
-
-  options(device = "windows")
-  plot(1:3)
 }
