@@ -36,7 +36,7 @@ e__graph_summary <- function(session_name, current_row,outer_env=totem) {
     ### Get sum if the selected column is numeric ###
     if (class(temp_df[[current_row$column]]) %in% c("numeric", "integer")) {
       #utils::writeClipboard(str = "Group by, target column is numeric", format = 1)
-      utils::writeClipboard(str = class(group_by_entry), format = 1)
+      utils::writeClipboard(str = typeof(group_by_entry), format = 1)
 
       group_by_entry_asterisks <- gsub(", ", "*", group_by_entry)
       #utils::writeClipboard(str = group_by_entry_asterisks, format = 1)
