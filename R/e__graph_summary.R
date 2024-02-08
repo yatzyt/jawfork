@@ -42,7 +42,7 @@ e__graph_summary <- function(session_name, current_row,outer_env=totem) {
       #Concatenate the independent and dependent variables into a string
       title <- sprintf('%s ~ %s', current_row$column, group_by_entry_asterisks)
       eval(parse(text = sprintf('plot <- boxplot(%s ~ %s, temp_df, ylab = "%s", main = "%s")', current_row$column, group_by_entry_asterisks, current_row$column, title)))
-      text(1:length(plot$n), min(temp_df[[current_row$column]], na.rm = T) - ((max(temp_df[[current_row$column]], na.rm = T) - min(temp_df[[current_row$column]], na.rm = T)) * 0.025), paste("n=", plot$n))
+      text(1:length(plot$n), min(temp_df[[current_row$column]], na.rm = T) - ((max(temp_df[[current_row$column]], na.rm = T) - min(temp_df[[current_row$column]], na.rm = T)) * 0.02), paste("n=", plot$n))
       grid()
     ### Otherwise no boxplot ###
     } else {   
@@ -58,7 +58,7 @@ e__graph_summary <- function(session_name, current_row,outer_env=totem) {
 
       #boxplot(temp_df[[current_row$column]])
       eval(parse(text = sprintf('plot <- boxplot(temp_df[[current_row$column]], xlab = "", ylab = "%s", main = "%s")', current_row$column, current_row$column)))
-      text(1:length(plot$n), min(temp_df[[current_row$column]], na.rm = T) - ((max(temp_df[[current_row$column]], na.rm = T) - min(temp_df[[current_row$column]], na.rm = T)) * 0.025), paste("n=", plot$n))
+      text(1:length(plot$n), min(temp_df[[current_row$column]], na.rm = T) - ((max(temp_df[[current_row$column]], na.rm = T) - min(temp_df[[current_row$column]], na.rm = T)) * 0.02), paste("n=", plot$n))
       grid()
     ### Otherwise no boxplot ###
     } else {    
