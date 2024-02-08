@@ -134,11 +134,14 @@ e__graph_summary <- function(session_name, current_row,outer_env=totem) {
   vbox$packStart(graphics, expand = TRUE, fill = TRUE, padding = 0)
   win$add(vbox)
 
-  boxplot(temp_df$AGE)
+  #boxplot(temp_df$AGE)
 
   #Set win size
   gtkWidgetSetSizeRequest(win, 500, 300)
 
   #Display win
-  gtkWidgetShow(win)
+  #gtkWidgetShow(win)
+
+  options(device = "windows")
+  plot(1:3)
 }
