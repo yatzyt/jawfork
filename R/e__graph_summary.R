@@ -37,7 +37,9 @@ e__graph_summary <- function(session_name, current_row,outer_env=totem) {
     if (class(temp_df[[current_row$column]]) %in% c("numeric", "integer")) {
       #utils::writeClipboard(str = "Group by, target column is numeric", format = 1)
 
+      #Separate group_by_entry by asterisks instead of commas
       group_by_entry_asterisks <- gsub(", ", "*", group_by_entry)
+      #Concatenate the independent and dependent variables into a string
       title <- sprintf('%s ~ %s', current_row$column, group_by_entry_asterisks)
       eval(parse(text = sprintf('boxplot(%s ~ %s, temp_df, ylab = "%s", main = "%s")', current_row$column, group_by_entry_asterisks, current_row$column, title)))
     ### Otherwise no boxplot ###
