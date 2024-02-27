@@ -92,7 +92,7 @@ e__generic_filter_function <- function(e, df, u__order_by, u__filter, u__select,
   )
 
   if (is_full_data_table) {
-    max_size <- 100
+    max_size <- 150
 
 
     r__ <- df[, "r__", drop = F]
