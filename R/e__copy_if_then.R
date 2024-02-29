@@ -65,9 +65,10 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
   dialog[["vbox"]]$add(frame)
   #Require response before interacting with table
   response <- dialog$run()
-  gtkWidgetDestroy(dialog)
 
   utils::writeClipboard(str = toString(gtkRadioButtonGetGroup(button)), format = 1)
+  
+  gtkWidgetDestroy(dialog)
 
   #if (response != GtkResponseType["close"] & response != GtkResponseType["delete-event"]) {
     column_classes <- df_obj$get_column_classes()
