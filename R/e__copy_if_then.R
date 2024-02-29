@@ -50,7 +50,7 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
     type = "question", 
     buttons = "upper-lower", 
     "Code in upper or lower case?")
-  response <- gtkDialogRun(dialog)
+  response <- dialog$run()
   gtkWidgetDestroy(dialog)
 
   #if (response != GtkResponseType["close"] & response != GtkResponseType["delete-event"]) {
