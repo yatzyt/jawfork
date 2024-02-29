@@ -116,7 +116,9 @@ e__df_obj_function <- function(box, outer_env = totem,obj_env=inner_env) {
       if (vector == F) {
         x <- obj_env$df_obj_list$full_df[, pass_columns, drop = F]
       } else {
+        #If copying as a vector, remove all newlines
         x <- datapasta::vector_construct(obj_env$df_obj_list$full_df[, pass_columns, drop = T])
+        x <- gsub("\n", "", x)
       }
 
       clipr::write_clip(x, allow_non_interactive = T)
