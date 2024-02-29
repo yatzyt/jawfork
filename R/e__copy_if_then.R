@@ -67,7 +67,7 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
   response <- dialog$run()
   gtkWidgetDestroy(dialog)
 
-  utils::writeClipboard(str = toString(button), format = 1)
+  utils::writeClipboard(str = toString(radio_buttons$getSelection()), format = 1)
 
   #if (response != GtkResponseType["close"] & response != GtkResponseType["delete-event"]) {
     column_classes <- df_obj$get_column_classes()
