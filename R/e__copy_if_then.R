@@ -49,7 +49,7 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
     flags = "destroy-with-parent", 
     type = "question", 
     buttons = "ok-cancel", 
-    "Select letter case for code to be copied")
+    "Select an option for the copied code")
   #Add options
   choices <- c("Uppercase", "Lowercase")
   radio_buttons <- NULL
@@ -66,6 +66,8 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
   #Require response before interacting with table
   response <- dialog$run()
   gtkWidgetDestroy(dialog)
+
+  utils::writeClipboard(str = response, format = 1)
 
   #if (response != GtkResponseType["close"] & response != GtkResponseType["delete-event"]) {
     column_classes <- df_obj$get_column_classes()
@@ -87,6 +89,6 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
     string_builder[j] <- paste0("else do;\n    err_msg=catx(\"|\",\"Error: Unexpected value for ", current_row$column, "\", ", current_row$column, ");\n    put err_msg;\nend;")
   
   
-    utils::writeClipboard(str = charToRaw(paste0(paste0(string_builder, collapse = "\n"), " ")), format = 1)
+    #utils::writeClipboard(str = charToRaw(paste0(paste0(string_builder, collapse = "\n"), " ")), format = 1)
   #}
 }
