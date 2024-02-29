@@ -53,7 +53,7 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
   response <- gtkDialogRun(dialog)
   gtkWidgetDestroy(dialog)
 
-  if (response != GtkResponseType["close"] & response != GtkResponseType["delete-event"]) {
+  #if (response != GtkResponseType["close"] & response != GtkResponseType["delete-event"]) {
     column_classes <- df_obj$get_column_classes()
     column_values <- df_obj$get_column_values(current_row$column)
     if (column_classes[current_row$column] == "numeric") {
@@ -74,5 +74,5 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
   
   
     utils::writeClipboard(str = charToRaw(paste0(paste0(string_builder, collapse = "\n"), " ")), format = 1)
-  }
+  #}
 }
