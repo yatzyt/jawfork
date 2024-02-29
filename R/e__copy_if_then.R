@@ -49,7 +49,21 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
     flags = "destroy-with-parent", 
     type = "question", 
     buttons = "ok-cancel", 
-    "Select case for copied code")
+    "Select letter case for code to be copied")
+  #Add options
+  choices <- c("Uppercase", "Lowercase")
+  radio_buttons <- NULL
+  vbox <- gtkVBox(F, 0)
+  for (choice in choices) {
+    button <- gtkRadioButton(radio_buttons, choice)
+    vbox$add(button)
+    radio_buttons <- c(radio_buttons, button)
+  }
+  #Make a frame for the buttons
+  frame <- gtkFrame("Letter case")
+  frame$add(vbox)
+  dialog[["vbox"]]$add(frame)
+  #Require response before interacting with table
   response <- dialog$run()
   gtkWidgetDestroy(dialog)
 
