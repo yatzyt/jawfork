@@ -9,7 +9,7 @@
 #' @return TODO
 
 e__copy_if_then <- function(session_name, current_row, df_obj,outer_env=totem) {
-  #require RGtk2
+  require(RGtk2)
   column_classes <- df_obj$get_column_classes()
   column_values <- df_obj$get_column_values(current_row$column)
   if (column_classes[current_row$column] == "numeric") {
@@ -42,7 +42,7 @@ e__copy_if_then <- function(session_name, current_row, df_obj,outer_env=totem) {
 #' @return TODO
 
 e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem) {
-  #require(RGtk2)
+  require(RGtk2)
   column_classes <- df_obj$get_column_classes()
   column_values <- df_obj$get_column_values(current_row$column)
   if (column_classes[current_row$column] == "numeric") {
@@ -52,7 +52,12 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
   }
 
     ######################## Dialog box test
-    dialog <- RGtk2::gtkMessageDialog(outer_env[[session_name]]$windows$main_window, "destroy-with-parent", "question", "yes-no", "Do you want to upgrade RGtk2?")
+    dialog <- gtkMessageDialog(
+      parent = outer_env[[session_name]]$windows$main_window, 
+      flags = "destroy-with-parent", 
+      type = "question", 
+      buttons = "yes-no", 
+      "Code in upper or lower case?")
     ######################## Dialog box test
 
   string_builder <- rep(NA, length(column_values) + 2)
