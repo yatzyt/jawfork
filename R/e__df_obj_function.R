@@ -112,14 +112,17 @@ e__df_obj_function <- function(box, outer_env = totem,obj_env=inner_env) {
   copy_full <- function(pass_columns = NULL, vector = F) {
     if (is.null(pass_columns) == T) {
       clipr::write_clip(obj_env$df_obj_list$full_df, allow_non_interactive = T)
+       utils::writeClipboard(str = 'Case 1', format = 1)
     } else {
       if (vector == F) {
         x <- obj_env$df_obj_list$full_df[, pass_columns, drop = F]
+         utils::writeClipboard(str = 'Case 2', format = 1)
       } else {
         x <- datapasta::vector_construct(obj_env$df_obj_list$full_df[, pass_columns, drop = T])
+         utils::writeClipboard(str = 'Case 1', format = 1)
       }
 
-      clipr::write_clip(x, allow_non_interactive = T)
+      #clipr::write_clip(x, allow_non_interactive = T)
     }
   }
 
