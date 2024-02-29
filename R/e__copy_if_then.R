@@ -58,6 +58,9 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
       type = "question", 
       buttons = "yes-no", 
       "Code in upper or lower case?")
+
+    response <- gtkDialogRun(dialog)
+    gtkWidgetDestroy(dialog)
     ######################## Dialog box test
 
   string_builder <- rep(NA, length(column_values) + 2)
