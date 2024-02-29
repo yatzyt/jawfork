@@ -50,8 +50,8 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
     type = "question", 
     buttons = "ok-cancel", 
     "Select case for copied code")
-  #response <- dialog$run()
-  #gtkWidgetDestroy(dialog)
+  response <- dialog$run()
+  gtkWidgetDestroy(dialog)
 
   #if (response != GtkResponseType["close"] & response != GtkResponseType["delete-event"]) {
     column_classes <- df_obj$get_column_classes()
