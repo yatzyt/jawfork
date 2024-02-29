@@ -49,6 +49,33 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
     sep <- "\""
   }
 
+      ######################## Dialog box test
+      dialog <- RGtk2::gtkMessageDialog(
+        parent = outer_env[[session_name]]$windows$main_window,
+        flags = "destroy-with-parent",
+        type = "question",
+        buttons = "upper-lower-cancel",
+        "Code in upper or lower case?"
+      )
+      #dialog["secondary-text"] <- cmd
+
+
+      ###################################################
+      ### code chunk number 62: Pre-defined-dialogs.Rnw:49-58
+      ###################################################
+      response <- RGtk2::gtkDialogRun(dialog)
+      if (response == RGtk2::GtkResponseType["cancel"] ||
+        response == RGtk2::GtkResponseType["close"] ||
+        response == RGtk2::GtkResponseType["delete-event"]) {
+        ## pass
+      } else if (response == RGtk2::GtkResponseType["upper"]) {
+        clipr::write_clip(str = 'UPPER', format = 1)
+      } else if (response == RGtk2::GtkResponseType["lower"]) {
+        clipr::write_clip(str = 'lower', format = 1)
+      }
+      RGtk2::gtkWidgetDestroy(dialog)
+    ######################## Dialog box test
+
   string_builder <- rep(NA, length(column_values) + 2)
   string_builder[1] <- paste0("if      missing(", current_row$column, ") then do;\n    <var>=\"\";\nend;")
   j <- 2
@@ -60,5 +87,5 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
   string_builder[j] <- paste0("else do;\n    err_msg=catx(\"|\",\"Error: Unexpected value for ", current_row$column, "\", ", current_row$column, ");\n    put err_msg;\nend;")
 
 
-  utils::writeClipboard(str = charToRaw(paste0(paste0(string_builder, collapse = "\n"), " ")), format = 1)
+  #utils::writeClipboard(str = charToRaw(paste0(paste0(string_builder, collapse = "\n"), " ")), format = 1)
 }
