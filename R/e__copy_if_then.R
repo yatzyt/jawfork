@@ -48,8 +48,8 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
     parent = outer_env[[session_name]]$windows$main_window, 
     flags = "destroy-with-parent", 
     type = "question", 
-    buttons = "yes-no", 
-    "Code in upper or lower case?")
+    buttons = "ok-cancel", 
+    "Select case for copied code")
   #response <- dialog$run()
   #gtkWidgetDestroy(dialog)
 
