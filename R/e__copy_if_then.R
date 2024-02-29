@@ -43,36 +43,36 @@ e__copy_if_then <- function(session_name, current_row, df_obj,outer_env=totem) {
 
 e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem) {
   require(RGtk2)
-  column_classes <- df_obj$get_column_classes()
-  column_values <- df_obj$get_column_values(current_row$column)
-  if (column_classes[current_row$column] == "numeric") {
-    sep <- ""
-  } else {
-    sep <- "\""
+  #Generate dialog to ask about code case
+  dialog <- gtkMessageDialog(
+    parent = outer_env[[session_name]]$windows$main_window, 
+    flags = "destroy-with-parent", 
+    type = "question", 
+    buttons = "upper-lower", 
+    "Code in upper or lower case?")
+  response <- gtkDialogRun(dialog)
+  gtkWidgetDestroy(dialog)
+
+  if (response != GtkResponseType["close"] & response != GtkResponseType["delete-event"]) {
+    column_classes <- df_obj$get_column_classes()
+    column_values <- df_obj$get_column_values(current_row$column)
+    if (column_classes[current_row$column] == "numeric") {
+      sep <- ""
+    } else {
+      sep <- "\""
+    }
+  
+    string_builder <- rep(NA, length(column_values) + 2)
+    string_builder[1] <- paste0("if      missing(", current_row$column, ") then do;\n    <var>=\"\";\nend;")
+    j <- 2
+    for (i in column_values) {
+      string_builder[j] <- paste0("else if ", current_row$column, "=", sep, i, sep, " then do;\n    <var>=\"\";\nend;")
+  
+      j <- j + 1
+    }
+    string_builder[j] <- paste0("else do;\n    err_msg=catx(\"|\",\"Error: Unexpected value for ", current_row$column, "\", ", current_row$column, ");\n    put err_msg;\nend;")
+  
+  
+    utils::writeClipboard(str = charToRaw(paste0(paste0(string_builder, collapse = "\n"), " ")), format = 1)
   }
-
-    ######################## Dialog box test
-    dialog <- gtkMessageDialog(
-      parent = outer_env[[session_name]]$windows$main_window, 
-      flags = "destroy-with-parent", 
-      type = "question", 
-      buttons = "yes-no-cancel", 
-      "Code in upper or lower case?")
-
-    response <- gtkDialogRun(dialog)
-    gtkWidgetDestroy(dialog)
-    ######################## Dialog box test
-
-  string_builder <- rep(NA, length(column_values) + 2)
-  string_builder[1] <- paste0("if      missing(", current_row$column, ") then do;\n    <var>=\"\";\nend;")
-  j <- 2
-  for (i in column_values) {
-    string_builder[j] <- paste0("else if ", current_row$column, "=", sep, i, sep, " then do;\n    <var>=\"\";\nend;")
-
-    j <- j + 1
-  }
-  string_builder[j] <- paste0("else do;\n    err_msg=catx(\"|\",\"Error: Unexpected value for ", current_row$column, "\", ", current_row$column, ");\n    put err_msg;\nend;")
-
-
-  #utils::writeClipboard(str = charToRaw(paste0(paste0(string_builder, collapse = "\n"), " ")), format = 1)
 }
