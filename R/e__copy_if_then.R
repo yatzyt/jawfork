@@ -57,6 +57,7 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
         buttons = "upper-lower-cancel",
         "Code in upper or lower case?"
       )
+      utils::writeClipboard(str = 'Check 1', format = 1)
       #dialog["secondary-text"] <- cmd
 
 
@@ -69,9 +70,9 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
         response == RGtk2::GtkResponseType["delete-event"]) {
         ## pass
       } else if (response == RGtk2::GtkResponseType["upper"]) {
-        clipr::write_clip(str = 'UPPER', format = 1)
+        utils::writeClipboard(str = 'UPPER', format = 1)
       } else if (response == RGtk2::GtkResponseType["lower"]) {
-        clipr::write_clip(str = 'lower', format = 1)
+        utils::writeClipboard(str = 'lower', format = 1)
       }
       RGtk2::gtkWidgetDestroy(dialog)
     ######################## Dialog box test
