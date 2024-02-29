@@ -9,6 +9,7 @@
 #' @return TODO
 
 e__copy_if_then <- function(session_name, current_row, df_obj,outer_env=totem) {
+  #require RGtk2
   column_classes <- df_obj$get_column_classes()
   column_values <- df_obj$get_column_values(current_row$column)
   if (column_classes[current_row$column] == "numeric") {
@@ -41,6 +42,7 @@ e__copy_if_then <- function(session_name, current_row, df_obj,outer_env=totem) {
 #' @return TODO
 
 e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem) {
+  #require(RGtk2)
   column_classes <- df_obj$get_column_classes()
   column_values <- df_obj$get_column_values(current_row$column)
   if (column_classes[current_row$column] == "numeric") {
@@ -49,32 +51,8 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
     sep <- "\""
   }
 
-      ######################## Dialog box test
-      dialog <- RGtk2::gtkMessageDialog(
-        parent = outer_env[[session_name]]$windows$main_window,
-        flags = "destroy-with-parent",
-        type = "question",
-        buttons = "upper-lower",
-        "Code in upper or lower case?"
-      )
-      utils::writeClipboard(str = 'Check 1', format = 1)
-      #dialog["secondary-text"] <- cmd
-
-
-      ###################################################
-      ### code chunk number 62: Pre-defined-dialogs.Rnw:49-58
-      ###################################################
-      response <- RGtk2::gtkDialogRun(dialog)
-      if (response == RGtk2::GtkResponseType["cancel"] ||
-        response == RGtk2::GtkResponseType["close"] ||
-        response == RGtk2::GtkResponseType["delete-event"]) {
-        ## pass
-      } else if (response == RGtk2::GtkResponseType["upper"]) {
-        utils::writeClipboard(str = 'UPPER', format = 1)
-      } else if (response == RGtk2::GtkResponseType["lower"]) {
-        utils::writeClipboard(str = 'lower', format = 1)
-      }
-      RGtk2::gtkWidgetDestroy(dialog)
+    ######################## Dialog box test
+    dialog <- RGtk2::gtkMessageDialog(outer_env[[session_name]]$windows$main_window, "destroy-with-parent", "question", "yes-no", "Do you want to upgrade RGtk2?")
     ######################## Dialog box test
 
   string_builder <- rep(NA, length(column_values) + 2)
