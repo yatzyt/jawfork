@@ -68,7 +68,7 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
 
   #Find selection
   for (i in length(radio_buttons)) {
-    if (gtkToggleButtonGetActive(radio_buttons[i]) {
+    if (gtkToggleButtonGetActive(radio_buttons[i])) {
       selectn <- i
     }
   }
