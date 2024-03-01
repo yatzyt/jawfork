@@ -10,6 +10,43 @@
 
 e__copy_if_then <- function(session_name, current_row, df_obj,outer_env=totem) {
   require(RGtk2)
+  
+  #Generate dialog to ask about code case
+  dialog <- gtkMessageDialog(
+    parent = outer_env[[session_name]]$windows$main_window, 
+    flags = "destroy-with-parent", 
+    type = "question", 
+    buttons = "ok-cancel", 
+    "Select an option for the copied code")
+  
+  #Add options
+  choices <- c("Uppercase", "Lowercase")
+  radio_buttons <- NULL
+  vbox <- gtkVBox(F, 0)
+  for (choice in choices) {
+    button <- gtkRadioButton(radio_buttons, choice)
+    vbox$add(button)
+    radio_buttons <- c(radio_buttons, button)
+  }
+  
+  #Make a frame for the buttons
+  frame <- gtkFrame("Letter case")
+  frame$add(vbox)
+  dialog[["vbox"]]$add(frame)
+  #Require response before interacting with table
+  response <- dialog$run()
+
+  #Find selection
+  for (i in 1:length(radio_buttons)) {
+    if (gtkToggleButtonGetActive(radio_buttons[[i]])) {
+      selectn <- i
+    }
+  }
+  selection <- choices[selectn]
+  
+  #Destroy dialog box
+  gtkWidgetDestroy(dialog)
+  
   column_classes <- df_obj$get_column_classes()
   column_values <- df_obj$get_column_values(current_row$column)
   if (column_classes[current_row$column] == "numeric") {
@@ -80,7 +117,7 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
   #Destroy dialog box
   gtkWidgetDestroy(dialog)
 
-  #if (response != GtkResponseType["close"] & response != GtkResponseType["delete-event"]) {
+  if (response != GtkResponseType["close"] & response != GtkResponseType["delete-event"]) {
     column_classes <- df_obj$get_column_classes()
     column_values <- df_obj$get_column_values(current_row$column)
     if (column_classes[current_row$column] == "numeric") {
@@ -100,6 +137,6 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
     string_builder[j] <- paste0("else do;\n    err_msg=catx(\"|\",\"Error: Unexpected value for ", current_row$column, "\", ", current_row$column, ");\n    put err_msg;\nend;")
   
   
-    #utils::writeClipboard(str = charToRaw(paste0(paste0(string_builder, collapse = "\n"), " ")), format = 1)
-  #}
+    utils::writeClipboard(str = charToRaw(paste0(paste0(string_builder, collapse = "\n"), " ")), format = 1)
+  }
 }
