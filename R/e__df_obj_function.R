@@ -122,7 +122,7 @@ e__df_obj_function <- function(box, outer_env = totem,obj_env=inner_env) {
       }
 
       #Use utils::writeClipboard instead of clipr::write_clip to remove linebreak
-      utils::writeClipboard(str = charToRaw(paste0(x, " "), format = 1)
+      utils::writeClipboard(str = charToRaw(paste0(x, " ")), format = 1)
       #clipr::write_clip(x, allow_non_interactive = T)
     }
   }
