@@ -66,8 +66,16 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
   #Require response before interacting with table
   response <- dialog$run()
 
-  utils::writeClipboard(str = toString(gtkToggleButtonGetActive(button)), format = 1)
+  #Find selection
+  for (i in length(radio_buttons)) {
+    if (gtkToggleButtonGetActive(radio_buttons[i]) {
+      selectn <- i
+    }
+  }
+  selection <- choices[selectn]
+  utils::writeClipboard(str = toString(selection), format = 1)
   
+  #Destroy dialog box
   gtkWidgetDestroy(dialog)
 
   #if (response != GtkResponseType["close"] & response != GtkResponseType["delete-event"]) {
