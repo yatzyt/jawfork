@@ -47,26 +47,40 @@ e__copy_if_then <- function(session_name, current_row, df_obj,outer_env=totem) {
   #Destroy dialog box
   gtkWidgetDestroy(dialog)
   
-  column_classes <- df_obj$get_column_classes()
-  column_values <- df_obj$get_column_values(current_row$column)
-  if (column_classes[current_row$column] == "numeric") {
-    sep <- ""
-  } else {
-    sep <- "\""
+  if (response %in% c(GtkResponseType["close"], GtkResponseType["delete-event"], GtkResponseType["cancel"]) == F) {
+    column_classes <- df_obj$get_column_classes()
+    column_values <- df_obj$get_column_values(current_row$column)
+    if (column_classes[current_row$column] == "numeric") {
+      sep <- ""
+    } else {
+      sep <- "\""
+    }
+  
+    string_builder <- rep(NA, length(column_values) + 2)
+    if (toupper(selection) == "UPPERCASE") {
+      string_builder[1] <- paste0("IF MISSING(", current_row$column, ") THEN <var> = \"\";")
+    } else {
+      string_builder[1] <- paste0("if missing(", current_row$column, ") then <var>=\"\";")
+    }
+    j <- 2
+    for (i in column_values) {
+      if (toupper(selection) == "UPPERCASE") {
+        string_builder[j] <- paste0("E:SE IF ", current_row$column, " = ", sep, i, sep, " THEN <var> = \"\";")
+      } else {
+        string_builder[j] <- paste0("else if ", current_row$column, "=", sep, i, sep, " then <var>=\"\";")
+      }
+  
+      j <- j + 1
+    }
+    if (toupper(selection) == "UPPERCASE") {
+      string_builder[j] <- paste0("ELSE DO;\n    ERR_MSG = CATX(\"|\",\"ERROR: Unexpected value for ", current_row$column, "\", ", current_row$column, ");\n    PUT ERR_MSG;\nEND;")
+    } else {
+      string_builder[j] <- paste0("else do;\n    err_msg=catx(\"|\",\"ERROR: Unexpected value for ", current_row$column, "\", ", current_row$column, ");\n    put err_msg;\nend;")
+    }
+  
+    #Copy final string to clipboard
+    utils::writeClipboard(str = charToRaw(paste0(paste0(string_builder, collapse = "\n"), " ")), format = 1)
   }
-
-  string_builder <- rep(NA, length(column_values) + 2)
-  string_builder[1] <- paste0("if      missing(", current_row$column, ") then <var>=\"\";")
-  j <- 2
-  for (i in column_values) {
-    string_builder[j] <- paste0("else if ", current_row$column, "=", sep, i, sep, " then <var>=\"\";")
-
-    j <- j + 1
-  }
-  string_builder[j] <- paste0("else do;\n    err_msg=catx(\"|\",\"Error: Unexpected value for ", current_row$column, "\", ", current_row$column, ");\n    put err_msg;\nend;")
-
-  #Copy final string to clipboard
-  utils::writeClipboard(str = charToRaw(paste0(paste0(string_builder, collapse = "\n"), " ")), format = 1)
 }
 
 #' e__copy_if_then_do
