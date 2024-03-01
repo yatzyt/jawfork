@@ -43,6 +43,7 @@ e__copy_if_then <- function(session_name, current_row, df_obj,outer_env=totem) {
 
 e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem) {
   require(RGtk2)
+  
   #Generate dialog to ask about code case
   dialog <- gtkMessageDialog(
     parent = outer_env[[session_name]]$windows$main_window, 
@@ -50,6 +51,7 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
     type = "question", 
     buttons = "ok-cancel", 
     "Select an option for the copied code")
+  
   #Add options
   choices <- c("Uppercase", "Lowercase")
   radio_buttons <- NULL
@@ -59,6 +61,7 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
     vbox$add(button)
     radio_buttons <- c(radio_buttons, button)
   }
+  
   #Make a frame for the buttons
   frame <- gtkFrame("Letter case")
   frame$add(vbox)
@@ -73,7 +76,6 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
     }
   }
   selection <- choices[selectn]
-  utils::writeClipboard(str = toString(selection), format = 1)
   
   #Destroy dialog box
   gtkWidgetDestroy(dialog)
