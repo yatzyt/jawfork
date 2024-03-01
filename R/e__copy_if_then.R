@@ -66,7 +66,7 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
   #Require response before interacting with table
   response <- dialog$run()
 
-  utils::writeClipboard(str = toString(gtkRadioButtonGetGroup(button)), format = 1)
+  utils::writeClipboard(str = toString(gtkToggleButtonGetActive(button)), format = 1)
   
   gtkWidgetDestroy(dialog)
 
