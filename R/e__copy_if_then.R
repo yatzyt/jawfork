@@ -117,7 +117,7 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
   #Destroy dialog box
   gtkWidgetDestroy(dialog)
 
-  if (response != GtkResponseType["close"] & response != GtkResponseType["delete-event"]) {
+  if (response %in% c(GtkResponseType["close"], GtkResponseType["delete-event"], GtkResponseType["cancel"]) == F) {
     column_classes <- df_obj$get_column_classes()
     column_values <- df_obj$get_column_values(current_row$column)
     if (column_classes[current_row$column] == "numeric") {
