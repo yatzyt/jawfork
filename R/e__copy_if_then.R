@@ -20,7 +20,7 @@ e__copy_if_then <- function(session_name, current_row, df_obj,outer_env=totem) {
     "Select an option for the copied code")
   
   #Add options
-  choices <- c("Uppercase", "Lowercase")
+  choices <- c("Lowercase", "Uppercase")
   radio_buttons <- NULL
   vbox <- gtkVBox(F, 0)
   for (choice in choices) {
@@ -65,7 +65,7 @@ e__copy_if_then <- function(session_name, current_row, df_obj,outer_env=totem) {
     j <- 2
     for (i in column_values) {
       if (toupper(selection) == "UPPERCASE") {
-        string_builder[j] <- paste0("E:SE IF ", current_row$column, " = ", sep, i, sep, " THEN <var> = \"\";")
+        string_builder[j] <- paste0("ELSE IF ", current_row$column, " = ", sep, i, sep, " THEN <var> = \"\";")
       } else {
         string_builder[j] <- paste0("else if ", current_row$column, "=", sep, i, sep, " then <var>=\"\";")
       }
@@ -104,7 +104,7 @@ e__copy_if_then_do <- function(session_name, current_row, df_obj,outer_env=totem
     "Select an option for the copied code")
   
   #Add options
-  choices <- c("Uppercase", "Lowercase")
+  choices <- c("Lowercase", "Uppercase")
   radio_buttons <- NULL
   vbox <- gtkVBox(F, 0)
   for (choice in choices) {
