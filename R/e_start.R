@@ -11,7 +11,7 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
   if ((sas_file_path %in% ls_content) == F) {
     sas_file_path <- gsub("\"", "", gsub("\\\\", "/", sas_file_path))
     if (file.exists(sas_file_path) == F) {
-      message("File does not exists.")
+      message("File does not exist.")
       return(F)
     }
     passed_ext <- z__file_ext(sas_file_path)
@@ -665,7 +665,7 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
       u__button(
         box = outer_env[[session_name]]$data_view_list$file_source_bar,
         start = T, padding = 2,
-        but_txt = "group",
+        but_txt = "grp",
         tool_tip = "Template group_by filter",
         call_back_fct = function(widget, event, data) {
           session_name <- data[[1]]
@@ -680,17 +680,32 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
       u__button(
         box = outer_env[[session_name]]$data_view_list$file_source_bar,
         start = T, padding = 2,
-        but_txt = "up",
-        tool_tip = "Upper case columns",
+        but_txt = "new",
+        tool_tip = "Template new column definition",
         call_back_fct = function(widget, event, data) {
           session_name <- data[[1]]
           outer_env <- data[[2]]
 
-          outer_env$u__append_before_code(session_name, cmd = "colnames(df) <- toupper(colnames(df))")
+          outer_env$u__append_before_code(session_name, cmd = "df <- df %>% mutate(NEWCOL = ifelse(VAR == VAL, 1, 0))")
 
           return(FALSE)
         }, data = list(session_name, outer_env)
       )
+
+      #u__button(
+      #  box = outer_env[[session_name]]$data_view_list$file_source_bar,
+      #  start = T, padding = 2,
+      #  but_txt = "up",
+      #  tool_tip = "Upper case columns",
+      #  call_back_fct = function(widget, event, data) {
+      #    session_name <- data[[1]]
+      #    outer_env <- data[[2]]
+      #
+      #    outer_env$u__append_before_code(session_name, cmd = "colnames(df) <- toupper(colnames(df))")
+      #
+      #    return(FALSE)
+      #  }, data = list(session_name, outer_env)
+      #)
 
       u__button(
         box = outer_env[[session_name]]$data_view_list$file_source_bar,
