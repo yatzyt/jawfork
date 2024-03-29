@@ -821,36 +821,36 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
 
 
 
-      u__button(
-        box = outer_env[[session_name]]$data_view_list$code_tool_bar,
-        start = F, padding = 2,
-        stock_id = "gtk-media-play",
-        tool_tip = "Run code",
-        call_back_fct = function(widget, event, data) {
-          session_name <- data[[1]]
-          outer_env <- data[[2]]
-          outer_env$show_load_window()
-          outer_env$u__load_dataset_filter(session_name)
-          outer_env$hide_load_window()
-          return(FALSE)
-        }, data = list(session_name, outer_env)
-      )
+      #u__button(
+      #  box = outer_env[[session_name]]$data_view_list$code_tool_bar,
+      #  start = F, padding = 2,
+      #  stock_id = "gtk-media-play",
+      #  tool_tip = "Run code",
+      #  call_back_fct = function(widget, event, data) {
+      #    session_name <- data[[1]]
+      #    outer_env <- data[[2]]
+      #    outer_env$show_load_window()
+      #    outer_env$u__load_dataset_filter(session_name)
+      #    outer_env$hide_load_window()
+      #    return(FALSE)
+      #  }, data = list(session_name, outer_env)
+      #)
 
-      u__button(
-        box = outer_env[[session_name]]$data_view_list$code_tool_bar,
-        start = F, padding = 2,
-        stock_id = "gtk-close",
-        tool_tip = "Clear",
-        call_back_fct = function(widget, event, data) {
-          session_name <- data[[1]]
-          outer_env <- data[[2]]
-          outer_env$show_load_window()
-          u__text_area_clear(outer_env[[session_name]]$text_area_1)
-          outer_env$u__load_dataset_filter(session_name)
-          outer_env$hide_load_window()
-          return(FALSE)
-        }, data = list(session_name, outer_env)
-      )
+      #u__button(
+      #  box = outer_env[[session_name]]$data_view_list$code_tool_bar,
+      #  start = F, padding = 2,
+      #  stock_id = "gtk-close",
+      #  tool_tip = "Clear",
+      #  call_back_fct = function(widget, event, data) {
+      #    session_name <- data[[1]]
+      #    outer_env <- data[[2]]
+      #    outer_env$show_load_window()
+      #    u__text_area_clear(outer_env[[session_name]]$text_area_1)
+      #    outer_env$u__load_dataset_filter(session_name)
+      #    outer_env$hide_load_window()
+      #    return(FALSE)
+      #  }, data = list(session_name, outer_env)
+      #)
 
 
       u__button(
