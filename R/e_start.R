@@ -665,6 +665,21 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
       u__button(
         box = outer_env[[session_name]]$data_view_list$file_source_bar,
         start = T, padding = 2,
+        but_txt = "group",
+        tool_tip = "Template group_by filter",
+        call_back_fct = function(widget, event, data) {
+          session_name <- data[[1]]
+          outer_env <- data[[2]]
+
+          outer_env$u__append_before_code(session_name, cmd = "df <- df %>% group_by(USUBJID) %>% filter(any(VAR == VAL))")
+
+          return(FALSE)
+        }, data = list(session_name, outer_env)
+      )
+
+      u__button(
+        box = outer_env[[session_name]]$data_view_list$file_source_bar,
+        start = T, padding = 2,
         but_txt = "up",
         tool_tip = "Upper case columns",
         call_back_fct = function(widget, event, data) {
