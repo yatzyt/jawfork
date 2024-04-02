@@ -1015,7 +1015,7 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
           outer_env <- data[[2]]
 
           #Try hiding a random widget
-          RGtk2::gtkWidgetHide(outer_env[[session_name]]$data_view_list$group__by_box)
+          RGtk2::gtkWidgetHide(outer_env[[session_name]]$data_view_list$group_by_box)
           RGtk2::gtkWidgetHide(outer_env[[session_name]]$data_view_list$select_box)
           RGtk2::gtkWidgetHide(outer_env[[session_name]]$data_view_list$unique_by_box)
           RGtk2::gtkWidgetHide(outer_env[[session_name]]$data_view_list$code_tool_bar)
