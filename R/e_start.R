@@ -1014,6 +1014,10 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
           session_name <- data[[1]]
           outer_env <- data[[2]]
 
+          #Define simplicity_view if it is undefined
+          if (!exists(outer_env[[session_name]]$status_bar$simplicity_view)) {
+            outer_env[[session_name]]$status_bar$simplicity_view == F
+          }
           #Hide top boxes if simplicity view is off, enable simplicity view
           if (outer_env[[session_name]]$status_bar$simplicity_view == F) {
             RGtk2::gtkWidgetHide(outer_env[[session_name]]$data_view_list$top_code_box)
