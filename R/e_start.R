@@ -1006,7 +1006,7 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
 
       #JN: simplicity mode that will hide everything but Full Data Table     
       u__button(
-        box = outer_env[[session_name]]$status_bar$box_bucket,
+        box = outer_env[[session_name]]$status_bar$box,
         start = F, padding = 5,
         stock_id = "gtk-orientation-landscape",
         tool_tip = "Simplicity mode",
@@ -1015,7 +1015,7 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
           outer_env <- data[[2]]
 
           #Try hiding a random widget
-          RGtk2::gtk_widget_hide(outer_env[[session_name]]$data_view_list$slot1_box)
+          RGtk2::gtkWidgetHide(outer_env[[session_name]]$data_view_list$slot1_box)
 
           return(FALSE)
         },
