@@ -943,6 +943,7 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
       outer_env[[session_name]]$status_bar$box <- RGtk2::gtkHBox()
       outer_env[[session_name]]$status_bar$box_bucket <- RGtk2::gtkHBox()
       outer_env[[session_name]]$status_bar$box_bucket_showing <- F
+      outer_env[[session_name]]$status_bar$simplicity_view <- F
       outer_env[[session_name]]$status_bar$info_label <- RGtk2::gtkLabel("")
       outer_env[[session_name]]$status_bar$info_label_cell <- RGtk2::gtkLabel("")
 
@@ -1008,15 +1009,24 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
       u__button(
         box = outer_env[[session_name]]$status_bar$box,
         start = F, padding = 5,
-        stock_id = "gtk-orientation-landscape",
-        tool_tip = "Simplicity mode",
+        stock_id = "gtk-fullscreen",
+        tool_tip = "Toggle simplicity mode",
         call_back_fct = function(widget, event, data) {
           session_name <- data[[1]]
           outer_env <- data[[2]]
 
-          #Try hiding a random widget
-          RGtk2::gtkWidgetHide(outer_env[[session_name]]$data_view_list$top_code_box)
-          RGtk2::gtkWidgetHide(outer_env[[session_name]]$data_view_list$top_tables_box)
+          #Hide top boxes if simplicity view is off, enable simplicity view
+          if (outer_env[[session_name]]$status_bar$simplicity_view == F) {
+            RGtk2::gtkWidgetHide(outer_env[[session_name]]$data_view_list$top_code_box)
+            RGtk2::gtkWidgetHide(outer_env[[session_name]]$data_view_list$top_tables_box)
+            outer_env[[session_name]]$status_bar$simplicity_view <- T
+          } 
+          #Otherwise show top boxes, disable simplicity fiew
+          else {
+            RGtk2::gtkWidgetShow(outer_env[[session_name]]$data_view_list$top_code_box)
+            RGtk2::gtkWidgetShow(outer_env[[session_name]]$data_view_list$top_tables_box)
+            outer_env[[session_name]]$status_bar$simplicity_view <- F
+          }
 
           return(FALSE)
         },
