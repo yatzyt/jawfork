@@ -1016,7 +1016,7 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
 
           #Define simplicity_view if it is undefined
           if (!exists("outer_env[[session_name]]$status_bar$simplicity_view")) {
-            outer_env[[session_name]]$status_bar$simplicity_view == F
+            outer_env[[session_name]]$status_bar$simplicity_view <- F
           }
           #Hide top boxes if simplicity view is off, enable simplicity view
           if (outer_env[[session_name]]$status_bar$simplicity_view == F) {
