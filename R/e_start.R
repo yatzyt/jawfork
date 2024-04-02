@@ -943,7 +943,6 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
       outer_env[[session_name]]$status_bar$box <- RGtk2::gtkHBox()
       outer_env[[session_name]]$status_bar$box_bucket <- RGtk2::gtkHBox()
       outer_env[[session_name]]$status_bar$box_bucket_showing <- F
-      outer_env[[session_name]]$status_bar$simplicity_view <- F
       outer_env[[session_name]]$status_bar$info_label <- RGtk2::gtkLabel("")
       outer_env[[session_name]]$status_bar$info_label_cell <- RGtk2::gtkLabel("")
 
