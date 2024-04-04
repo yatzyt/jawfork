@@ -115,11 +115,14 @@ e__df_obj_function <- function(box, outer_env = totem,obj_env=inner_env) {
     } else {
       if (vector == F) {
         x <- obj_env$df_obj_list$full_df[, pass_columns, drop = F]
+        clipr::write_clip(x, allow_non_interactive = T)
       } else {
         x <- datapasta::vector_construct(obj_env$df_obj_list$full_df[, pass_columns, drop = T])
+        #If copying as a vector, remove all newlines
+        x <- gsub("\n", "", x)
+        #Use utils::writeClipboard instead of clipr::write_clip to remove linebreak
+        utils::writeClipboard(str = charToRaw(paste0(x, " ")), format = 1)
       }
-
-      clipr::write_clip(x, allow_non_interactive = T)
     }
   }
 
