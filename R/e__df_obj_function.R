@@ -116,6 +116,20 @@ e__df_obj_function <- function(box, outer_env = totem,obj_env=inner_env) {
       if (vector == F) {
         x <- obj_env$df_obj_list$full_df[, pass_columns, drop = F]
       } else {
+        x <- datapasta::vector_construct(obj_env$df_obj_list$full_df[, pass_columns, drop = T])
+      }
+
+      clipr::write_clip(x, allow_non_interactive = T)
+    }
+  }
+
+  copy_full_original <- function(pass_columns = NULL, vector = F) {
+    if (is.null(pass_columns) == T) {
+      clipr::write_clip(obj_env$df_obj_list$full_df, allow_non_interactive = T)
+    } else {
+      if (vector == F) {
+        x <- obj_env$df_obj_list$full_df[, pass_columns, drop = F]
+      } else {
         #If copying as a vector, remove all newlines
         x <- datapasta::vector_construct(obj_env$df_obj_list$full_df[, pass_columns, drop = T])
         x <- gsub("\n", "", x)
@@ -123,7 +137,6 @@ e__df_obj_function <- function(box, outer_env = totem,obj_env=inner_env) {
 
       #Use utils::writeClipboard instead of clipr::write_clip to remove linebreak
       utils::writeClipboard(str = charToRaw(paste0(x, " ")), format = 1)
-      #clipr::write_clip(x, allow_non_interactive = T)
     }
   }
 
