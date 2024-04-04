@@ -67,15 +67,15 @@ e__all_event_functions <- function(outer_env = totem) {
 
 
 
-  i__all_event_functions[["General"]][["Open Context Menu"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env) {
-    if (is.null(view_objects$event) == F) {
-      click_btn <- view_objects$event$button
-      RGtk2::gtkMenuPopup(obj_env$menubar[["base"]],
-        button = click_btn,
-        activate.time = RGtk2::gdkEventGetTime(view_objects$event)
-      )
-    }
-  }
+  #i__all_event_functions[["General"]][["Open Context Menu"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env) {
+  #  if (is.null(view_objects$event) == F) {
+  #    click_btn <- view_objects$event$button
+  #    RGtk2::gtkMenuPopup(obj_env$menubar[["base"]],
+  #      button = click_btn,
+  #      activate.time = RGtk2::gdkEventGetTime(view_objects$event)
+  #    )
+  #  }
+  #}
 
 
   #--------------------------------------------
