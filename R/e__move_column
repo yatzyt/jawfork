@@ -7,7 +7,7 @@
 #'
 #' @return TODO
 
-e__move_column <- function(session_name, current_row, outer_env=totem, placement) {
+e__move_column <- function(session_name, current_row, placement, outer_env=totem) {
   require(RGtk2)
   
   #Get selection
