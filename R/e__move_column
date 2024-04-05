@@ -7,18 +7,21 @@
 #'
 #' @return TODO
 
-e__move_column <- function(session_name, current_row, df_obj, outer_env=totem, placement) {
+e__move_column <- function(session_name, current_row, outer_env=totem, placement) {
   require(RGtk2)
   
   #Get selection
   selection <- as.character(current_row$column)
   #Get column order of dataset
   st <- RGtk2::gtkEntryGetText(outer_env[[session_name]]$data_view_list$select_entry)
+  temp_df <- outer_env[[session_name]]$data2
   if (st != "") {
-    dataset2 <- select(df_obj[0, ], st)
+    #dataset2 <- select(temp_df[0, ], st)
+    dataset2 <- select(temp_df, ], st)
     col_order <- colnames(dataset2)
   } else {
-    col_order <- colnames(df_obj[0, ])
+    #col_order <- colnames(temp_df[0, ])
+    col_order <- colnames(temp_df)
   }
 
   #Handle moving column before target
