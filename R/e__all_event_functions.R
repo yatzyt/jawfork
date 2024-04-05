@@ -243,11 +243,11 @@ e__all_event_functions <- function(outer_env = totem) {
     outer_env$u__graph_summary(session_name, current_row)
   }
 
-  i__all_event_functions[["Full Data Table"]][["Move column before"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env, 0) {
-    outer_env$u__move_column(session_name, current_row)
+  i__all_event_functions[["Full Data Table"]][["Move column before"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env) {
+    outer_env$u__move_column(session_name, current_row, placement = 0)
   }
-  i__all_event_functions[["Full Data Table"]][["Move column after"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env, 1) {
-    outer_env$u__move_column(session_name, current_row)
+  i__all_event_functions[["Full Data Table"]][["Move column after"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env) {
+    outer_env$u__move_column(session_name, current_row, placement = 1)
   }
 
   #--------------------------------------------
