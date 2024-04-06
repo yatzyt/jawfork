@@ -9,7 +9,6 @@
 
 e__move_column <- function(placement, session_name, current_row, outer_env=totem) {
   require(RGtk2)
-  print("test")
   
   #Get selection
   selection <- as.character(current_row$column)
@@ -42,22 +41,28 @@ e__move_column <- function(placement, session_name, current_row, outer_env=totem
     }
     combo$setActive(0)
     
-    #Make a frame for the buttons
+    #Make a frame for the options
     frame <- gtkFrame(paste0("Column to move ", toupper(selection), " before"))
     frame$add(combo)
     dialog[["vbox"]]$add(frame)
     #Require response before interacting with table
-    response <- dialog$run()
-  
+    response <- dialog$run()  
     #Find selection
-    print(gtkComboBoxGetActive(combo)) 
-    #target <- choices[selectn]
-    
+    target <- choices[gtkComboBoxGetActive(combo)]    
     #Destroy dialog box
     gtkWidgetDestroy(dialog)
     
     if (response %in% c(GtkResponseType["close"], GtkResponseType["delete-event"], GtkResponseType["cancel"]) == F) {
-      utils::writeClipboard(str = "hello world", format = 1)
+      old_index <- which(col_order == selection)
+      new_index <- which(col_order == target) + placement
+      if (new_index > old_index) {
+        delete_index <- old_index
+      } else {
+        delete_index <- old_index + 1
+      }
+      col_order <- append(col_order, selection, after = new_index - 1)
+      col_order <- col_order[-delete_index]
+      RGtk2::gtkEntrySetText(outer_env[[session_name]]$data_view_list$select_entry, col_order)
     }
   }
 }
