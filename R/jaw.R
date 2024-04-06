@@ -64,12 +64,12 @@ jaw <- function(settings_dir=NULL) {
   totem$load_window <- RGtk2::gtkWindow(show = F)
   RGtk2::gtkWindowSetModal(totem$load_window, T)
   #Pick a random loading gif for this session
-  rand <- floor(runif(1, 1, 60))
+  rand <- floor(runif(1, 1, 4))
   if (rand == 1) {
     RGtk2::gtkContainerAdd(totem$load_window, RGtk2::gtkImageNewFromFile(file.path(system.file("images", package = "jaw"), "party_loading.gif")))
-  } else if (rand == 21) {
+  } else if (rand == 2) {
     RGtk2::gtkContainerAdd(totem$load_window, RGtk2::gtkImageNewFromFile(file.path(system.file("images", package = "jaw"), "left_loading.gif")))
-  } else if (rand == 41) {
+  } else if (rand == 3) {
     RGtk2::gtkContainerAdd(totem$load_window, RGtk2::gtkImageNewFromFile(file.path(system.file("images", package = "jaw"), "evil_loading.gif")))
   } else {
     RGtk2::gtkContainerAdd(totem$load_window, RGtk2::gtkImageNewFromFile(file.path(system.file("images", package = "jaw"), "loading.gif")))
