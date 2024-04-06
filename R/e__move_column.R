@@ -41,7 +41,7 @@ e__move_column <- function(placement, session_name, current_row, outer_env=totem
     for (choice in choices) {
       combo$appendText(choice)
     }
-    combo$setActive(o)
+    combo$setActive(0)
     
     #Make a frame for the buttons
     frame <- gtkFrame(paste0("Column to move ", toupper(selection), " before"))
