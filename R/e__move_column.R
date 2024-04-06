@@ -54,7 +54,6 @@ e__move_column <- function(placement, session_name, current_row, outer_env=totem
     gtkWidgetDestroy(dialog)
     
     if (response %in% c(GtkResponseType["close"], GtkResponseType["delete-event"], GtkResponseType["cancel"]) == F) {
-      print(col_order)
       old_index <- which(col_order == selection)
       new_index <- which(col_order == target) + placement
       if (new_index > old_index) {
@@ -62,8 +61,11 @@ e__move_column <- function(placement, session_name, current_row, outer_env=totem
       } else {
         delete_index <- old_index + 1
       }
+      print(col_order)
       col_order <- append(col_order, selection, after = new_index - 1)
+      print(col_order)
       col_order <- col_order[-delete_index]
+      print(col_order)
       RGtk2::gtkEntrySetText(outer_env[[session_name]]$data_view_list$select_entry, col_order)
     }
   }
