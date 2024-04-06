@@ -157,7 +157,6 @@ e__all_event_functions <- function(outer_env = totem) {
   i__all_event_functions[["Meta Table"]][["Trigger Value Summary with Group By"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env) {
     current_data <- obj_env$df_obj$current_data()
     row_i <- current_row$row_i
-    print(row_i)
     view_objects$event_mapping[["Meta Table|Trigger Value Summary with Group By"]](session_name, current_data[row_i, "variable",
       drop = T
     ])
@@ -178,8 +177,7 @@ e__all_event_functions <- function(outer_env = totem) {
 
   i__all_event_functions[["Meta Table"]][["Move column before"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env) {
     current_data <- obj_env$df_obj$current_data()
-    print(head(current_data))
-    current_row <- c()
+    print(current_row)
     #row_i <- current_row$row_i
     #outer_env$move_column(0, session_name, current_data[row_i, "variable",
     #  drop = T
