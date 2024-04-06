@@ -147,8 +147,6 @@ e__all_event_functions <- function(outer_env = totem) {
   # meta table
 
   #-------------------------------------------
-
-
   i__all_event_functions[["Meta Table"]][["Trigger Value Summary"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env) {
     current_data <- obj_env$df_obj$current_data()
     row_i <- current_row$row_i
@@ -156,8 +154,6 @@ e__all_event_functions <- function(outer_env = totem) {
       drop = T
     ])
   }
-
-
   i__all_event_functions[["Meta Table"]][["Trigger Value Summary with Group By"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env) {
     current_data <- obj_env$df_obj$current_data()
     row_i <- current_row$row_i
@@ -166,24 +162,24 @@ e__all_event_functions <- function(outer_env = totem) {
     ])
   }
 
-
-
-
   i__all_event_functions[["Meta Table"]][["dataset_layout"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env) {
     obj_env$df_obj$copy_dataset_layout()
   }
-
-
   i__all_event_functions[["Meta Table"]][["keep statement"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env) {
     obj_env$df_obj$copy_keep()
   }
-
   i__all_event_functions[["Meta Table"]][["label statement"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env) {
     obj_env$df_obj$copy_label()
   }
-
   i__all_event_functions[["Meta Table"]][["length statement"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env) {
     obj_env$df_obj$copy_length()
+  }
+
+  i__all_event_functions[["Meta Table"]][["Move column before"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env) {
+    outer_env$move_column(0, session_name, current_row)
+  }
+  i__all_event_functions[["Meta Table"]][["Move column after"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env) {
+    outer_env$move_column(1, session_name, current_row)
   }
 
   #--------------------------------------------
