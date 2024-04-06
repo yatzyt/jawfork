@@ -178,6 +178,7 @@ e__all_event_functions <- function(outer_env = totem) {
   i__all_event_functions[["Meta Table"]][["Move column before"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env) {
     current_data <- obj_env$df_obj$current_data()
     print(current_row)
+    print(current_row$row_i)
     #row_i <- current_row$row_i
     #outer_env$move_column(0, session_name, current_data[row_i, "variable",
     #  drop = T
