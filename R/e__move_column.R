@@ -9,6 +9,7 @@
 
 e__move_column <- function(placement, session_name, current_row, outer_env=totem) {
   require(RGtk2)
+  print("test")
   
   #Get selection
   selection <- as.character(current_row$column)
@@ -49,13 +50,8 @@ e__move_column <- function(placement, session_name, current_row, outer_env=totem
     response <- dialog$run()
   
     #Find selection
-    for (i in 1:length(combo)) {
-      if (gtkComboBoxGetActive(combo[[i]])) {
-        selectn <- i
-      }
-    }
-    target <- choices[selectn]
-    print(target)
+    print(gtkComboBoxGetActive(combo)) 
+    #target <- choices[selectn]
     
     #Destroy dialog box
     gtkWidgetDestroy(dialog)
