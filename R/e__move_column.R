@@ -36,28 +36,27 @@ e__move_column <- function(placement, session_name, current_row, outer_env=totem
     
     #Add options
     choices <- col_order
-    radio_buttons <- NULL
-    vbox <- gtkVBox(F, 0)
+    combo <- gtkComboBoxNewText()
+    combo$show()
     for (choice in choices) {
-      button <- gtkRadioButton(radio_buttons, choice)
-      vbox$add(button)
-      radio_buttons <- c(radio_buttons, button)
+      combo$appendText(choice)
     }
+    combo$setActive(o)
     
     #Make a frame for the buttons
     frame <- gtkFrame(paste0("Column to move ", toupper(selection), " before"))
-    frame$add(vbox)
+    frame$add(combo)
     dialog[["vbox"]]$add(frame)
     #Require response before interacting with table
     response <- dialog$run()
   
     #Find selection
-    for (i in 1:length(radio_buttons)) {
-      if (gtkToggleButtonGetActive(radio_buttons[[i]])) {
+    for (i in 1:length(combo)) {
+      if (gtkToggleButtonGetActive(combo[[i]])) {
         selectn <- i
       }
     }
-    selection <- choices[selectn]
+    target <- choices[selectn]
     
     #Destroy dialog box
     gtkWidgetDestroy(dialog)
