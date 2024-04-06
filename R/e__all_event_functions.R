@@ -54,9 +54,12 @@ e__all_event_functions <- function(outer_env = totem) {
     }
   }
   i__all_event_functions[["General"]][["Bob"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env) {
-    outer_env$show_load_window()
-    Sys.sleep(10)
-    outer_env$hide_load_window()
+    w <- RGtk2::gtkWindow(show = FALSE)
+    w["title"] <- "Bob"
+    RGtk2::gtkContainerAdd(w, RGtk2::gtkImageNewFromFile(file.path(system.file("images", package = "jaw"), "loading.gif")))
+    RGtk2::gtkWidgetSetSizeRequest(w, 300, 350)
+    
+    RGtk2::gtkWidgetShow(w)
   }
 
 
