@@ -48,7 +48,8 @@ e__move_column <- function(placement, session_name, current_row, outer_env=totem
     #Require response before interacting with table
     response <- dialog$run()  
     #Find selection
-    target <- choices[gtkComboBoxGetActive(combo)]    
+    target <- choices[gtkComboBoxGetActive(combo)]
+    print(target)
     #Destroy dialog box
     gtkWidgetDestroy(dialog)
     
