@@ -177,20 +177,17 @@ e__all_event_functions <- function(outer_env = totem) {
 
   i__all_event_functions[["Meta Table"]][["Move column before"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env) {
     current_data <- obj_env$df_obj$current_data()
-    print(current_row)
-    print(current_row$row_i)
-    #Make a vector of the format needed to passto move_column
+    #Make a vector of the format needed to pass to move_column
     fake_current_row <- c()
     fake_current_row$column <- current_data[current_row$row_i, "variable", drop = T]
-    print(fake_current_row)
     outer_env$move_column(0, session_name, fake_current_row)
   }
   i__all_event_functions[["Meta Table"]][["Move column after"]] <- function(session_name, current_row, view_objects, outer_env = totem, obj_env = inner_env) {
     current_data <- obj_env$df_obj$current_data()
-    row_i <- current_row$row_i
-    outer_env$move_column(0, session_name, current_data[row_i, "variable",
-      drop = T
-    ])
+    #Make a vector of the format needed to pass to move_column
+    fake_current_row <- c()
+    fake_current_row$column <- current_data[current_row$row_i, "variable", drop = T]
+    outer_env$move_column(1, session_name, fake_current_row)
   }
 
   #--------------------------------------------
