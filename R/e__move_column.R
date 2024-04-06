@@ -48,13 +48,13 @@ e__move_column <- function(placement, session_name, current_row, outer_env=totem
     #Require response before interacting with table
     response <- dialog$run()  
     #Find selection
-    print(gtkComboBoxGetActive(combo))
-    target <- col_order[gtkComboBoxGetActive(combo)]
+    target <- col_order[gtkComboBoxGetActive(combo) + 1]
     print(target)
     #Destroy dialog box
     gtkWidgetDestroy(dialog)
     
     if (response %in% c(GtkResponseType["close"], GtkResponseType["delete-event"], GtkResponseType["cancel"]) == F) {
+      print(col_order)
       old_index <- which(col_order == selection)
       new_index <- which(col_order == target) + placement
       if (new_index > old_index) {
