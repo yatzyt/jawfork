@@ -17,11 +17,9 @@ e__move_column <- function(placement, session_name, current_row, outer_env=totem
   temp_df <- outer_env[[session_name]]$data2
   if (st != "") {
     dataset2 <- select(temp_df[0, ], st)
-    #dataset2 <- select(temp_df, st)
     col_order <- colnames(dataset2)
   } else {
     col_order <- colnames(temp_df[0, ])
-    #col_order <- colnames(temp_df)
   }
 
   #Handle moving column before target
@@ -51,12 +49,13 @@ e__move_column <- function(placement, session_name, current_row, outer_env=totem
     response <- dialog$run()
   
     #Find selection
-    #for (i in 1:length(combo)) {
-    #  if (gtkToggleButtonGetActive(combo[[i]])) {
-    #    selectn <- i
-    #  }
-    #}
-    #target <- choices[selectn]
+    for (i in 1:length(combo)) {
+      if (gtkComboBoxGetActive(combo[[i]])) {
+        selectn <- i
+      }
+    }
+    target <- choices[selectn]
+    print(target)
     
     #Destroy dialog box
     gtkWidgetDestroy(dialog)
