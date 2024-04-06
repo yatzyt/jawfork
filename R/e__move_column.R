@@ -14,11 +14,11 @@ e__move_column <- function(placement, session_name, current_row, outer_env=totem
   selection <- as.character(current_row$column)
   #Get column order of dataset
   st <- RGtk2::gtkEntryGetText(outer_env[[session_name]]$data_view_list$select_entry)
-  print(st)
-  print(class(st))
   temp_df <- outer_env[[session_name]]$data2
   if (st != "") {
-    dataset2 <- select(temp_df[0, ], st)
+    #Convert st into a vector of strings
+    vst <- unlist(strsplit(gsub(" ", "", st), ","))
+    dataset2 <- select(temp_df[0, ], vst)
     col_order <- colnames(dataset2)
   } else {
     col_order <- colnames(temp_df[0, ])
