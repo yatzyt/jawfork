@@ -69,7 +69,7 @@ e__all_event_functions <- function(outer_env = totem) {
     
     RGtk2::gtkWidgetShow(w)
 
-    RGtk2::gtkWindowMaximze(outer_env[[session_name]]$windows$main_window)
+    RGtk2::gtkWindowMaximize(outer_env[[session_name]]$windows$main_window)
   }
 
 
