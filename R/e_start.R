@@ -42,6 +42,9 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
       RGtk2::gtkWidgetSetSizeRequest(main_window, 500, 300)
 
       RGtk2::gtkWindowSetDefaultSize(main_window, totem$settings_list$default_sizes$window[1], totem$settings_list$default_sizes$window[2])
+      if (totem$settings_list$maximize == T) {
+          RGtk2::gtkWindowMaximize(main_window)
+      }
 
 
 
