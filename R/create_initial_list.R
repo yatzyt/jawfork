@@ -8,6 +8,7 @@
 create_initial_list <- function(settings_dir=NULL) {
   jaw_e <- new.env()
   jaw_e$all_sessions <- c()
+  print(paste0("settings_dir: ", settings_dir))
 
   if (is.null(settings_dir)==F) {
 
@@ -21,9 +22,13 @@ create_initial_list <- function(settings_dir=NULL) {
 
 
   jaw_e$settings_dir_path <- file.path(settings_dir, "jaw")
+  print(paste0("jaw_e$settings_dir_path: ", jaw_e$settings_dir_path))
   jaw_e$local_settings_rds <- file.path(jaw_e$settings_dir_path, "settings.rds")
+  print(paste0("jaw_e$local_settings_rds: ", jaw_e$local_settings_rds))
   jaw_e$code_R <- file.path(jaw_e$settings_dir_path, "code.R")
+  print(paste0("jaw_e$code_R: ", jaw_e$code_R))
   jaw_e$jaw_log_path <- file.path(jaw_e$settings_dir_path, "jaw_log.txt")
+  print(paste0("jaw_e$jaw_log_path: ", jaw_e$jaw_log_path))
   jaw_e$settings_list <- create_file_structure(jaw_e)
   return(jaw_e)
 }
