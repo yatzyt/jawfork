@@ -72,6 +72,7 @@ save_settings <- function(jaw_e) {
     message(paste0("Removed: ", jaw_e$settings_dir_path))
     unlink(jaw_e$settings_dir_path, recursive = T)
   } else {
+    print("Saving settings...")
     saveRDS(jaw_e$settings_list, file = jaw_e$local_settings_rds)
   }
 }
