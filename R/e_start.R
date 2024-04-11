@@ -946,7 +946,7 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
       outer_env[[session_name]]$status_bar$box <- RGtk2::gtkHBox()
       outer_env[[session_name]]$status_bar$box_bucket <- RGtk2::gtkHBox()
       outer_env[[session_name]]$status_bar$box_bucket_showing <- F
-      outer_env[[session_name]]$status_bar$simplicity_view <- F
+      outer_env[[session_name]]$status_bar$simplicity_view <- totem$settings_list$simplicity
       outer_env[[session_name]]$status_bar$info_label <- RGtk2::gtkLabel("")
       outer_env[[session_name]]$status_bar$info_label_cell <- RGtk2::gtkLabel("")
 
@@ -1008,6 +1008,13 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
         data = list(session_name, outer_env)
       )
 
+      #Activate simplicity view according to settings.rds
+      if (outer_env[[session_name]]$status_bar$simplicity_view == T) {
+        RGtk2::gtkWidgetHide(outer_env[[session_name]]$data_view_list$top_code_box)
+        RGtk2::gtkWidgetHide(outer_env[[session_name]]$data_view_list$top_tables_box)
+        outer_env[[session_name]]$status_bar$simplicity_view <- T
+      }
+      
       #JN: simplicity mode that will hide everything but Full Data Table     
       u__button(
         box = outer_env[[session_name]]$status_bar$box,
