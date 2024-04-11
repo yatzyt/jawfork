@@ -36,7 +36,7 @@ e__close_all_windows <- function(session_name,outer_env=totem) {
 
   totem$settings_list$default_sizes$slot_pane <- slot_position
 
-
+  totem$settings_list$simplicity <- outer_env[[session_name]]$status_bar$simplicity_view
 
   allocation <- RGtk2::gtkWidgetGetAllocation(outer_env[[session_name]]$windows$main_window)$allocation
   totem$settings_list$default_sizes$window <- c(allocation$width, allocation$height)
