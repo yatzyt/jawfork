@@ -239,7 +239,7 @@ e__create_settings <- function(outer_env = totem) {
   
   #Add button for maximization setting
   cb <- RGtk2::gtkCheckButtonNewWithLabel("Maximize on load", show = TRUE)
-  RGtk2::gtkToggleButtonSetActive(cb, T)
+  RGtk2::gtkToggleButtonSetActive(cb, outer_env$settings_list$maximize)
   RGtk2::gtkBoxPackStart(outer_env$settings_window$settings_window_main_box, cb, F, F, padding = 4)  
   
   #Define function to call when maximization button clicked
