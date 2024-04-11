@@ -218,6 +218,21 @@ e__create_settings <- function(outer_env = totem) {
 
 
       inner_table_i <- inner_table_i + 1
-    }
+    }    
+
+    #################################################
+    #       Add custom items after the loop         #
+    # Things I don't want to be right click options #
+    #################################################
+    header_box <- RGtk2::gtkHBox()
+    RGtk2::gtkBoxPackStart(header_box, RGtk2::gtkLabel("Other"), F, F, padding = 5)
+    
+    header_reset <- RGtk2::gtkButton("reset to default")
+    RGtk2::gtkButtonSetFocusOnClick(header_reset, F)
+    
+    RGtk2::gtkBoxPackEnd(header_box, header_reset, F, F, padding = 5)
+    
+    RGtk2::gtkBoxPackStart(outer_env$settings_window$settings_window_main_box, header_box, F, F, padding = 4)
+    RGtk2::gtkBoxPackStart(outer_env$settings_window$settings_window_main_box, RGtk2::gtkLabel("Click to change settings."), F, F, padding = 4)
   }
 }
