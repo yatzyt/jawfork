@@ -187,6 +187,10 @@ check_settings <- function(settings) {
     settings$maximize <- T
   }
 
+  if (("simplicity" %in% names(settings)) == F) {
+    settings$simplicity <- F
+  }
+
   default_sizes <- list(window = c(864 + 50, 698), main_pane = 268, top_pane = 85 + 30, slot_pane = 417)
 
 
