@@ -52,15 +52,15 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
 
   if (is.null(var_class) == F) {
     if (var_class == "numeric") {
-      RGtk2::gtkWidgetModifyBg(object = evb, state = "normal", color = "#FFFFFF")
+      RGtk2::gtkWidgetModifyBg(object = evb, state = "normal", color = "#FF00FF")
     } else {
-      RGtk2::gtkWidgetModifyBg(object = evb, state = "normal", color = "#FFFFFF")
+      RGtk2::gtkWidgetModifyBg(object = evb, state = "normal", color = "#00FFFF")
     }
   } else {
     if ((j %% 2) == 0) {
-      RGtk2::gtkWidgetModifyBg(object = evb, state = "normal", color = "#FFFFFF")
+      RGtk2::gtkWidgetModifyBg(object = evb, state = "normal", color = "#FFFF00")
     } else {
-      RGtk2::gtkWidgetModifyBg(object = evb, state = "normal", color = "#FFFFFF")
+      RGtk2::gtkWidgetModifyBg(object = evb, state = "normal", color = "#00FF00")
     }
   }
 
