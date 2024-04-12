@@ -41,26 +41,26 @@ e__table_obj_function_df2 <- function(df, outer_env = totem,obj_env=inner_env) {
     tryCatch(
       {
         #Colors according to Format by:
-        #df2[, 2] <- ifelse((usubjid_levels %% 2) == 0, ifelse((1:nrow(df) %% 2) == 0, "#fcf7e8", "#f4efe1"),
-        df2[, 2] <- ifelse((usubjid_levels %% 2) == 0, ifelse((1:nrow(df) %% 2) == 0, "#7F5F01", "#533F04"),
-          #ifelse((1:nrow(df) %% 2) == 0, "#e8edfc", "#e1e5f4")
-          ifelse((1:nrow(df) %% 2) == 0, "#206A83", "#164555")
+        df2[, 2] <- ifelse((usubjid_levels %% 2) == 0, ifelse((1:nrow(df) %% 2) == 0, "#fcf7e8", "#f4efe1"),
+        #df2[, 2] <- ifelse((usubjid_levels %% 2) == 0, ifelse((1:nrow(df) %% 2) == 0, "#7F5F01", "#533F04"),
+          ifelse((1:nrow(df) %% 2) == 0, "#e8edfc", "#e1e5f4")
+          #ifelse((1:nrow(df) %% 2) == 0, "#206A83", "#164555")
         )
       },
       #Colors for when there is no Format by:
       error = function(e) {
-        #df2[, 2] <- ifelse((1:nrow(df) %% 2) == 0, "#F1F1F1", "#FFFFFF")
-        df2[, 2] <- ifelse((1:nrow(df) %% 2) == 0, "#2C3E5D", "#172B4D")
+        df2[, 2] <- ifelse((1:nrow(df) %% 2) == 0, "#F1F1F1", "#FFFFFF")
+        #df2[, 2] <- ifelse((1:nrow(df) %% 2) == 0, "#2C3E5D", "#172B4D")
       }
     )
   } else {
     #Colors for when there is no Format by:
-    #df2[, 2] <- ifelse((1:nrow(df) %% 2) == 0, "#F1F1F1", "#FFFFFF")
-    df2[, 2] <- ifelse((1:nrow(df) %% 2) == 0, "#2C3E5D", "#172B4D")
+    df2[, 2] <- ifelse((1:nrow(df) %% 2) == 0, "#F1F1F1", "#FFFFFF")
+    #df2[, 2] <- ifelse((1:nrow(df) %% 2) == 0, "#2C3E5D", "#172B4D")
   }
   #r__ Color
-  #df2[, 1] <- "#9bb5f5"
-  df2[, 1] <- "#A54800"
+  df2[, 1] <- "#9bb5f5"
+  #df2[, 1] <- "#A54800"
 
 
   colnames(df2) <- c("f___1", "f___2")
@@ -127,10 +127,14 @@ e__table_obj_function <- function(box, outer_env = totem,obj_env=inner_env) {
       selectedColor <- RGtk2::as.GdkColor(c(198, 213, 253) * 256) # Linux
 
       #Color for selected row
-      RGtk2::gtkWidgetModifyBase(obj_env$table_objects_list$view, RGtk2::GtkStateType["selected"], "#234159")
-      RGtk2::gtkWidgetModifyBase(obj_env$table_objects_list$view, RGtk2::GtkStateType["active"], "#234159")
-      RGtk2::gtkWidgetModifyText(obj_env$table_objects_list$view, RGtk2::GtkStateType["selected"], RGtk2::as.GdkColor("grey"))
-      RGtk2::gtkWidgetModifyText(obj_env$table_objects_list$view, RGtk2::GtkStateType["active"], RGtk2::as.GdkColor("grey"))
+      RGtk2::gtkWidgetModifyBase(obj_env$table_objects_list$view, RGtk2::GtkStateType["selected"], "#e7e3cd")
+      RGtk2::gtkWidgetModifyBase(obj_env$table_objects_list$view, RGtk2::GtkStateType["active"], "#e7e3cd")
+      RGtk2::gtkWidgetModifyText(obj_env$table_objects_list$view, RGtk2::GtkStateType["selected"], RGtk2::as.GdkColor("black"))
+      RGtk2::gtkWidgetModifyText(obj_env$table_objects_list$view, RGtk2::GtkStateType["active"], RGtk2::as.GdkColor("black"))
+      #RGtk2::gtkWidgetModifyBase(obj_env$table_objects_list$view, RGtk2::GtkStateType["selected"], "#302459")
+      #RGtk2::gtkWidgetModifyBase(obj_env$table_objects_list$view, RGtk2::GtkStateType["active"], "#302459")
+      #RGtk2::gtkWidgetModifyText(obj_env$table_objects_list$view, RGtk2::GtkStateType["selected"], RGtk2::as.GdkColor("grey"))
+      #RGtk2::gtkWidgetModifyText(obj_env$table_objects_list$view, RGtk2::GtkStateType["active"], RGtk2::as.GdkColor("grey"))
 
 
       ## basic GUI
