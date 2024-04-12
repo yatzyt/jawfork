@@ -49,7 +49,8 @@ e__table_obj_function_df2 <- function(df, outer_env = totem,obj_env=inner_env) {
       }
     )
   } else {
-    df2[, 2] <- ifelse((1:nrow(df) %% 2) == 0, "#F1F1F1", "#FFFFFF")
+    #df2[, 2] <- ifelse((1:nrow(df) %% 2) == 0, "#F1F1F1", "#FFFFFF")
+    df2[, 2] <- ifelse((1:nrow(df) %% 2) == 0, "#252525", "#2F2F2F")
   }
   df2[, 1] <- "#9bb5f5"
 
