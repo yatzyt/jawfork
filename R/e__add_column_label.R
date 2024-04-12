@@ -12,7 +12,8 @@
 #' @return TODO
 
 e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool_tip = NULL, sec_label,outer_env=totem,obj_env=inner_env) {
-  color_header_1 <- "#9bb5f5"
+  #color_header_1 <- "#9bb5f5"
+  color_header_1 <- "#00FF00"
   font.str <- "Serif, bold 9"
   font <- RGtk2::pangoFontDescriptionFromString(font.str)
 
