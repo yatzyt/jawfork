@@ -40,18 +40,18 @@ e__table_obj_function_df2 <- function(df, outer_env = totem,obj_env=inner_env) {
 
     tryCatch(
       {
-        df2[, 2] <- ifelse((usubjid_levels %% 2) == 0, ifelse((1:nrow(df) %% 2) == 0, "#fcf7e8", "#f4efe1"),
-          ifelse((1:nrow(df) %% 2) == 0, "#e8edfc", "#e1e5f4")
+        df2[, 2] <- ifelse((usubjid_levels %% 2) == 0, ifelse((1:nrow(df) %% 2) == 0, "#FF0000", "#FF2222"),
+          ifelse((1:nrow(df) %% 2) == 0, "#00FF00", "#22FF22")
         )
       },
       error = function(e) {
-        df2[, 2] <- ifelse((1:nrow(df) %% 2) == 0, "#F1F1F1", "#FFFFFF")
+        df2[, 2] <- ifelse((1:nrow(df) %% 2) == 0, "#0000FF", "#2222FF")
       }
     )
   } else {
-    df2[, 2] <- ifelse((1:nrow(df) %% 2) == 0, "#F1F1F1", "#FFFFFF")
+    df2[, 2] <- ifelse((1:nrow(df) %% 2) == 0, "#FF00FF", "#FF22FF")
   }
-  df2[, 1] <- "#9bb5f5"
+  df2[, 1] <- "#FFFF00"
 
 
   colnames(df2) <- c("f___1", "f___2")
