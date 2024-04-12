@@ -40,8 +40,8 @@ e__table_obj_function_df2 <- function(df, outer_env = totem,obj_env=inner_env) {
 
     tryCatch(
       {
-        df2[, 2] <- ifelse((usubjid_levels %% 2) == 0, ifelse((1:nrow(df) %% 2) == 0, "#fcf7e8", "#f4efe1"),
-          ifelse((1:nrow(df) %% 2) == 0, "#e8edfc", "#e1e5f4")
+        df2[, 2] <- ifelse((usubjid_levels %% 2) == 0, ifelse((1:nrow(df) %% 2) == 0, "#7F5F01", "#533F04"),
+          ifelse((1:nrow(df) %% 2) == 0, "#206A83", "#164555")
         )
       },
       error = function(e) {
@@ -49,10 +49,11 @@ e__table_obj_function_df2 <- function(df, outer_env = totem,obj_env=inner_env) {
       }
     )
   } else {
+    #Colors for when there is no Format by:
     #df2[, 2] <- ifelse((1:nrow(df) %% 2) == 0, "#F1F1F1", "#FFFFFF")
-    df2[, 2] <- ifelse((1:nrow(df) %% 2) == 0, "#252525", "#2F2F2F")
+    df2[, 2] <- ifelse((1:nrow(df) %% 2) == 0, "#2C3E5D", "#172B4D")
   }
-  df2[, 1] <- "#9bb5f5"
+  df2[, 1] <- "#C25100"
 
 
   colnames(df2) <- c("f___1", "f___2")
