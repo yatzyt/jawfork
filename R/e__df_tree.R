@@ -24,10 +24,6 @@ e__df_tree <- function(session_name, passed_box, rows_length, event_mapping = NU
   RGtk2::gtkBoxPackStart(passed_box, box, F, F)
 
 
-  #color_header_1 <- "#9bb5f5"
-  #color_bg_1 <- "#FFFFFF"
-  #color_bg_2 <- "#f7f7f7"
-  #color_sep_1 <- "#f1f1f1"
   color_header_1 <- "#00ffff"
   color_bg_1 <- "#ff00ff"
   color_bg_2 <- "#ffff00"
