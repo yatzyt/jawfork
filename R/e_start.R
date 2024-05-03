@@ -103,7 +103,7 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
         
         session_name <- data[[1]]
         outer_env <- data[[2]]
-        outer_env$hide_past_code_window(session_name)
+        #outer_env$hide_past_code_window(session_name)
         return(T)
       }, data = list(session_name, outer_env))
 
