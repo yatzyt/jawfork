@@ -37,6 +37,7 @@ e__file_history <- function(outer_env=totem) {
 
   RGtk2::gSignalConnect(outer_env$file_history$file_history_window_main_new_path_chk_btn, "button-press-event",
     function(widget, event, data) {
+      outer_env$show_load_window()
       outer_env <- data
       file_history <- outer_env$settings_list$file_history
       for (i in seq_len(nrow(file_history))) {
@@ -49,6 +50,7 @@ e__file_history <- function(outer_env=totem) {
 
       outer_env$settings_list$file_history <- file_history
       outer_env$file_history$file_history_window_table$update(file_history)
+      outer_env$hide_load_window()
 
       return(FALSE)
     },
