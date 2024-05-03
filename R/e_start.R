@@ -95,6 +95,9 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
 
 
       RGtk2::gSignalConnect(outer_env[[session_name]]$past_code_window, "delete-event", f = function(window, event, data) {
+
+        print("Deleting past code table...")
+        
         session_name <- data[[1]]
         outer_env <- data[[2]]
         outer_env$hide_past_code_window(session_name)
