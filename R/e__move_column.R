@@ -110,6 +110,7 @@ e__move_column <- function(placement, session_name, current_row, outer_env=totem
         newst <- paste0(newst, ", ")
       }
     }
+    newst <- paste0(newst, ", everything()")
     #Replace select field with new column order, run code
     RGtk2::gtkEntrySetText(outer_env[[session_name]]$data_view_list$select_entry, newst)
     outer_env$show_load_window()
