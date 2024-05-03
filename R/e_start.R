@@ -92,18 +92,10 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
       RGtk2::gtkWindowSetTitle(outer_env[[session_name]]$past_code_window, "Past Code")
 
       RGtk2::gtkWidgetSetSizeRequest(outer_env[[session_name]]$past_code_window, 600, 600)
-
-      #outer_env[[session_name]]$hide_past_code_window <- function(session_name, outer_env = totem) {
-      #  RGtk2::gtkWidgetHide(outer_env[[session_name]]$past_code_window)
-      #}
       
       RGtk2::gSignalConnect(outer_env[[session_name]]$past_code_window, "delete-event", f = function(window, event, data) {
-
-        print("Deleting past code table...")
-        
         session_name <- data[[1]]
         outer_env <- data[[2]]
-        #outer_env$hide_past_code_window(session_name)
         RGtk2::gtkWidgetHide(outer_env[[session_name]]$past_code_window)
         return(T)
       }, data = list(session_name, outer_env))
