@@ -1,4 +1,5 @@
 u__add_text_area <- function(label, shift_function, session) {
+  print("Call to u__add_text_area")
   temp_list <- list()
   temp_list$Frame <- RGtk2::gtkFrame()
 
@@ -42,6 +43,7 @@ u__add_text_area <- function(label, shift_function, session) {
 
 
 u__text_area_get_text <- function(obj) {
+  print("Call to u__text_area_get_text")
   Buffer <- RGtk2::gtkTextViewGetBuffer(obj$View)
   end_iter <- RGtk2::gtkTextBufferGetEndIter(Buffer)
   start_iter <- RGtk2::gtkTextBufferGetStartIter(Buffer)
@@ -56,6 +58,7 @@ u__text_area_get_text <- function(obj) {
 
 
 u__text_area_append_text <- function(obj, txt) {
+  print("Call to u__text_area_append_text")
   txt0 <- u__text_area_get_text(obj)
   if (txt0 == "") {
     u__text_area_set_text(obj, txt)
@@ -67,6 +70,7 @@ u__text_area_append_text <- function(obj, txt) {
 }
 
 u__text_area_set_text <- function(obj, txt) {
+  print("Call to u__text_area_set_text")
   Buffer <- RGtk2::gtkTextViewGetBuffer(obj$View)
   RGtk2::gtkTextBufferSetText(Buffer, txt)
 
@@ -74,6 +78,7 @@ u__text_area_set_text <- function(obj, txt) {
 }
 
 u__text_area_clear <- function(obj) {
+  print("Call to u__text_area_clear")
   Buffer <- RGtk2::gtkTextViewGetBuffer(obj$View)
   RGtk2::gtkTextBufferSetText(Buffer, "")
 
