@@ -20,6 +20,9 @@ u__add_text_area <- function(label, shift_function, session) {
                     return(TRUE)
                 },data=list(session,shift_function))
 
+      #Attempt to recognize whenever code area is edited
+      RGtk2::gSignalConnect(temp_list$View, "backspace", print("Text in code area deleted"))
+
 
 
 
