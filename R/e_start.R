@@ -238,9 +238,6 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
 
       outer_env[[session_name]]$text_area_1 <- u__add_text_area("Code", run_code, session_name)
 
-      #Attempt to recognize whenever code area is edited
-      RGtk2::gSignalConnect(outer_env[[session_name]]$text_area_1, "backspace", print("Text in code area deleted"))
-
       RGtk2::gtkBoxPackStart(outer_env[[session_name]]$data_view_list$top_code_box, outer_env[[session_name]]$text_area_1$Frame, T, T)
 
       outer_env[[session_name]]$data_view_list$code_tool_bar <- RGtk2::gtkHBox()
