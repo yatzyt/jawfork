@@ -23,14 +23,12 @@ u__add_text_area <- function(label, shift_function, session) {
       RGtk2::gSignalConnect(temp_list$View, "backspace",  
                               function() {
                                 print("Text in code area backspaced")
-                                return(TRUE)
                               }
                             )
 
       RGtk2::gSignalConnect(temp_list$View, "delete-from-cursor",  
                               function() {
                                 print("Text in code area deleted")
-                                return(TRUE)
                               }
                             )
 
