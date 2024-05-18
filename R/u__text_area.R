@@ -20,7 +20,14 @@ u__add_text_area <- function(label, shift_function, session) {
                 },data=list(session,shift_function))
 
       #Attempt to recognize whenever code area is edited
-      RGtk2::gSignalConnect(temp_list$View, c("backspace", "delete-from-cursor"),  
+      RGtk2::gSignalConnect(temp_list$View, "backspace",  
+                              function() {
+                                print("Text in code area backspaced")
+                                return(TRUE)
+                              }
+                            )
+
+      RGtk2::gSignalConnect(temp_list$View, "delete-from-cursor",  
                               function() {
                                 print("Text in code area deleted")
                                 return(TRUE)
