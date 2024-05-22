@@ -28,6 +28,7 @@ u__add_text_area <- function(label, shift_function, session) {
                       start_iter$iter, end_iter$iter,
                       include.hidden.chars = TRUE
                     )
+                  str <- key
                     print(paste0("Detected signal: ", str))
                   
                     return(TRUE)
