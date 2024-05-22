@@ -6,7 +6,39 @@ u__add_text_area <- function(label, shift_function, session) {
 
   temp_list$View <- RGtk2::gtkTextView()
 
-    RGtk2::gSignalConnect(temp_list$View, "key-release-event", 
+    #RGtk2::gSignalConnect(temp_list$View, "key-release-event", 
+    #            function(view, event, data) {
+    #              session<- data[[1]]
+    #              shift_function <- data[[2]]
+    #                #Run code if key press is shift+ctrl
+    #                key <- z__event_state_key(event)
+    #                if(key=="shift+ctrl"){
+    #                
+    #                shift_function(session)
+#
+    #                }
+    #                
+    #                #######################################
+    #                # Signal whenever code area is edited #
+    #                #######################################
+    #                buffer <- RGtk2::gtkTextViewGetBuffer(view)
+    #                end_iter <- RGtk2::gtkTextBufferGetEndIter(buffer)
+    #                start_iter <- RGtk2::gtkTextBufferGetStartIter(buffer)
+    #                str <- RGtk2::gtkTextBufferGetText(buffer,
+    #                  start_iter$iter, end_iter$iter,
+    #                  include.hidden.chars = TRUE
+    #                )
+    #                single_key <- event[["keyval"]]
+    #                #Do not add to timeline stack for the following keys:
+    #                #Left and right ctrl, shift, and alt keys; caps lock, arrow keys, home, end, and tab
+    #                if (!(single_key %in% c("65507", "65505", "65513", "16777215", "65506", "65508", "65514", "65361", "65362", "65363", "65364", "65360", "65367", "65289"))) {
+    #                  print(paste0("Detected signal: ", str))
+    #                }
+    #              
+    #                return(TRUE)
+    #            },data=list(session,shift_function))
+
+    RGtk2::gSignalConnect(temp_list$View, "key-press-event", 
                 function(view, event, data) {
                   session<- data[[1]]
                   shift_function <- data[[2]]
