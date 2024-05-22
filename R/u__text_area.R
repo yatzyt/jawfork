@@ -10,19 +10,13 @@ u__add_text_area <- function(label, shift_function, session) {
                 function(view, event, data) {
                   session<- data[[1]]
                   shift_function <- data[[2]]
-                    #Run code if key press is shift+ctrl
+                    #######################################
+                    # Run code if key press is shift+ctrl #
+                    #######################################
                     key <- z__event_state_key(event)
                     if(key=="shift+ctrl"){
                       shift_function(session)
                     }
-                  
-                    return(TRUE)
-                },data=list(session,shift_function))
-
-    RGtk2::gSignalConnect(temp_list$View, "key-release-event", 
-                function(view, event, data) {
-                  session<- data[[1]]
-                  shift_function <- data[[2]]
                     
                     #######################################
                     # Signal whenever code area is edited #
@@ -35,8 +29,10 @@ u__add_text_area <- function(label, shift_function, session) {
                       include.hidden.chars = TRUE
                     )
                     single_key <- event[["keyval"]]
+                    #########################
                     #Do not add to timeline stack for the following keys:
                     #Left and right ctrl, shift, and alt keys; caps lock, arrow keys, home, end, and tab
+                    ##############################
                     if (!(single_key %in% c("65507", "65505", "65513", "16777215", "65506", "65508", "65514", "65361", "65362", "65363", "65364", "65360", "65367", "65289"))) {
                       print(paste0("Detected signal: ", str))
                     }
