@@ -48,7 +48,7 @@ u__add_text_area <- function(label, shift_function, session) {
         return(TRUE)
       }, data = temp_list$View)
   
-      RGtk2::gSignalConnect(temp_list$View, "insert-at-cursor", function(view, dummy1) {
+      RGtk2::gSignalConnect(temp_list$View, "key-release-event", function(view, dummy1) {
         buffer <- RGtk2::gtkTextViewGetBuffer(view)
         end_iter <- RGtk2::gtkTextBufferGetEndIter(buffer)
         start_iter <- RGtk2::gtkTextBufferGetStartIter(buffer)
