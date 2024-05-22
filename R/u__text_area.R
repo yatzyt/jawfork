@@ -23,7 +23,7 @@ u__add_text_area <- function(label, shift_function, session) {
       # Signal whenever code area is edited      #
       # No, I really couldn't find an easier way #
       ############################################
-      RGtk2::gSignalConnect(temp_list$View, "backspace", function(view) {
+      RGtk2::gSignalConnect(temp_list$View, "backspace", function(view, dummy1) {
         #str <- u__text_area_get_text(outer_env[[session_name]]$text_area_1)
         str <- "backspace"
         print(paste0("Detected signal: ", str))
