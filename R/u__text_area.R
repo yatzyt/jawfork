@@ -10,6 +10,7 @@ u__add_text_area <- function(label, shift_function, session) {
                 function(view, event, data) {
                   session<- data[[1]]
                   shift_function <- data[[2]]
+                    #Run code if key press is shift+ctrl
                     key <- z__event_state_key(event)
                     if(key=="shift+ctrl"){
                     
@@ -17,6 +18,9 @@ u__add_text_area <- function(label, shift_function, session) {
 
                     }
                     
+                    #######################################
+                    # Signal whenever code area is edited #
+                    #######################################
                     buffer <- RGtk2::gtkTextViewGetBuffer(view)
                     end_iter <- RGtk2::gtkTextBufferGetEndIter(buffer)
                     start_iter <- RGtk2::gtkTextBufferGetStartIter(buffer)
@@ -28,72 +32,6 @@ u__add_text_area <- function(label, shift_function, session) {
                   
                     return(TRUE)
                 },data=list(session,shift_function))
-
-      ############################################
-      # Signal whenever code area is edited      #
-      # No, I really couldn't find an easier way #
-      ############################################
-      #Many of these need dummy arguments since the signals contain extra info
-      RGtk2::gSignalConnect(temp_list$View, "backspace", function(view, dummy1) {
-        buffer <- RGtk2::gtkTextViewGetBuffer(view)
-        end_iter <- RGtk2::gtkTextBufferGetEndIter(buffer)
-        start_iter <- RGtk2::gtkTextBufferGetStartIter(buffer)
-        str <- RGtk2::gtkTextBufferGetText(buffer,
-          start_iter$iter, end_iter$iter,
-          include.hidden.chars = TRUE
-        )
-        print(paste0("Detected signal: ", str))
-        return(TRUE)
-      }, data = temp_list$View)
-  
-      RGtk2::gSignalConnect(temp_list$View, "delete-from-cursor", function(view, dummy1, dummy2, dummy3) {
-        buffer <- RGtk2::gtkTextViewGetBuffer(view)
-        end_iter <- RGtk2::gtkTextBufferGetEndIter(buffer)
-        start_iter <- RGtk2::gtkTextBufferGetStartIter(buffer)
-        str <- RGtk2::gtkTextBufferGetText(buffer,
-          start_iter$iter, end_iter$iter,
-          include.hidden.chars = TRUE
-        )
-        print(paste0("Detected signal: ", str))
-        return(TRUE)
-      }, data = temp_list$View)
-  
-      #RGtk2::gSignalConnect(temp_list$View, "key-release-event", function(view, event, data, dummy1) {
-      #  buffer <- RGtk2::gtkTextViewGetBuffer(view)
-      #  end_iter <- RGtk2::gtkTextBufferGetEndIter(buffer)
-      #  start_iter <- RGtk2::gtkTextBufferGetStartIter(buffer)
-      #  str <- RGtk2::gtkTextBufferGetText(buffer,
-      #    start_iter$iter, end_iter$iter,
-      #    include.hidden.chars = TRUE
-      #  )
-      #  print(paste0("Detected signal: ", str))
-      #  return(TRUE)
-      #}, data = list(temp_list$View, session, shift_function))
-  
-      RGtk2::gSignalConnect(temp_list$View, "paste-clipboard", function(view, dummy1) {
-        buffer <- RGtk2::gtkTextViewGetBuffer(view)
-        end_iter <- RGtk2::gtkTextBufferGetEndIter(buffer)
-        start_iter <- RGtk2::gtkTextBufferGetStartIter(buffer)
-        str <- RGtk2::gtkTextBufferGetText(buffer,
-          start_iter$iter, end_iter$iter,
-          include.hidden.chars = TRUE
-        )
-        print(paste0("Detected signal: ", str))
-        return(TRUE)
-      }, data = temp_list$View)
-  
-      RGtk2::gSignalConnect(temp_list$View, "cut-clipboard", function(view, dummy1) {
-        buffer <- RGtk2::gtkTextViewGetBuffer(view)
-        end_iter <- RGtk2::gtkTextBufferGetEndIter(buffer)
-        start_iter <- RGtk2::gtkTextBufferGetStartIter(buffer)
-        str <- RGtk2::gtkTextBufferGetText(buffer,
-          start_iter$iter, end_iter$iter,
-          include.hidden.chars = TRUE
-        )
-        print(paste0("Detected signal: ", str))
-        return(TRUE)
-      }, data = temp_list$View)
-
 
 
 
