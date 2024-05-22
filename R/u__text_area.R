@@ -28,7 +28,7 @@ u__add_text_area <- function(label, shift_function, session) {
         print(paste0("Detected signal: ", str))
         return(TRUE)
       })
-      RGtk2::gSignalConnect(temp_list$View, "delete-from-cursor", function(str) {
+      RGtk2::gSignalConnect(temp_list$View, "delete-from-cursor"[1], function(str) {
         str <- "delete"
         print(paste0("Detected signal: ", str))
         return(TRUE)
@@ -45,6 +45,11 @@ u__add_text_area <- function(label, shift_function, session) {
       })
       RGtk2::gSignalConnect(temp_list$View, "cut-clipboard", function(str) {
         str <- "cut-clipboard"
+        print(paste0("Detected signal: ", str))
+        return(TRUE)
+      })
+      RGtk2::gSignalConnect(temp_list$View, "preedit-changed", function(str) {
+        str <- "preedit-changed"
         print(paste0("Detected signal: ", str))
         return(TRUE)
       })
