@@ -25,8 +25,14 @@ u__add_text_area <- function(label, shift_function, session) {
       ############################################
       RGtk2::gSignalConnect(temp_list$View, "backspace", function(view, dummy1) {
         buffer <- RGtk2::gtkTextViewGetBuffer(view)
+        end_iter <- RGtk2::gtkTextBufferGetEndIter(buffer)
+        start_iter <- RGtk2::gtkTextBufferGetStartIter(buffer)
+        str <- RGtk2::gtkTextBufferGetText(buffer,
+          start_iter$iter, end_iter$iter,
+          include.hidden.chars = TRUE
+        )
         #str <- u__text_area_get_text(view)
-        str <- "backspace"
+        #str <- "backspace"
         print(paste0("Detected signal: ", str))
         return(TRUE)
       }, data = temp_list$View)
