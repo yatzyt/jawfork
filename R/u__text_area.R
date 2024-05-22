@@ -16,6 +16,16 @@ u__add_text_area <- function(label, shift_function, session) {
                     shift_function(session)
 
                     }
+                    
+                    buffer <- RGtk2::gtkTextViewGetBuffer(view)
+                    end_iter <- RGtk2::gtkTextBufferGetEndIter(buffer)
+                    start_iter <- RGtk2::gtkTextBufferGetStartIter(buffer)
+                    str <- RGtk2::gtkTextBufferGetText(buffer,
+                      start_iter$iter, end_iter$iter,
+                      include.hidden.chars = TRUE
+                    )
+                    print(paste0("Detected signal: ", str))
+                  
                     return(TRUE)
                 },data=list(session,shift_function))
 
@@ -48,17 +58,17 @@ u__add_text_area <- function(label, shift_function, session) {
         return(TRUE)
       }, data = temp_list$View)
   
-      RGtk2::gSignalConnect(temp_list$View, "key-release-event", function(view, event, data, dummy1) {
-        buffer <- RGtk2::gtkTextViewGetBuffer(view)
-        end_iter <- RGtk2::gtkTextBufferGetEndIter(buffer)
-        start_iter <- RGtk2::gtkTextBufferGetStartIter(buffer)
-        str <- RGtk2::gtkTextBufferGetText(buffer,
-          start_iter$iter, end_iter$iter,
-          include.hidden.chars = TRUE
-        )
-        print(paste0("Detected signal: ", str))
-        return(TRUE)
-      }, data = list(temp_list$View, session, shift_function))
+      #RGtk2::gSignalConnect(temp_list$View, "key-release-event", function(view, event, data, dummy1) {
+      #  buffer <- RGtk2::gtkTextViewGetBuffer(view)
+      #  end_iter <- RGtk2::gtkTextBufferGetEndIter(buffer)
+      #  start_iter <- RGtk2::gtkTextBufferGetStartIter(buffer)
+      #  str <- RGtk2::gtkTextBufferGetText(buffer,
+      #    start_iter$iter, end_iter$iter,
+      #    include.hidden.chars = TRUE
+      #  )
+      #  print(paste0("Detected signal: ", str))
+      #  return(TRUE)
+      #}, data = list(temp_list$View, session, shift_function))
   
       RGtk2::gSignalConnect(temp_list$View, "paste-clipboard", function(view, dummy1) {
         buffer <- RGtk2::gtkTextViewGetBuffer(view)
