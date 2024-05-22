@@ -24,16 +24,17 @@ u__add_text_area <- function(label, shift_function, session) {
       # No, I really couldn't find an easier way #
       ############################################
       RGtk2::gSignalConnect(temp_list$View, "backspace", function(str) {
-        str <- "backspace"
+        str <- u__text_area_get_text(temp_list$View)
         print(paste0("Detected signal: ", str))
         return(TRUE)
       })
-      RGtk2::gSignalConnect(temp_list$View, "delete-from-cursor"[1], function(str) {
+      #delete-from-cursor needs dummy arguments since delete-from-cursor contains extra info
+      RGtk2::gSignalConnect(temp_list$View, "delete-from-cursor", function(str, dummy1, dummy2) {
         str <- "delete"
         print(paste0("Detected signal: ", str))
         return(TRUE)
       })
-      RGtk2::gSignalConnect(temp_list$View, "insert-at-cursor", function() {
+      RGtk2::gSignalConnect(temp_list$View, "insert-at-cursor", function(str) {
         str <- "insert-at-cursor"
         print(paste0("Detected signal: ", str))
         return(TRUE)
