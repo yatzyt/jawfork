@@ -19,15 +19,14 @@ u__add_text_area <- function(label, shift_function, session) {
                     return(TRUE)
                 },data=list(session,shift_function))
 
-      print_signal <- function(str) {
+      #Attempt to recognize whenever code area is edited
+      RGtk2::gSignalConnect(temp_list$View, "backspace", function(str) {
+        str <- "backspace"
         print(paste0("Detected signal: ", str))
         return(TRUE)
-      }
+      })
 
-      #Attempt to recognize whenever code area is edited
-      RGtk2::gSignalConnect(temp_list$View, "backspace", print_signal("backspace"))
-
-      RGtk2::gSignalConnect(temp_list$View, "delete-from-cursor", print_signal("delete-from-cursor"))
+      #RGtk2::gSignalConnect(temp_list$View, "delete-from-cursor", print_signal("delete-from-cursor"))
 
 
 
