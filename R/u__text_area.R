@@ -29,11 +29,11 @@ u__add_text_area <- function(label, shift_function, session) {
         return(TRUE)
       })
       RGtk2::gSignalConnect(temp_list$View, "delete-from-cursor", function(str) {
-        str <- "delete-from-cursor"
+        str <- "delete"
         print(paste0("Detected signal: ", str))
         return(TRUE)
       })
-      RGtk2::gSignalConnect(temp_list$View, "insert-at-cursor", function(str) {
+      RGtk2::gSignalConnect(temp_list$View, "insert-at-cursor", function() {
         str <- "insert-at-cursor"
         print(paste0("Detected signal: ", str))
         return(TRUE)
