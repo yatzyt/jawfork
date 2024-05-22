@@ -48,14 +48,6 @@ u__add_text_area <- function(label, shift_function, session) {
         return(TRUE)
       }, data = temp_list$View)
   
-    RGtk2::gSignalConnect(temp_list$View, "key-release-event", 
-                function(view, event, data) {
-                  session<- data[[1]]
-                  shift_function <- data[[2]]
-                  key <- z__event_state_key(event)
-                  return(TRUE)
-                }, data = list(session, shift_function))
-  
       RGtk2::gSignalConnect(temp_list$View, "key-release-event", function(view, event, data, dummy1) {
         buffer <- RGtk2::gtkTextViewGetBuffer(view)
         end_iter <- RGtk2::gtkTextBufferGetEndIter(buffer)
@@ -66,7 +58,7 @@ u__add_text_area <- function(label, shift_function, session) {
         )
         print(paste0("Detected signal: ", str))
         return(TRUE)
-      }, data = data = list(temp_list$View, session, shift_function))
+      }, data = list(temp_list$View, session, shift_function))
   
       RGtk2::gSignalConnect(temp_list$View, "paste-clipboard", function(view, dummy1) {
         buffer <- RGtk2::gtkTextViewGetBuffer(view)
