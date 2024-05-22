@@ -23,11 +23,11 @@ u__add_text_area <- function(label, shift_function, session) {
       # Signal whenever code area is edited      #
       # No, I really couldn't find an easier way #
       ############################################
-      RGtk2::gSignalConnect(temp_list$View, "backspace", function(str) {
+      RGtk2::gSignalConnect(temp_list$View, "backspace", function(view) {
         str <- u__text_area_get_text(outer_env[[session_name]]$text_area_1)
         print(paste0("Detected signal: ", str))
         return(TRUE)
-      })
+      }, data = temp_list)
       #delete-from-cursor needs dummy arguments since delete-from-cursor contains extra info
       RGtk2::gSignalConnect(temp_list$View, "delete-from-cursor", function(str, dummy1, dummy2) {
         str <- "delete"
