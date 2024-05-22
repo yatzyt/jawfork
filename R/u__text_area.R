@@ -19,14 +19,35 @@ u__add_text_area <- function(label, shift_function, session) {
                     return(TRUE)
                 },data=list(session,shift_function))
 
-      #Attempt to recognize whenever code area is edited
+      ############################################
+      # Signal whenever code area is edited      #
+      # No, I really couldn't find an easier way #
+      ############################################
       RGtk2::gSignalConnect(temp_list$View, "backspace", function(str) {
         str <- "backspace"
         print(paste0("Detected signal: ", str))
         return(TRUE)
       })
-
-      #RGtk2::gSignalConnect(temp_list$View, "delete-from-cursor", print_signal("delete-from-cursor"))
+      RGtk2::gSignalConnect(temp_list$View, "delete-from-cursor", function(str) {
+        str <- "delete-from-cursor"
+        print(paste0("Detected signal: ", str))
+        return(TRUE)
+      })
+      RGtk2::gSignalConnect(temp_list$View, "insert-at-cursor", function(str) {
+        str <- "insert-at-cursor"
+        print(paste0("Detected signal: ", str))
+        return(TRUE)
+      })
+      RGtk2::gSignalConnect(temp_list$View, "paste-clipboard", function(str) {
+        str <- "paste-clipboard"
+        print(paste0("Detected signal: ", str))
+        return(TRUE)
+      })
+      RGtk2::gSignalConnect(temp_list$View, "cut-clipboard", function(str) {
+        str <- "cut-clipboard"
+        print(paste0("Detected signal: ", str))
+        return(TRUE)
+      })
 
 
 
