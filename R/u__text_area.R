@@ -19,7 +19,7 @@ u__add_text_area <- function(label, shift_function, session) {
                     return(TRUE)
                 },data=list(session,shift_function))
 
-    RGtk2::gSignalConnect(temp_list$View, "key-press-event", 
+    RGtk2::gSignalConnect(temp_list$View, "key-release-event", 
                 function(view, event, data) {
                   session<- data[[1]]
                   shift_function <- data[[2]]
