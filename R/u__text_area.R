@@ -24,11 +24,11 @@ u__add_text_area <- function(label, shift_function, session) {
                     buffer <- RGtk2::gtkTextViewGetBuffer(view)
                     end_iter <- RGtk2::gtkTextBufferGetEndIter(buffer)
                     start_iter <- RGtk2::gtkTextBufferGetStartIter(buffer)
-                    str <- RGtk2::gtkTextBufferGetText(buffer,
-                      start_iter$iter, end_iter$iter,
-                      include.hidden.chars = TRUE
-                    )
-                  str <- key
+                    #str <- RGtk2::gtkTextBufferGetText(buffer,
+                    #  start_iter$iter, end_iter$iter,
+                    #  include.hidden.chars = TRUE
+                    #)
+                  str <- event[["keyval"]]
                     print(paste0("Detected signal: ", str))
                   
                     return(TRUE)
