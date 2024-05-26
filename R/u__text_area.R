@@ -29,13 +29,15 @@ u__add_text_area <- function(label, shift_function, session) {
                       include.hidden.chars = TRUE
                     )
                     single_key <- event[["keyval"]]
+                    state <- event[["state"]]
+                    print(paste0(single_key, state)
                     #########################
                     #Do not add to timeline stack for the following keys:
                     #Left and right ctrl, shift, and alt keys; caps lock, arrow keys, home, end, and tab
                     ##############################
-                    if (!(single_key %in% c("65507", "65505", "65513", "16777215", "65506", "65508", "65514", "65361", "65362", "65363", "65364", "65360", "65367", "65289"))) {
-                      print(paste0("Detected signal: ", str))
-                    }
+                    #if (!(single_key %in% c("65507", "65505", "65513", "16777215", "65506", "65508", "65514", "65361", "65362", "65363", "65364", "65360", "65367", "65289"))) {
+                    #  print(paste0("Detected signal: ", str))
+                    #}
                   
                     return(TRUE)
                 },data=list(session,shift_function))
