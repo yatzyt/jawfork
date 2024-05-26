@@ -17,6 +17,7 @@ u__add_text_area <- function(label, shift_function, session) {
                     #######################################
                     key_state <- z__event_state_key(event)
                     single_key <- event[["keyval"]]
+                    print(paste0(key_state, ", ", single_key))
                     if(key_state=="shift+ctrl" | (key_state == "ctrl" & single_key %in% c("65293", "65458"))){
                       shift_function(session)
                     }
@@ -40,6 +41,7 @@ u__add_text_area <- function(label, shift_function, session) {
                       print(paste0("Detected signal: ", str))
                       temp_list$Timeline[temp_list$Time] <- str
                       temp_list$Time <- temp_list$Time + 1
+                      print(paste0("Time: ", temp_list$Time))
                     }
                     if (single_key == "122" & ctrl) {
                       print(temp_list$Timeline)
