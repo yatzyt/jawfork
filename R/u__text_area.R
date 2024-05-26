@@ -29,7 +29,7 @@ u__add_text_area <- function(label, shift_function, session) {
                       include.hidden.chars = TRUE
                     )
                     single_key <- event[["keyval"]]
-                    #state <- event[["state"]]
+                    state <- event[["state"]]
                     #print(paste0(single_key, state))
                     #########################
                     #Do not add to timeline stack for the following keys:
