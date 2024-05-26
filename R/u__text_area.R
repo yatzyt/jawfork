@@ -5,6 +5,8 @@ u__add_text_area <- function(label, shift_function, session) {
   RGtk2::gtkFrameSetLabel(temp_list$Frame, label)
 
   temp_list$View <- RGtk2::gtkTextView()
+  temp_list$Timeline <- c()
+  temp_list$Time <- 0
 
     RGtk2::gSignalConnect(temp_list$View, "key-release-event", 
                 function(view, event, data) {
@@ -29,15 +31,19 @@ u__add_text_area <- function(label, shift_function, session) {
                       include.hidden.chars = TRUE
                     )
                     single_key <- event[["keyval"]]
-                    state <- event[["state"]]
-                    print(state)
+                    ctrl <- event[["state"]] == "4"
                     #########################
                     #Do not add to timeline stack for the following keys:
                     #Left and right ctrl, shift, and alt keys; caps lock, arrow keys, home, end, and tab
                     ##############################
-                    #if (!(single_key %in% c("65507", "65505", "65513", "16777215", "65506", "65508", "65514", "65361", "65362", "65363", "65364", "65360", "65367", "65289"))) {
-                    #  print(paste0("Detected signal: ", str))
-                    #}
+                    if (!(single_key %in% c("65507", "65505", "65513", "16777215", "65506", "65508", "65514", "65361", "65362", "65363", "65364", "65360", "65367", "65289"))) {
+                      print(paste0("Detected signal: ", str))
+                      temp_list$Timeline[temp_list$Time] <- str
+                      temp_list$Time <- temp_list$Time + 1
+                    }
+                    if (single_key == "Z" & ctrl) {
+                      print(temp_list$Timeline)
+                    }
                   
                     return(TRUE)
                 },data=list(session,shift_function))
