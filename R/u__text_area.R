@@ -42,6 +42,8 @@ u__add_text_area <- function(label, shift_function, session, timeline, time) {
                       time <<- time + 1
                     }
                     #Undo
+                    #TODO: combine entries that are the exact same
+                    #TODO: print timeline and time with each key to see how it changes
                     if (single_key == "122" & ctrl & time != 0) {
                       time <<- time - 1
                       RGtk2::gtkTextBufferSetText(buffer, timeline[time])
