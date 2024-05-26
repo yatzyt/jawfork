@@ -30,7 +30,7 @@ u__add_text_area <- function(label, shift_function, session) {
                     )
                     single_key <- event[["keyval"]]
                     state <- event[["state"]]
-                    print(paste0(single_key, state)
+                    print(paste0(single_key, state))
                     #########################
                     #Do not add to timeline stack for the following keys:
                     #Left and right ctrl, shift, and alt keys; caps lock, arrow keys, home, end, and tab
