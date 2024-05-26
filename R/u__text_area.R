@@ -31,6 +31,7 @@ u__add_text_area <- function(label, shift_function, session) {
                       include.hidden.chars = TRUE
                     )
                     single_key <- event[["keyval"]]
+                    print(single_key)
                     ctrl <- event[["state"]] == "4"
                     #########################
                     #Do not add to timeline stack for the following keys:
