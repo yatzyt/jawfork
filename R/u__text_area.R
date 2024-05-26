@@ -5,8 +5,6 @@ u__add_text_area <- function(label, shift_function, session) {
   RGtk2::gtkFrameSetLabel(temp_list$Frame, label)
 
   temp_list$View <- RGtk2::gtkTextView()
-  temp_list$Timeline <- c()
-  temp_list$Time <- 0
 
     RGtk2::gSignalConnect(temp_list$View, "key-release-event", 
                 function(view, event, data) {
@@ -17,8 +15,9 @@ u__add_text_area <- function(label, shift_function, session) {
                     #######################################
                     key_state <- z__event_state_key(event)
                     single_key <- event[["keyval"]]
+                    ctrl <- event[["state"]] == "4"
                     print(paste0(key_state, ", ", single_key))
-                    if(key_state=="shift+ctrl" | (key_state == "ctrl" & single_key %in% c("65293", "65458"))){
+                    if(key_state=="shift+ctrl" | (ctrl & single_key %in% c("65293", "65458"))){
                       shift_function(session)
                     }
                     
@@ -32,19 +31,18 @@ u__add_text_area <- function(label, shift_function, session) {
                       start_iter$iter, end_iter$iter,
                       include.hidden.chars = TRUE
                     )
-                    ctrl <- event[["state"]] == "4"
                     #########################
                     #Do not add to timeline stack for the following keys:
                     #Left and right ctrl, shift, and alt keys; caps lock, arrow keys, home, end, and tab
                     ##############################
                     if (!(single_key %in% c("65507", "65505", "65513", "16777215", "65506", "65508", "65514", "65361", "65362", "65363", "65364", "65360", "65367", "65289"))) {
                       print(paste0("Detected signal: ", str))
-                      temp_list$Timeline[temp_list$Time] <- str
-                      temp_list$Time <- temp_list$Time + 1
-                      print(paste0("Time: ", temp_list$Time))
+                      timeline[time] <- str
+                      time <- time + 1
+                      print(paste0("Time: ", time))
                     }
                     if (single_key == "122" & ctrl) {
-                      print(temp_list$Timeline)
+                      print(timeline)
                     }
                   
                     return(TRUE)
