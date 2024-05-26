@@ -15,8 +15,9 @@ u__add_text_area <- function(label, shift_function, session) {
                     #######################################
                     # Run code if key press is shift+ctrl #
                     #######################################
-                    key <- z__event_state_key(event)
-                    if(key=="shift+ctrl"){
+                    key_state <- z__event_state_key(event)
+                    single_key <- event[["keyval"]]
+                    if(key_state=="shift+ctrl" | (key_state == "ctrl" & single_key %in% c("65293", "65458"))){
                       shift_function(session)
                     }
                     
@@ -30,8 +31,6 @@ u__add_text_area <- function(label, shift_function, session) {
                       start_iter$iter, end_iter$iter,
                       include.hidden.chars = TRUE
                     )
-                    single_key <- event[["keyval"]]
-                    print(single_key)
                     ctrl <- event[["state"]] == "4"
                     #########################
                     #Do not add to timeline stack for the following keys:
@@ -42,7 +41,7 @@ u__add_text_area <- function(label, shift_function, session) {
                       temp_list$Timeline[temp_list$Time] <- str
                       temp_list$Time <- temp_list$Time + 1
                     }
-                    if (single_key == "Z" & ctrl) {
+                    if (single_key == "122" & ctrl) {
                       print(temp_list$Timeline)
                     }
                   
