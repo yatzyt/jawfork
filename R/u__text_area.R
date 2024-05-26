@@ -1,4 +1,4 @@
-u__add_text_area <- function(label, shift_function, session) {
+u__add_text_area <- function(label, shift_function, session, timeline, time) {
   temp_list <- list()
   temp_list$Frame <- RGtk2::gtkFrame()
 
@@ -37,8 +37,8 @@ u__add_text_area <- function(label, shift_function, session) {
                     ##############################
                     if (!(single_key %in% c("65507", "65505", "65513", "16777215", "65506", "65508", "65514", "65361", "65362", "65363", "65364", "65360", "65367", "65289"))) {
                       print(paste0("Detected signal: ", str))
-                      timeline[time] <- str
-                      time <- time + 1
+                      timeline[time] <<- str
+                      time <<- time + 1
                       print(paste0("Time: ", time))
                     }
                     if (single_key == "122" & ctrl) {
