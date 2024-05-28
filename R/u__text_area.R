@@ -10,9 +10,9 @@ u__add_text_area <- function(label, shift_function, session, timeline, time) {
                 function(view, event, data) {
                   session<- data[[1]]
                   shift_function <- data[[2]]
-                    #######################################
-                    # Run code if key press is shift+ctrl #
-                    #######################################
+                    ###################################
+                    # Run code for select key strokes #
+                    ###################################
                     key_state <- z__event_state_key(event)
                     single_key <- event[["keyval"]]
                     ctrl <- event[["state"]] == "4"
