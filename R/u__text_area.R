@@ -16,7 +16,7 @@ u__add_text_area <- function(label, shift_function, session, timeline, time) {
                     key_state <- z__event_state_key(event)
                     single_key <- event[["keyval"]]
                     ctrl <- event[["state"]] == "4"
-                    if(key_state=="shift+ctrl" | (ctrl & single_key %in% c("65293", "65458"))){
+                    if((key_state=="shift+ctrl" & outer_env$settings_list$ctrlshift) | (ctrl & single_key %in% c("65293", "65458"))){
                       shift_function(session)
                     }
                     
@@ -42,8 +42,10 @@ u__add_text_area <- function(label, shift_function, session, timeline, time) {
                       time <<- time + 1
                     }
                     #Undo
+                  
                     #TODO: combine entries that are the exact same
                     #TODO: print timeline and time with each key to see how it changes
+                  
                     if (single_key == "122" & ctrl & time != 0) {
                       time <<- time - 1
                       RGtk2::gtkTextBufferSetText(buffer, timeline[time])
