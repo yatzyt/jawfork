@@ -33,12 +33,7 @@ u__add_text_area <- function(label, shift_function, session, timeline, time, out
                     # Delete the linebreak that gets inserted with Ctrl+Enter #
                     ###########################################################
                     if (ctrl & single_key =="65293") {
-                      enter_str <- RGtk2::gtkTextBufferGetText(buffer,
-                        start_iter$iter, end_iter$iter,
-                        include.hidden.chars = TRUE
-                      )
-                      print(enter_str)
-                      #RGtk2::gtkTextBufferSetText(buffer, "Ctrl+Enter")
+                      RGtk2::gtkTextBufferSetText(buffer, substr(str, 1, (nchar(str) - 2)))
                     }
                     #########################
                     #Do not add to timeline stack for the following keys:
