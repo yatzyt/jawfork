@@ -732,8 +732,8 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
           outer_env <- data[[2]]
 
           outer_env$u__append_before_code(session_name, cmd = "df$n__1 <- add_cross_counts(df, c('USUBJID', 'PARAM', 'AVISIT'))")
-          str <- outer_env$u__text_are_get_text(session_name)
-          print(str)
+          #str <- outer_env$u__text_are_get_text(session_name)
+          #print(str)
           #timeline[time] <<- str
           #time <<- time + 1
 
