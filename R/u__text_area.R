@@ -1,4 +1,4 @@
-u__add_text_area <- function(label, shift_function, session, timeline, time) {
+u__add_text_area <- function(label, shift_function, session, timeline, time, outer_env) {
   temp_list <- list()
   temp_list$Frame <- RGtk2::gtkFrame()
 
@@ -16,7 +16,9 @@ u__add_text_area <- function(label, shift_function, session, timeline, time) {
                     key_state <- z__event_state_key(event)
                     single_key <- event[["keyval"]]
                     ctrl <- event[["state"]] == "4"
-                    if((key_state=="shift+ctrl" & outer_env$settings_list$ctrlshift) | (ctrl & single_key %in% c("65293", "65458"))){
+                    PRINT(
+                    if((key_state=="shift+ctrl") | (ctrl & single_key %in% c("65293", "65458"))){
+                    #if((key_state=="shift+ctrl" & outer_env$settings_list$ctrlshift) | (ctrl & single_key %in% c("65293", "65458"))){
                       shift_function(session)
                     }
                     
