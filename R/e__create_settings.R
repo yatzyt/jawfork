@@ -238,25 +238,25 @@ e__create_settings <- function(outer_env = totem) {
   RGtk2::gtkBoxPackStart(outer_env$settings_window$settings_window_main_box, RGtk2::gtkLabel("Click to change settings."), F, F, padding = 4)
   
   #Add button for maximization setting
-  cb <- RGtk2::gtkCheckButtonNewWithLabel("Maximize on load", show = TRUE)
-  RGtk2::gtkToggleButtonSetActive(cb, outer_env$settings_list$maximize)
-  RGtk2::gtkBoxPackStart(outer_env$settings_window$settings_window_main_box, cb, F, F, padding = 4)  
+  max <- RGtk2::gtkCheckButtonNewWithLabel("Maximize on load", show = TRUE)
+  RGtk2::gtkToggleButtonSetActive(max, outer_env$settings_list$maximize)
+  RGtk2::gtkBoxPackStart(outer_env$settings_window$settings_window_main_box, max, F, F, padding = 4)  
   
   #Add button for Ctrl+Shift setting
-  cb <- RGtk2::gtkCheckButtonNewWithLabel("Ctrl+Shift runs code", show = TRUE)
-  RGtk2::gtkToggleButtonSetActive(cb, outer_env$settings_list$ctrlshift)
-  RGtk2::gtkBoxPackStart(outer_env$settings_window$settings_window_main_box, cb, F, F, padding = 4) 
+  ctsh <- RGtk2::gtkCheckButtonNewWithLabel("Ctrl+Shift runs code", show = TRUE)
+  RGtk2::gtkToggleButtonSetActive(ctsh, outer_env$settings_list$ctrlshift)
+  RGtk2::gtkBoxPackStart(outer_env$settings_window$settings_window_main_box, ctsh, F, F, padding = 4) 
   
   #Define function to call when maximization button clicked
-  RGtk2::gSignalConnect(cb, "toggled", function(cb) {
-    current_state <- RGtk2::gtkToggleButtonGetActive(cb)
+  RGtk2::gSignalConnect(max, "toggled", function(max) {
+    current_state <- RGtk2::gtkToggleButtonGetActive(max)
     outer_env$settings_list$maximize <- current_state
     return(T)
   })
   
   #Define function to call when Ctrl+Shift button clicked
-  RGtk2::gSignalConnect(cb, "toggled", function(cb) {
-    current_state <- RGtk2::gtkToggleButtonGetActive(cb)
+  RGtk2::gSignalConnect(ctsh, "toggled", function(ctsh) {
+    current_state <- RGtk2::gtkToggleButtonGetActive(ctsh)
     outer_env$settings_list$ctrlshift <- current_state
     return(T)
   })
