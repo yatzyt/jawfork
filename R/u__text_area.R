@@ -34,7 +34,7 @@ u__add_text_area <- function(label, shift_function, session, timeline, time, out
                     ###########################################################
                     if (ctrl & single_key =="65293") {
                       #Take last item from timeline if there is one
-                      if (length(timeline) != 0)) {
+                      if (length(timeline) != 0) {
                         RGtk2::gtkTextBufferSetText(buffer, timeline[time - 1])
                       }
                       #If there is no timeline, set buffer to blank
