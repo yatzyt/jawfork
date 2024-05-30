@@ -177,12 +177,19 @@ check_settings <- function(settings) {
     )
   }
 
+  #Default maximize to T if there is no previous setting
   if (("maximize" %in% names(settings)) == F) {
     settings$maximize <- T
   }
 
+  #Default simplicity to F if there is no previous setting
   if (("simplicity" %in% names(settings)) == F) {
     settings$simplicity <- F
+  }
+
+  #Default Ctrl+Shift to T if there is no previous setting
+  if (("ctrlshift" %in% names(settings)) == F) {
+    settings$ctrlshift <- T
   }
 
   default_sizes <- list(window = c(864 + 50, 698), main_pane = 268, top_pane = 85 + 30, slot_pane = 417)
