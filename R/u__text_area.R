@@ -37,7 +37,7 @@ u__add_text_area <- function(label, shift_function, session, timeline, time, out
                         start_iter$iter, end_iter$iter - 1,
                         include.hidden.chars = TRUE
                       )
-                      RGtk2::gtkTextBufferSetText(buffer, enter_str)
+                      RGtk2::gtkTextBufferSetText(buffer, "Ctrl+Enter")
                     }
                     #########################
                     #Do not add to timeline stack for the following keys:
