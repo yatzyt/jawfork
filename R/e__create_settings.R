@@ -242,10 +242,22 @@ e__create_settings <- function(outer_env = totem) {
   RGtk2::gtkToggleButtonSetActive(cb, outer_env$settings_list$maximize)
   RGtk2::gtkBoxPackStart(outer_env$settings_window$settings_window_main_box, cb, F, F, padding = 4)  
   
+  #Add button for Ctrl+Shift setting
+  cb <- RGtk2::gtkCheckButtonNewWithLabel("Ctrl+Shift runs code", show = TRUE)
+  RGtk2::gtkToggleButtonSetActive(cb, outer_env$settings_list$ctrlshift)
+  RGtk2::gtkBoxPackStart(outer_env$settings_window$settings_window_main_box, cb, F, F, padding = 4) 
+  
   #Define function to call when maximization button clicked
   RGtk2::gSignalConnect(cb, "toggled", function(cb) {
     current_state <- RGtk2::gtkToggleButtonGetActive(cb)
     outer_env$settings_list$maximize <- current_state
+    return(T)
+  })
+  
+  #Define function to call when Ctrl+Shift button clicked
+  RGtk2::gSignalConnect(cb, "toggled", function(cb) {
+    current_state <- RGtk2::gtkToggleButtonGetActive(cb)
+    outer_env$settings_list$ctrlshift <- current_state
     return(T)
   })
   
