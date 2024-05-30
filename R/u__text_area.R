@@ -19,9 +19,9 @@ u__add_text_area <- function(label, shift_function, session, timeline, time, out
                     if((key_state=="shift+ctrl" & outer_env$settings_list$ctrlshift) | (ctrl & single_key %in% c("65293", "65458"))){
                       shift_function(session)
                     }                    
-                    #######################################
-                    # Signal whenever code area is edited #
-                    #######################################
+                    ##########################################
+                    # Store buffer whenever a key is pressed #
+                    ##########################################
                     buffer <- RGtk2::gtkTextViewGetBuffer(view)
                     end_iter <- RGtk2::gtkTextBufferGetEndIter(buffer)
                     start_iter <- RGtk2::gtkTextBufferGetStartIter(buffer)
