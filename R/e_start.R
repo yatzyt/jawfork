@@ -236,7 +236,7 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
         outer_env$hide_load_window()
       }
 
-      outer_env[[session_name]]$text_area_1 <- u__add_text_area("Code", run_code, session_name, timeline, time)
+      outer_env[[session_name]]$text_area_1 <- u__add_text_area("Code", run_code, session_name, timeline, time, outer_env)
 
       RGtk2::gtkBoxPackStart(outer_env[[session_name]]$data_view_list$top_code_box, outer_env[[session_name]]$text_area_1$Frame, T, T)
 
