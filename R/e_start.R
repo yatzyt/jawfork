@@ -726,11 +726,14 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
         start = T, padding = 2,
         but_txt = "cc",
         tool_tip = "Add cross count",
-        call_back_fct = function(widget, event, data) {
+        call_back_fct = function(widget, event, data, timeline, time) {
           session_name <- data[[1]]
           outer_env <- data[[2]]
 
           outer_env$u__append_before_code(session_name, cmd = "df$n__1 <- add_cross_counts(df, c('USUBJID', 'PARAM', 'AVISIT'))")
+          str <- outer_env$u__text_are_get_text(session_name)
+          timeline[time] <<- str
+          time <<- time + 1
 
           return(FALSE)
         }, data = list(session_name, outer_env)
