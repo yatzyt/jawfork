@@ -6,23 +6,6 @@ u__add_text_area <- function(label, shift_function, session, timeline, time, out
 
   temp_list$View <- RGtk2::gtkTextView()
 
-    RGtk2::gSignalConnect(temp_list$View, "key-press-event", 
-                function(view, event, data) {
-                  session<- data[[1]]
-                  shift_function <- data[[2]]
-                    ###################################
-                    # Run code for select key strokes #
-                    ###################################
-                    key_state <- z__event_state_key(event)
-                    single_key <- event[["keyval"]]
-                    ctrl <- event[["state"]] == "4"
-                    if((key_state=="shift+ctrlx" & outer_env$settings_list$ctrlshift) | (ctrl & single_key %in% c("65293", "65458x"))){
-                      shift_function(session)
-                    }
-                  
-                    return(TRUE)
-                },data=list(session,shift_function))
-
     RGtk2::gSignalConnect(temp_list$View, "key-release-event", 
                 function(view, event, data) {
                   session<- data[[1]]
@@ -33,10 +16,9 @@ u__add_text_area <- function(label, shift_function, session, timeline, time, out
                     key_state <- z__event_state_key(event)
                     single_key <- event[["keyval"]]
                     ctrl <- event[["state"]] == "4"
-                    if((key_state=="shift+ctrl" & outer_env$settings_list$ctrlshift) | (ctrl & single_key %in% c("65293x", "65458"))){
+                    if((key_state=="shift+ctrl" & outer_env$settings_list$ctrlshift) | (ctrl & single_key %in% c("65293", "65458"))){
                       shift_function(session)
-                    }
-                    
+                    }                    
                     #######################################
                     # Signal whenever code area is edited #
                     #######################################
@@ -47,6 +29,16 @@ u__add_text_area <- function(label, shift_function, session, timeline, time, out
                       start_iter$iter, end_iter$iter,
                       include.hidden.chars = TRUE
                     )
+                    ###########################################################
+                    # Delete the linebreak that gets inserted with Ctrl+Enter #
+                    ###########################################################
+                    if (ctrl & single_key =="65293") {
+                      enter_str <- RGtk2::gtkTextBufferGetText(buffer,
+                        start_iter$iter, end_iter$iter - 1,
+                        include.hidden.chars = TRUE
+                      )
+                      RGtk2::gtkTextBufferSetText(buffer, enter_str)
+                    }
                     #########################
                     #Do not add to timeline stack for the following keys:
                     #Left and right ctrl, shift, and alt keys; caps lock, arrow keys, home, end, and tab
