@@ -741,7 +741,7 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
         start = T, padding = 2,
         but_txt = "time",
         tool_tip = "Print timeline to console",
-        call_back_fct = function(widget, event, timeline, data) {
+        call_back_fct = function(widget, event, data) {
           session_name <- data[[1]]
           outer_env <- data[[2]]
 
@@ -752,7 +752,7 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
           print("Done")
           
           return(FALSE)
-        }, data = list(session_name, outer_env, timeline, data)
+        }, data = list(session_name, outer_env, timeline)
       )
 
 
