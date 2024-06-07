@@ -747,8 +747,8 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
           timeline <- data[[3]]
 
           print("Printing timeline...")
-          for (i in 1:length(timeline_copy)) {
-            print(paste0(i, ": ", timeline_copy[i]))
+          for (i in 1:length(timeline)) {
+            print(paste0(i, ": ", timeline[i]))
           }
           print("Done")
           
