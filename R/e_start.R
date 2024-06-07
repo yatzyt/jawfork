@@ -753,7 +753,7 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
           print("Done")
           
           return(FALSE)
-        }, data = list(session_name, outer_env, timing)
+        }, data = list(session_name, outer_env, timeline)
       )
 
 
