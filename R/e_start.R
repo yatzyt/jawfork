@@ -744,12 +744,12 @@ e__start <- function(sas_file_path, outer_env = totem, assign_env=.GlobalEnv) {
         call_back_fct = function(widget, event, data) {
           session_name <- data[[1]]
           outer_env <- data[[2]]
+          timeline <- data[[3]]
 
           print("Printing timeline...")
-          #for (i in 1:length(timeline_copy)) {
-          #  print(paste0(i, ": ", timeline_copy[i]))
-          #}
-          print(data[3])
+          for (i in 1:length(timeline_copy)) {
+            print(paste0(i, ": ", timeline_copy[i]))
+          }
           print("Done")
           
           return(FALSE)
