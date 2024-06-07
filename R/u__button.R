@@ -14,7 +14,7 @@
 #'
 #' @return TODO
 
-u__button <- function(box, start = T, padding = 5, stock_id = NULL, but_txt = NULL, tool_tip = NULL, call_back_fct = NULL, data = NULL) {
+u__button <- function(box, start = T, padding = 5, stock_id = NULL, but_txt = NULL, tool_tip = NULL, call_back_fct = NULL, data = NULL, timeline = timeline) {
   btn <- RGtk2::gtkButton()
   RGtk2::gtkButtonSetFocusOnClick(btn, F)
   if (is.null(stock_id) == F) {
