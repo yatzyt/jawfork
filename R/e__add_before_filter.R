@@ -29,7 +29,7 @@ e__add_before_filter_full_data_bucket <- function(session_name, current_row, exc
     cmd <- paste0("df <- filter(df, ", paste0(my_title, collapse = " & "), ")")
   }
 
-  outer_env$u__append_before_code(session_name, cmd)
+  outer_env$u__append_before_code(session_name, gsub('"NA"', 'NA', cmd))
 }
 
 
@@ -73,7 +73,7 @@ e__add_before_filter_full_data_column <- function(session_name, current_row, df_
     cmd <- paste0("df <- filter(df, ", paste0(my_title, collapse = " & "), ")")
   }
 
-  outer_env$u__append_before_code(session_name, cmd)
+  outer_env$u__append_before_code(session_name, gsub('"NA"', 'NA', cmd))
 }
 
 
@@ -117,7 +117,7 @@ e__add_before_filter_full_data <- function(session_name, current_row, exclude = 
     cmd <- paste0("df <- filter(df, ", paste0(my_title, collapse = " & "), ")")
   }
 
-  outer_env$u__append_before_code(session_name, cmd)
+  outer_env$u__append_before_code(session_name, gsub('"NA"', 'NA', cmd))
 }
 
 #' e__add_before_filter
@@ -157,7 +157,7 @@ e__add_before_filter <- function(session_name, current_row, exclude = F, outer_e
   }
 
 
-  outer_env$u__append_before_code(session_name, cmd)
+  outer_env$u__append_before_code(session_name, gsub('"NA"', 'NA', cmd))
 }
 
 
@@ -172,7 +172,7 @@ e__add_before_filter <- function(session_name, current_row, exclude = F, outer_e
 
 e__add_count_to_df_summary <- function(session_name, cross_tab_names, outer_env = totem) {
   cmd <- paste0("df$n__1 <- add_cross_counts(df, c(\"", paste0(cross_tab_names, collapse = "\", \""), "\"))")
-  outer_env$u__append_before_code(session_name, cmd)
+  outer_env$u__append_before_code(session_name, gsub('"NA"', 'NA', cmd))
 }
 
 #' e__get_summary
