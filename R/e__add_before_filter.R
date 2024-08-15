@@ -73,7 +73,11 @@ e__add_before_filter_full_data_column <- function(session_name, current_row, df_
     cmd <- paste0("df <- filter(df, ", paste0(my_title, collapse = " & "), ")")
   }
 
-  outer_env$u__append_before_code(session_name, gsub('"NA"', 'NA', cmd))
+  if (grepl('as.Date', cmd) {
+    outer_env$u__append_before_code(session_name, gsub('"NA"', 'NA', cmd))
+  } else {
+    outer_env$u__append_before_code(session_name, cmd)
+  }
 }
 
 
@@ -117,7 +121,11 @@ e__add_before_filter_full_data <- function(session_name, current_row, exclude = 
     cmd <- paste0("df <- filter(df, ", paste0(my_title, collapse = " & "), ")")
   }
 
-  outer_env$u__append_before_code(session_name, gsub('"NA"', 'NA', cmd))
+  if (grepl('as.Date', cmd) {
+    outer_env$u__append_before_code(session_name, gsub('"NA"', 'NA', cmd))
+  } else {
+    outer_env$u__append_before_code(session_name, cmd)
+  }
 }
 
 #' e__add_before_filter
@@ -157,7 +165,11 @@ e__add_before_filter <- function(session_name, current_row, exclude = F, outer_e
   }
 
 
-  outer_env$u__append_before_code(session_name, gsub('"NA"', 'NA', cmd))
+  if (grepl('as.Date', cmd) {
+    outer_env$u__append_before_code(session_name, gsub('"NA"', 'NA', cmd))
+  } else {
+    outer_env$u__append_before_code(session_name, cmd)
+  }
 }
 
 
