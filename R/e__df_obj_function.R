@@ -143,7 +143,8 @@ e__df_obj_function <- function(box, outer_env = totem,obj_env=inner_env) {
       }
     }
 
-    temp <- tempfile(fileext = ".csv")
+    #temp <- tempfile(fileext = ".csv")
+    temp <- paste0(outer_env[[session_name]], ".csv")
     write.csv(temp_df, file=temp)
     shell.exec(temp)
   }
