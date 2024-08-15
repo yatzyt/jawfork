@@ -143,11 +143,10 @@ e__df_obj_function <- function(box, outer_env = totem,obj_env=inner_env) {
       }
     }
 
-    #temp <- tempfile(fileext = ".csv")
     sas_w_ext <- outer_env[[session_name]]$sas_file_basename
     sas_ext <- unlist(gregexpr('.', sas_w_ext, fixed = T))[1]
     sas_no_ext <- substr(sas_w_ext, 1, sas_ext - 1)
-    temp <- paste0(sas_no_ext, ".csv")
+    temp <- paste0(tempdir(), "\\", sas_no_ext, ".csv")
     write.csv(temp_df, file=temp)
     shell.exec(temp)
   }
