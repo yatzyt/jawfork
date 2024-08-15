@@ -271,9 +271,9 @@ e__create_settings <- function(outer_env = totem) {
 
 
   #Display working directory for troubleshooting purposes
-  #header_box <- RGtk2::gtkHBox()
-  #RGtk2::gtkBoxPackStart(header_box, RGtk2::gtkLabel(paste0("Work directory: ", getwd())), F, F, padding = 5)  
-  #RGtk2::gtkBoxPackEnd(header_box, header_reset, F, F, padding = 5)
-  ##Add header box to settings window
-  #RGtk2::gtkBoxPackStart(outer_env$settings_window$settings_window_main_box, header_box, F, F, padding = 4)
+  header_box2 <- RGtk2::gtkHBox()
+  RGtk2::gtkBoxPackStart(header_box2, RGtk2::gtkLabel(paste0("Work directory: ", getwd())), F, F, padding = 5)  
+  RGtk2::gtkBoxPackEnd(header_box2, header_reset, F, F, padding = 5)
+  #Add header box to settings window
+  RGtk2::gtkBoxPackStart(outer_env$settings_window$settings_window_main_box, header_box2, F, F, padding = 4)
 }
