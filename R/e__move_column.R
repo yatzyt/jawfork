@@ -105,7 +105,13 @@ e__move_column <- function(placement, session_name, current_row, outer_env=totem
     #Turn col_order into a comma separated list
     newst <- ""
     for (i in 1:length(col_order)) {
-      newst <- paste0(newst, col_order[i])
+      #Sandwich column name with backticks if it has special characters
+      if (!grepl("^[a-zA-Z0-9]*$", col_order[i])) { 
+        clean_col <- paste0("`", col_order[i], "`") 
+      } else {
+        clean_col <- col_order[i]
+      }
+      newst <- paste0(newst, clean_col)
       if (i != length(col_order)) {
         newst <- paste0(newst, ", ")
       }
