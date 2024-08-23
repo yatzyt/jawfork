@@ -17,9 +17,11 @@ e__add_before_filter_full_data_bucket <- function(session_name, current_row, exc
     temp_string <- RGtk2::gtkEntryGetText(outer_env[[session_name]]$status_bar$box_bucket_entry)
     #Sandwich column name with backticks if it has special characters
     if (!grepl("^[a-zA-Z0-9]*$", x)) { 
-      x <- paste0("`", x, "`") 
+      clean_x <- paste0("`", x, "`") 
+    } else {
+      clean_x <- x
     }
-    my_title[[i]] <- paste0(x, " %in% c(", temp_string, ")")
+    my_title[[i]] <- paste0(clean_x, " %in% c(", temp_string, ")")
 
 
 
@@ -56,30 +58,20 @@ e__add_before_filter_full_data_column <- function(session_name, current_row, df_
   my_title <- rep(NA, length(cross_tab_names))
   i <- 1
   for (x in cross_tab_names) {
+    #Sandwich column name with backticks if it has special characters
+    if (!grepl("^[a-zA-Z0-9]*$", x)) { 
+      clean_x <- paste0("`", x, "`") 
+    } else {
+      clean_x <- x
+    }
     if (is.character(temp_df[[x]])) {
-      #Sandwich column name with backticks if it has special characters
-      if (!grepl("^[a-zA-Z0-9]*$", x)) { 
-        x <- paste0("`", x, "`") 
-      }
-      my_title[[i]] <- paste0(x, " %in% c(\"", paste0(sort(unique(filtered_data[, x, drop = T])), collapse = "\", \""), "\")")
+      my_title[[i]] <- paste0(clean_x, " %in% c(\"", paste0(sort(unique(filtered_data[, x, drop = T])), collapse = "\", \""), "\")")
     } else if (is.numeric(temp_df[[x]])) {
-      #Sandwich column name with backticks if it has special characters
-      if (!grepl("^[a-zA-Z0-9]*$", x)) { 
-        x <- paste0("`", x, "`") 
-      }
-      my_title[[i]] <- paste0(x, " %in% c(", paste0(sort(unique(filtered_data[, x, drop = T])), collapse = ", "), ")")
+      my_title[[i]] <- paste0(clean_x, " %in% c(", paste0(sort(unique(filtered_data[, x, drop = T])), collapse = ", "), ")")
     } else if (lubridate::is.Date(temp_df[[x]])) {
-    #Sandwich column name with backticks if it has special characters
-      if (!grepl("^[a-zA-Z0-9]*$", x)) { 
-        x <- paste0("`", x, "`") 
-      }
-      my_title[[i]] <- paste0(x, " %in% as.Date(c(\"", paste0(as.character(sort(unique(filtered_data[, x, drop = T]))), collapse = "\", \""), "\"))")
+      my_title[[i]] <- paste0(clean_x, " %in% as.Date(c(\"", paste0(as.character(sort(unique(filtered_data[, x, drop = T]))), collapse = "\", \""), "\"))")
     } else if (lubridate::is.timepoint(temp_df[[x]])) {
-    #Sandwich column name with backticks if it has special characters
-      if (!grepl("^[a-zA-Z0-9]*$", x)) { 
-        x <- paste0("`", x, "`") 
-      }
-      my_title[[i]] <- paste0("as.character(", x, ") %in% c(\"", paste0(as.character(sort(unique(filtered_data[, x, drop = T]))), collapse = "\", \""), "\")")
+      my_title[[i]] <- paste0("as.character(", clean_x, ") %in% c(\"", paste0(as.character(sort(unique(filtered_data[, x, drop = T]))), collapse = "\", \""), "\")")
     }
 
 
@@ -119,30 +111,20 @@ e__add_before_filter_full_data <- function(session_name, current_row, exclude = 
   my_title <- rep(NA, length(cross_tab_names))
   i <- 1
   for (x in cross_tab_names) {
+    #Sandwich column name with backticks if it has special characters
+    if (!grepl("^[a-zA-Z0-9]*$", x)) { 
+      clean_x <- paste0("`", x, "`") 
+    } else {
+      clean_x <- x
+    }
     if (is.character(temp_df[[x]])) {
-      #Sandwich column name with backticks if it has special characters
-      if (!grepl("^[a-zA-Z0-9]*$", x)) { 
-        x <- paste0("`", x, "`") 
-      }
-      my_title[[i]] <- paste0(x, " %in% c(\"", current_row$row[, x, drop = T], "\")")
+      my_title[[i]] <- paste0(clean_x, " %in% c(\"", current_row$row[, x, drop = T], "\")")
     } else if (is.numeric(temp_df[[x]])) {
-      #Sandwich column name with backticks if it has special characters
-      if (!grepl("^[a-zA-Z0-9]*$", x)) { 
-        x <- paste0("`", x, "`") 
-      }
-      my_title[[i]] <- paste0(x, " %in% c(", current_row$row[, x, drop = T], ")")
+      my_title[[i]] <- paste0(clean_x, " %in% c(", current_row$row[, x, drop = T], ")")
     } else if (lubridate::is.Date(temp_df[[x]])) {
-      #Sandwich column name with backticks if it has special characters
-      if (!grepl("^[a-zA-Z0-9]*$", x)) { 
-        x <- paste0("`", x, "`") 
-      }
-      my_title[[i]] <- paste0(x, " %in% as.Date(c(\"", as.character(current_row$row[, x, drop = T]), "\"))")
+      my_title[[i]] <- paste0(clean_x, " %in% as.Date(c(\"", as.character(current_row$row[, x, drop = T]), "\"))")
     } else if (lubridate::is.timepoint(temp_df[[x]])) {
-      #Sandwich column name with backticks if it has special characters
-      if (!grepl("^[a-zA-Z0-9]*$", x)) { 
-        x <- paste0("`", x, "`") 
-      }
-      my_title[[i]] <- paste0("as.character(", x, ") %in% c(\"", as.character(current_row$row[, x, drop = T]), "\")")
+      my_title[[i]] <- paste0("as.character(", clean_x, ") %in% c(\"", as.character(current_row$row[, x, drop = T]), "\")")
     }
 
 
@@ -181,30 +163,20 @@ e__add_before_filter <- function(session_name, current_row, exclude = F, outer_e
   my_title <- rep(NA, length(cross_tab_names))
   i <- 1
   for (x in cross_tab_names) {
+    #Sandwich column name with backticks if it has special characters
+    if (!grepl("^[a-zA-Z0-9]*$", x)) { 
+      clean_x <- paste0("`", x, "`") 
+    } else {
+      clean_x <- x
+    }
     if (is.character(temp_df[[x]])) {
-      #Sandwich column name with backticks if it has special characters
-      if (!grepl("^[a-zA-Z0-9]*$", x)) { 
-        x <- paste0("`", x, "`") 
-      }
-      my_title[[i]] <- paste0(x, " %in% c(\"", current_row$row[, x, drop = T], "\")")
+      my_title[[i]] <- paste0(clean_x, " %in% c(\"", current_row$row[, x, drop = T], "\")")
     } else if (is.numeric(temp_df[[x]])) {
-      #Sandwich column name with backticks if it has special characters
-      if (!grepl("^[a-zA-Z0-9]*$", x)) { 
-        x <- paste0("`", x, "`") 
-      }
-      my_title[[i]] <- paste0(x, " %in% c(", current_row$row[, x, drop = T], ")")
+      my_title[[i]] <- paste0(clean_x, " %in% c(", current_row$row[, x, drop = T], ")")
     } else if (lubridate::is.Date(temp_df[[x]])) {
-      #Sandwich column name with backticks if it has special characters
-      if (!grepl("^[a-zA-Z0-9]*$", x)) { 
-        x <- paste0("`", x, "`") 
-      }
-      my_title[[i]] <- paste0(x, " %in% as.Date(c(\"", as.character(current_row$row[, x, drop = T]), "\"))")
+      my_title[[i]] <- paste0(clean_x, " %in% as.Date(c(\"", as.character(current_row$row[, x, drop = T]), "\"))")
     } else if (lubridate::is.timepoint(temp_df[[x]])) {
-      #Sandwich column name with backticks if it has special characters
-      if (!grepl("^[a-zA-Z0-9]*$", x)) { 
-        x <- paste0("`", x, "`") 
-      }
-      my_title[[i]] <- paste0("as.character(", x, ") %in% c(\"", as.character(current_row$row[, x, drop = T]), "\")")
+      my_title[[i]] <- paste0("as.character(", clean_x, ") %in% c(\"", as.character(current_row$row[, x, drop = T]), "\")")
     }
     i <- i + 1
   }
