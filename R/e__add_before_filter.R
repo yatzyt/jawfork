@@ -57,12 +57,28 @@ e__add_before_filter_full_data_column <- function(session_name, current_row, df_
   i <- 1
   for (x in cross_tab_names) {
     if (is.character(temp_df[[x]])) {
+      #Sandwich column name with backticks if it has special characters
+      if (!grepl("^[a-zA-Z0-9]*$", x)) { 
+        x <- paste0("`", x, "`") 
+      }
       my_title[[i]] <- paste0(x, " %in% c(\"", paste0(sort(unique(filtered_data[, x, drop = T])), collapse = "\", \""), "\")")
     } else if (is.numeric(temp_df[[x]])) {
+      #Sandwich column name with backticks if it has special characters
+      if (!grepl("^[a-zA-Z0-9]*$", x)) { 
+        x <- paste0("`", x, "`") 
+      }
       my_title[[i]] <- paste0(x, " %in% c(", paste0(sort(unique(filtered_data[, x, drop = T])), collapse = ", "), ")")
     } else if (lubridate::is.Date(temp_df[[x]])) {
+    #Sandwich column name with backticks if it has special characters
+      if (!grepl("^[a-zA-Z0-9]*$", x)) { 
+        x <- paste0("`", x, "`") 
+      }
       my_title[[i]] <- paste0(x, " %in% as.Date(c(\"", paste0(as.character(sort(unique(filtered_data[, x, drop = T]))), collapse = "\", \""), "\"))")
     } else if (lubridate::is.timepoint(temp_df[[x]])) {
+    #Sandwich column name with backticks if it has special characters
+      if (!grepl("^[a-zA-Z0-9]*$", x)) { 
+        x <- paste0("`", x, "`") 
+      }
       my_title[[i]] <- paste0("as.character(", x, ") %in% c(\"", paste0(as.character(sort(unique(filtered_data[, x, drop = T]))), collapse = "\", \""), "\")")
     }
 
@@ -104,12 +120,28 @@ e__add_before_filter_full_data <- function(session_name, current_row, exclude = 
   i <- 1
   for (x in cross_tab_names) {
     if (is.character(temp_df[[x]])) {
+      #Sandwich column name with backticks if it has special characters
+      if (!grepl("^[a-zA-Z0-9]*$", x)) { 
+        x <- paste0("`", x, "`") 
+      }
       my_title[[i]] <- paste0(x, " %in% c(\"", current_row$row[, x, drop = T], "\")")
     } else if (is.numeric(temp_df[[x]])) {
+      #Sandwich column name with backticks if it has special characters
+      if (!grepl("^[a-zA-Z0-9]*$", x)) { 
+        x <- paste0("`", x, "`") 
+      }
       my_title[[i]] <- paste0(x, " %in% c(", current_row$row[, x, drop = T], ")")
     } else if (lubridate::is.Date(temp_df[[x]])) {
+      #Sandwich column name with backticks if it has special characters
+      if (!grepl("^[a-zA-Z0-9]*$", x)) { 
+        x <- paste0("`", x, "`") 
+      }
       my_title[[i]] <- paste0(x, " %in% as.Date(c(\"", as.character(current_row$row[, x, drop = T]), "\"))")
     } else if (lubridate::is.timepoint(temp_df[[x]])) {
+      #Sandwich column name with backticks if it has special characters
+      if (!grepl("^[a-zA-Z0-9]*$", x)) { 
+        x <- paste0("`", x, "`") 
+      }
       my_title[[i]] <- paste0("as.character(", x, ") %in% c(\"", as.character(current_row$row[, x, drop = T]), "\")")
     }
 
@@ -150,12 +182,28 @@ e__add_before_filter <- function(session_name, current_row, exclude = F, outer_e
   i <- 1
   for (x in cross_tab_names) {
     if (is.character(temp_df[[x]])) {
+      #Sandwich column name with backticks if it has special characters
+      if (!grepl("^[a-zA-Z0-9]*$", x)) { 
+        x <- paste0("`", x, "`") 
+      }
       my_title[[i]] <- paste0(x, " %in% c(\"", current_row$row[, x, drop = T], "\")")
     } else if (is.numeric(temp_df[[x]])) {
+      #Sandwich column name with backticks if it has special characters
+      if (!grepl("^[a-zA-Z0-9]*$", x)) { 
+        x <- paste0("`", x, "`") 
+      }
       my_title[[i]] <- paste0(x, " %in% c(", current_row$row[, x, drop = T], ")")
     } else if (lubridate::is.Date(temp_df[[x]])) {
+      #Sandwich column name with backticks if it has special characters
+      if (!grepl("^[a-zA-Z0-9]*$", x)) { 
+        x <- paste0("`", x, "`") 
+      }
       my_title[[i]] <- paste0(x, " %in% as.Date(c(\"", as.character(current_row$row[, x, drop = T]), "\"))")
     } else if (lubridate::is.timepoint(temp_df[[x]])) {
+      #Sandwich column name with backticks if it has special characters
+      if (!grepl("^[a-zA-Z0-9]*$", x)) { 
+        x <- paste0("`", x, "`") 
+      }
       my_title[[i]] <- paste0("as.character(", x, ") %in% c(\"", as.character(current_row$row[, x, drop = T]), "\")")
     }
     i <- i + 1
