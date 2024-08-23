@@ -15,6 +15,8 @@ e__add_before_filter_full_data_bucket <- function(session_name, current_row, exc
   i <- 1
   for (x in cross_tab_names) {
     temp_string <- RGtk2::gtkEntryGetText(outer_env[[session_name]]$status_bar$box_bucket_entry)
+    #Sandwich column name with backticks if it has special characters
+    if (grepl("^[a-zA-Z0-9]*$", x)) { x <- paste0("`", x, "`") }     
     my_title[[i]] <- paste0(x, " %in% c(", temp_string, ")")
 
 
@@ -43,7 +45,7 @@ e__add_before_filter_full_data_bucket <- function(session_name, current_row, exc
 #'
 #' @return TODO
 
-e__add_before_filter_full_data_column <- function(session_name, current_row, df_obj, exclude = F, outer_env = totem) {
+e__add_before_filter_full_data_column <- session_name, current_row, df_obj, exclude = F, outer_env = totem) {
   filtered_data <- df_obj$current_data()
   temp_df <- outer_env[[session_name]]$data2
 
@@ -91,7 +93,7 @@ e__add_before_filter_full_data_column <- function(session_name, current_row, df_
 #'
 #' @return TODO
 
-e__add_before_filter_full_data <- function(session_name, current_row, exclude = F, outer_env = totem) {
+e__add_before_filter_full_data <- session_name, current_row, exclude = F, outer_env = totem) {
   temp_df <- outer_env[[session_name]]$data2
 
   cross_tab_names <- current_row$column
@@ -137,7 +139,7 @@ e__add_before_filter_full_data <- function(session_name, current_row, exclude = 
 #'
 #' @return TODO
 
-e__add_before_filter <- function(session_name, current_row, exclude = F, outer_env = totem) {
+e__add_before_filter <- session_name, current_row, exclude = F, outer_env = totem) {
   temp_df <- outer_env[[session_name]]$data2
 
   cross_tab_names <- setdiff(colnames(current_row$row), c("r__", "n", "freq", "lines"))
@@ -182,7 +184,7 @@ e__add_before_filter <- function(session_name, current_row, exclude = F, outer_e
 #'
 #' @return TODO
 
-e__add_count_to_df_summary <- function(session_name, cross_tab_names, outer_env = totem) {
+e__add_count_to_df_summary <- session_name, cross_tab_names, outer_env = totem) {
   cmd <- paste0("df$n__1 <- add_cross_counts(df, c(\"", paste0(cross_tab_names, collapse = "\", \""), "\"))")
   outer_env$u__append_before_code(session_name, gsub('"NA"', 'NA', cmd))
 }
