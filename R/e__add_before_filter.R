@@ -16,7 +16,7 @@ e__add_before_filter_full_data_bucket <- function(session_name, current_row, exc
   for (x in cross_tab_names) {
     temp_string <- RGtk2::gtkEntryGetText(outer_env[[session_name]]$status_bar$box_bucket_entry)
     #Sandwich column name with backticks if it has special characters
-    if (!grepl("^[a-zA-Z0-9]*$", x)) { 
+    if (!grepl("^[a-zA-Z][a-zA-Z0-9]*$", x)) { 
       clean_x <- paste0("`", x, "`") 
     } else {
       clean_x <- x
@@ -59,7 +59,7 @@ e__add_before_filter_full_data_column <- function(session_name, current_row, df_
   i <- 1
   for (x in cross_tab_names) {
     #Sandwich column name with backticks if it has special characters
-    if (!grepl("^[a-zA-Z0-9]*$", x)) { 
+    if (!grepl("^[a-zA-Z][a-zA-Z0-9]*$", x)) { 
       clean_x <- paste0("`", x, "`") 
     } else {
       clean_x <- x
@@ -112,7 +112,7 @@ e__add_before_filter_full_data <- function(session_name, current_row, exclude = 
   i <- 1
   for (x in cross_tab_names) {
     #Sandwich column name with backticks if it has special characters
-    if (!grepl("^[a-zA-Z0-9]*$", x)) { 
+    if (!grepl("^[a-zA-Z][a-zA-Z0-9]*$", x)) { 
       clean_x <- paste0("`", x, "`") 
     } else {
       clean_x <- x
@@ -164,7 +164,7 @@ e__add_before_filter <- function(session_name, current_row, exclude = F, outer_e
   i <- 1
   for (x in cross_tab_names) {
     #Sandwich column name with backticks if it has special characters
-    if (!grepl("^[a-zA-Z0-9]*$", x)) { 
+    if (!grepl("^[a-zA-Z][a-zA-Z0-9]*$", x)) { 
       clean_x <- paste0("`", x, "`") 
     } else {
       clean_x <- x
