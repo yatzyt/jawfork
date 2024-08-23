@@ -47,7 +47,7 @@ e__add_before_filter_full_data_bucket <- function(session_name, current_row, exc
 #'
 #' @return TODO
 
-e__add_before_filter_full_data_column <- session_name, current_row, df_obj, exclude = F, outer_env = totem) {
+e__add_before_filter_full_data_column <- function(session_name, current_row, df_obj, exclude = F, outer_env = totem) {
   filtered_data <- df_obj$current_data()
   temp_df <- outer_env[[session_name]]$data2
 
@@ -95,7 +95,7 @@ e__add_before_filter_full_data_column <- session_name, current_row, df_obj, excl
 #'
 #' @return TODO
 
-e__add_before_filter_full_data <- session_name, current_row, exclude = F, outer_env = totem) {
+e__add_before_filter_full_data <- function(session_name, current_row, exclude = F, outer_env = totem) {
   temp_df <- outer_env[[session_name]]$data2
 
   cross_tab_names <- current_row$column
@@ -141,7 +141,7 @@ e__add_before_filter_full_data <- session_name, current_row, exclude = F, outer_
 #'
 #' @return TODO
 
-e__add_before_filter <- session_name, current_row, exclude = F, outer_env = totem) {
+e__add_before_filter <- function(session_name, current_row, exclude = F, outer_env = totem) {
   temp_df <- outer_env[[session_name]]$data2
 
   cross_tab_names <- setdiff(colnames(current_row$row), c("r__", "n", "freq", "lines"))
@@ -186,7 +186,7 @@ e__add_before_filter <- session_name, current_row, exclude = F, outer_env = tote
 #'
 #' @return TODO
 
-e__add_count_to_df_summary <- session_name, cross_tab_names, outer_env = totem) {
+e__add_count_to_df_summary <- function(session_name, cross_tab_names, outer_env = totem) {
   cmd <- paste0("df$n__1 <- add_cross_counts(df, c(\"", paste0(cross_tab_names, collapse = "\", \""), "\"))")
   outer_env$u__append_before_code(session_name, gsub('"NA"', 'NA', cmd))
 }
