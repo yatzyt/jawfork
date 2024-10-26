@@ -47,7 +47,7 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
     my_row <- data3[j - 1, ]
     z <- RGtk2::gtkLabel(my_row[, "label"])    
     z$xalign <- 0
-    RGtk2::gtkBoxPackStart(hb, z, T, T, padding = 3)
+    RGtk2::gtkBoxPackStart(hb, z, T, T, padding = 10)
   } else {
     y <- RGtk2::gtkLabel("")
     x <- RGtk2::gtkLabel(paste0(label, " "))
