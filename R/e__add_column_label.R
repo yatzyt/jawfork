@@ -18,7 +18,7 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
 
 
   evb <- RGtk2::gtkEventBox()
-  hb <- RGtk2::gtkVBox(spacing = 5)
+  hb <- RGtk2::gtkVBox(spacing = 50)
   RGtk2::gtkContainerAdd(evb, hb)
 
 
