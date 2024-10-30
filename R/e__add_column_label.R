@@ -23,6 +23,9 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
 
 
   if (is.null(var_class) == F) {
+    ############################
+    # Get column name and type #
+    ############################
     if (var_class == "numeric") {
       x <- RGtk2::gtkLabel(paste0(label, " [n] "))
     } else if (toupper(var_class) == toupper("Date")) {
@@ -39,13 +42,20 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
     x$xalign <- 0
     RGtk2::gtkWidgetModifyFont(x, font)
     RGtk2::gtkBoxPackStart(hb, x, T, T, padding = 1)
-    #Get column labels
+    #####################
+    # Get column labels #
+    #####################
     data3 <- outer_env[[session_name]]$data3
     my_row <- data3[j - 1, ]
     if (is.na(my_row[, "label"])) { pre_y <- "---" }
     else { pre_y <- my_row[, "label"] }
+      #Insert line breaks to prevent labels from being too long
+      
     y <- RGtk2::gtkLabel(paste0(pre_y, " \n Line 2"))
     y$xalign <- 0
+    #####################
+    # Get unique values #
+    #####################
     RGtk2::gtkBoxPackStart(hb, y, T, T, padding = 1)
     z <- RGtk2::gtkLabel(sec_label)
     z$xalign <- 0
