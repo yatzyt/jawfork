@@ -48,8 +48,9 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
     data3 <- outer_env[[session_name]]$data3
     
     #Try to write out data3
-    temp <- tempfile(fileext = ".csv")
-    print(temp)
+    #temp <- tempfile(fileext = ".csv")
+    #print(temp)
+    write.csv(data3, "C:/Users/jneff.PENTARACORP/Desktop/test.csv")
     #write.csv(temp_df, file=temp)
     #shell.exec(temp)
     
