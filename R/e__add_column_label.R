@@ -49,8 +49,9 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
     
     #Try to write out data3
     temp <- tempfile(fileext = ".csv")
-    write.csv(temp_df, file=temp)
-    shell.exec(temp)
+    print(temp)
+    #write.csv(temp_df, file=temp)
+    #shell.exec(temp)
     
     my_row <- data3[j - 1, ]
     if (is.na(my_row[, "label"])) { pre_y <- "---" }
