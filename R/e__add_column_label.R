@@ -45,15 +45,7 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
     #####################
     # Get column labels #
     #####################
-    data3 <- outer_env[[session_name]]$data3
-    
-    #Try to write out data3
-    #temp <- tempfile(fileext = ".csv")
-    #print(temp)
-    write.csv(data3, "C:/Users/jneff.PENTARACORP/Desktop/test.csv")
-    #write.csv(temp_df, file=temp)
-    #shell.exec(temp)
-    
+    data3 <- outer_env[[session_name]]$data3    
     my_row <- data3[j - 1, ]
     if (is.na(my_row[, "label"])) { pre_y <- "---" }
     else { pre_y <- my_row[, "label"] }
@@ -61,8 +53,7 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
       # Insert line breaks to prevent labels from being too long #
       ############################################################
       #Set max length based on max length of column values
-      #print(max(nchar(as.character(temp_df[j - 1, ]))))
-      max_length <- 20
+      max_length <- min(20, my_row[, "length"])
       # Split the text into words
       words <- strsplit(pre_y, " ")[[1]]
       # Initialize an empty result
