@@ -65,7 +65,7 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
         # Check if adding the word would exceed the max_length
         if (current_length + nchar(word) > max_length) {
           # If so, add a line break and reset current_length
-          result <- paste0(result, "\n ", word)
+          result <- paste0(result, " \n", word)
           current_length <- nchar(word)
         } else {
           # Otherwise, add the word to the current line
