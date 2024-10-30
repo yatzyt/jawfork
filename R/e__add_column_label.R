@@ -41,7 +41,7 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
     }
     x$xalign <- 0
     RGtk2::gtkWidgetModifyFont(x, font)
-    RGtk2::gtkBoxPackStart(hb, x, T, T, padding = 1)
+    RGtk2::gtkBoxPackStart(hb, x, F, T, padding = 1)
     #####################
     # Get column labels #
     #####################
