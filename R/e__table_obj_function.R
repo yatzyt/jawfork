@@ -55,7 +55,7 @@ e__table_obj_function_df2 <- function(df, outer_env = totem,obj_env=inner_env) {
     )
   } else {
     #Colors for when there is no Format by:
-    df2[, 2] <- ifelse((1:nrow(df) %% 2) == 0, "#F1F1F1", "#FFFFFF")
+    df2[, 2] <- ifelse((1:nrow(df) %% 2) == 0, "#FFFFFF", "#F1F1F1")
     #df2[, 2] <- ifelse((1:nrow(df) %% 2) == 0, "#2C3E5D", "#172B4D")
   }
   #r__ Color
