@@ -53,6 +53,7 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
       # Insert line breaks to prevent labels from being too long #
       ############################################################
       #Set max length based on max length of column values
+      print(max(nchar(as.character(temp_df[j - 1, ]))))
       max_length <- 20
       # Split the text into words
       words <- strsplit(pre_y, " ")[[1]]
