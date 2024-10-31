@@ -53,7 +53,8 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
       # Insert line breaks to prevent labels from being too long #
       ############################################################
       #Set max length based on max length of column values
-      max_length <- max(20, my_row[, "length"])
+        #max_length <- max(20, my_row[, "length"])
+        max_length <- 20
       # Split the text into words
       words <- strsplit(pre_y, " ")[[1]]
       # Initialize an empty result
@@ -73,8 +74,7 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
           result <- paste0(result, word)
           current_length <- current_length + nchar(word) + 1
         }
-      }
-      
+      }      
     y <- RGtk2::gtkLabel(paste0(result, " "))
     y$xalign <- 0
     RGtk2::gtkBoxPackStart(hb, y, F, F, padding = 1)
