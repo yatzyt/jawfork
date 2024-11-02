@@ -176,8 +176,9 @@ e__table_obj_function <- function(box, outer_env = totem,obj_env=inner_env) {
             "\nBlank: ", my_row[, "blank"]
           )
 
+          #I don't know what this is originally intended for, but it's screwing up the column labels in the header
+          #Commenting it out hasn't led to any adverse effects I've seen yet
           #RGtk2::gtkLabelSetText(obj_env$table_objects_list$allColumns[[j]]$evt$y, paste0("U: ", my_row[, "unique"]))
-          #RGtk2::gtkLabelSetText(obj_env$table_objects_list$allColumns[[j]]$evt$y, "Test column labels 2")
           RGtk2::gtkWidgetSetTooltipText(obj_env$table_objects_list$allColumns[[j]]$evt$evb, my_tool_tip)
           if (my_row[, "class"] == "numeric") {
             RGtk2::gtkWidgetModifyBg(object = obj_env$table_objects_list$allColumns[[j]]$evt$evb, state = "normal", color = "#FFFFFF")
