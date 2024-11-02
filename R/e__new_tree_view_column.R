@@ -41,8 +41,7 @@ e__new_tree_view_column <- function(df, j,outer_env=totem,obj_env=inner_env) {
       "\nBlank: ", my_row[, "blank"]
     )
 
-    #evt <- obj_env$add_column_label(column, colnames(df)[j], j, my_row[, "class"], my_tool_tip, paste0("U: ", my_row[, "unique"]))
-    evt <- obj_env$add_column_label(column, colnames(df)[j], j, my_row[, "class"], my_tool_tip, "Test column label")
+    evt <- obj_env$add_column_label(column, colnames(df)[j], j, my_row[, "class"], my_tool_tip, paste0("U: ", my_row[, "unique"]))
   } else {
     evt <- obj_env$add_column_label(column, colnames(df)[j], j)
   }
