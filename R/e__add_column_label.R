@@ -16,7 +16,7 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
   font.str <- "Serif, bold 9"
   font <- RGtk2::pangoFontDescriptionFromString(font.str)
 
-  print("add_column_label called")
+  print(paste0("add_column_label called: ", j)
 
 
   evb <- RGtk2::gtkEventBox()
