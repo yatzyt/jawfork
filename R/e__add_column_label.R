@@ -52,7 +52,8 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
     
     data2 <- outer_env[[session_name]]$data2
     print(colnames(data2[j]))
-    print(max(nchar((data2[j]))))
+    print(max(nchar((data2[[j]]))))
+    col_length <- max(nchar((outer_env[[session_name]]$data2[[j]])))
       ############################################################
       # Insert line breaks to prevent labels from being too long #
       ############################################################
