@@ -169,8 +169,8 @@ e__table_obj_function <- function(box, outer_env = totem,obj_env=inner_env) {
         for (j in setdiff(seq_len(ncol(df) - 2), 1)) {
           data3 <- outer_env[[session_name]]$data3
 
-          write.csv(outer_env[[session_name]]$data2, "C:\Users\jneff.PENTARACORP\Desktop\data2.csv")
-          write.csv(outer_env[[session_name]]$data1, "C:\Users\jneff.PENTARACORP\Desktop\data1.csv")
+          write.csv(outer_env[[session_name]]$data2, "C:/Users/jneff.PENTARACORP/Desktop/data2.csv")
+          write.csv(outer_env[[session_name]]$data1, "C:/Users/jneff.PENTARACORP/Desktop/data1.csv")
           
           my_row <- data3[j - 1, ]
           my_tool_tip <- paste0(
