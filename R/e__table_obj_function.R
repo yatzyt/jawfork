@@ -181,7 +181,7 @@ e__table_obj_function <- function(box, outer_env = totem,obj_env=inner_env) {
           #RGtk2::gtkLabelSetText(obj_env$table_objects_list$allColumns[[j]]$evt$y, paste0("U: ", my_row[, "unique"]))
 
           
-          obj_env$add_column_label(column, colnames(df)[j], j, my_row[, "class"], my_tool_tip, paste0("U: ", my_row[, "unique"]))
+          obj_env$add_column_label(obj_env$table_objects_list$allColumns[[j]], colnames(df)[j], j, my_row[, "class"], my_tool_tip, paste0("U: ", my_row[, "unique"]))
 
           
           RGtk2::gtkWidgetSetTooltipText(obj_env$table_objects_list$allColumns[[j]]$evt$evb, my_tool_tip)
