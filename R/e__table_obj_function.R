@@ -184,11 +184,14 @@ e__table_obj_function <- function(box, outer_env = totem,obj_env=inner_env) {
           #####################
           if (is.na(my_row[, "label"])) { pre_y <- "---" }
           else { pre_y <- my_row[, "label"] }
+          
+          col_length <- max(nchar((outer_env[[session_name]]$data2[[j - 1]])))
+          if (is.na(col_length)) {col_length <- 0}
             ############################################################
             # Insert line breaks to prevent labels from being too long #
             ############################################################
             #Set max length based on max length of column values
-            max_length <- 20
+            max_length <- max(20, col_length)
             # Split the text into words
             words <- strsplit(pre_y, " ")[[1]]
             # Initialize an empty result
