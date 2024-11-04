@@ -75,15 +75,12 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
           current_length <- current_length + nchar(word) + 1
         }
       }      
-    y <- RGtk2::gtkLabel(paste0(result, " "))
+    ###########################################
+    # Combine column labels and unique values #
+    ###########################################
+    y <- RGtk2::gtkLabel(paste0(result, "\n", sec_label]))
     y$xalign <- 0
     RGtk2::gtkBoxPackStart(hb, y, F, F, padding = 1)
-    #####################
-    # Get unique values #
-    #####################
-    z <- RGtk2::gtkLabel(sec_label)
-    z$xalign <- 0
-    RGtk2::gtkBoxPackStart(hb, z, F, F, padding = 1)
   } else {
     y <- RGtk2::gtkLabel("")
     x <- RGtk2::gtkLabel(paste0(label, " "))
