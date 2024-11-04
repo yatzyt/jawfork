@@ -175,41 +175,15 @@ e__table_obj_function <- function(box, outer_env = totem,obj_env=inner_env) {
             "\nUnique: ", my_row[, "unique"], "\nMissing: ", my_row[, "missing"],
             "\nBlank: ", my_row[, "blank"]
           )
-
-        #####################
-        # Get column labels #
-        #####################
-        if (is.na(my_row[, "label"])) { pre_y <- "---" }
-        else { pre_y <- my_row[, "label"] }
-            ############################################################
-            # Insert line breaks to prevent labels from being too long #
-            ############################################################
-            #Set max length based on max length of column values
-            max_length <- 20
-            # Split the text into words
-            words <- strsplit(pre_y, " ")[[1]]
-            # Initialize an empty result
-            result <- ""
-            # Track the current line length
-            current_length <- 0      
-            # Loop through each word
-            for (word in words) {
-              # Check if adding the word would exceed the max_length
-              if (current_length + nchar(word) > max_length) {
-                # If so, add a line break and reset current_length
-                result <- paste0(result, " \n", word)
-                current_length <- nchar(word)
-              } else {
-                # Otherwise, add the word to the current line
-                if (current_length > 0) result <- paste0(result, " ")
-                result <- paste0(result, word)
-                current_length <- current_length + nchar(word) + 1
-              }
-            }  
           
           #I don't know what this is originally intended for, but it's screwing up the column labels in the header
           #Commenting it out hasn't led to any adverse effects I've seen yet
-          RGtk2::gtkLabelSetText(obj_env$table_objects_list$allColumns[[j]]$evt$y, result, paste0("U: ", my_row[, "unique"]))
+          #RGtk2::gtkLabelSetText(obj_env$table_objects_list$allColumns[[j]]$evt$y, paste0("U: ", my_row[, "unique"]))
+
+          
+          obj_env$add_column_label(column, colnames(df)[j], j, my_row[, "class"], my_tool_tip, paste0("U: ", my_row[, "unique"]))
+
+          
           RGtk2::gtkWidgetSetTooltipText(obj_env$table_objects_list$allColumns[[j]]$evt$evb, my_tool_tip)
           if (my_row[, "class"] == "numeric") {
             RGtk2::gtkWidgetModifyBg(object = obj_env$table_objects_list$allColumns[[j]]$evt$evb, state = "normal", color = "#FFFFFF")
