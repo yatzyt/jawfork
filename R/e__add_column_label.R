@@ -50,9 +50,6 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
     if (is.na(my_row[, "label"])) { pre_y <- "---" }
     else { pre_y <- my_row[, "label"] }
     
-    data2 <- outer_env[[session_name]]$data2
-    print(colnames(data2[j - 1]))
-    print(max(nchar((data2[[j - 1]]))))
     col_length <- max(nchar((outer_env[[session_name]]$data2[[j - 1]])))
     if (is.na(col_length)) {col_length <- 0}
       ############################################################
