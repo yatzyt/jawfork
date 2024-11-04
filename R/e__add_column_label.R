@@ -54,12 +54,12 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
     print(colnames(data2[j - 1]))
     print(max(nchar((data2[[j - 1]]))))
     col_length <- max(nchar((outer_env[[session_name]]$data2[[j - 1]])))
+    if (is.na(col_length)) {col_length <- 0}
       ############################################################
       # Insert line breaks to prevent labels from being too long #
       ############################################################
       #Set max length based on max length of column values
-        #max_length <- max(20, my_row[, "length"])
-        max_length <- 20
+      max_length <- max(20, col_length)
       # Split the text into words
       words <- strsplit(pre_y, " ")[[1]]
       # Initialize an empty result
