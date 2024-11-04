@@ -168,12 +168,6 @@ e__table_obj_function <- function(box, outer_env = totem,obj_env=inner_env) {
       if (is_full_data_table) {
         for (j in setdiff(seq_len(ncol(df) - 2), 1)) {
           data3 <- outer_env[[session_name]]$data3
-
-          write.csv(outer_env[[session_name]]$data2, "C:/Users/jneff.PENTARACORP/Desktop/data2.csv")
-          write.csv(outer_env[[session_name]]$data1, "C:/Users/jneff.PENTARACORP/Desktop/data1.csv")
-          write.csv(outer_env[[session_name]]$data4, "C:/Users/jneff.PENTARACORP/Desktop/data4.csv")
-          write.csv(outer_env[[session_name]]$data5, "C:/Users/jneff.PENTARACORP/Desktop/data5.csv")
-          
           my_row <- data3[j - 1, ]
           my_tool_tip <- paste0(
             my_row[, "label"], "\nLength: ", my_row[, "length"],
