@@ -237,6 +237,7 @@ e__create_settings <- function(outer_env = totem) {
   #Add click to change message to settings window
   RGtk2::gtkBoxPackStart(outer_env$settings_window$settings_window_main_box, RGtk2::gtkLabel("Click to change settings."), F, F, padding = 4)
   
+  
   #Add button for maximization setting
   max <- RGtk2::gtkCheckButtonNewWithLabel("Maximize on load", show = TRUE)
   RGtk2::gtkToggleButtonSetActive(max, outer_env$settings_list$maximize)
@@ -246,6 +247,17 @@ e__create_settings <- function(outer_env = totem) {
   ctsh <- RGtk2::gtkCheckButtonNewWithLabel("Ctrl+Shift runs code", show = TRUE)
   RGtk2::gtkToggleButtonSetActive(ctsh, outer_env$settings_list$ctrlshift)
   RGtk2::gtkBoxPackStart(outer_env$settings_window$settings_window_main_box, ctsh, F, F, padding = 4) 
+  
+  #Add button for column label setting
+  collabel <- RGtk2::gtkCheckButtonNewWithLabel("Display column label in column headers", show = TRUE)
+  RGtk2::gtkToggleButtonSetActive(collabel, outer_env$settings_list$columnlabel)
+  RGtk2::gtkBoxPackStart(outer_env$settings_window$settings_window_main_box, collabel, F, F, padding = 4) 
+  
+  #Add button for column unique values setting
+  colunique <- RGtk2::gtkCheckButtonNewWithLabel("Display number of unique values in column headers", show = TRUE)
+  RGtk2::gtkToggleButtonSetActive(colunique, outer_env$settings_list$columnunique)
+  RGtk2::gtkBoxPackStart(outer_env$settings_window$settings_window_main_box, colunique, F, F, padding = 4) 
+  
   
   #Define function to call when maximization button clicked
   RGtk2::gSignalConnect(max, "toggled", function(max) {
@@ -258,6 +270,20 @@ e__create_settings <- function(outer_env = totem) {
   RGtk2::gSignalConnect(ctsh, "toggled", function(ctsh) {
     current_state <- RGtk2::gtkToggleButtonGetActive(ctsh)
     outer_env$settings_list$ctrlshift <- current_state
+    return(T)
+  })
+  
+  #Define function to call when column label button clicked
+  RGtk2::gSignalConnect(collabel, "toggled", function(collabel) {
+    current_state <- RGtk2::gtkToggleButtonGetActive(collabel)
+    outer_env$settings_list$columnlabel <- current_state
+    return(T)
+  })
+  
+  #Define function to call when column unique button clicked
+  RGtk2::gSignalConnect(colunique, "toggled", function(colunique) {
+    current_state <- RGtk2::gtkToggleButtonGetActive(colunique)
+    outer_env$settings_list$columnunique <- current_state
     return(T)
   })
   
