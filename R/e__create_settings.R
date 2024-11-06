@@ -291,6 +291,9 @@ e__create_settings <- function(outer_env = totem) {
   RGtk2::gSignalConnect(header_reset, "button-press-event", function(widget, event, cb) {
     RGtk2::gtkToggleButtonSetActive(cb, T)
     outer_env$settings_list$maximize <- T
+    outer_env$settings_list$ctrlshift <- T
+    outer_env$settings_list$columnlabel <- T
+    outer_env$settings_list$columnunique <- T
     return(T)
   }, cb)
 
