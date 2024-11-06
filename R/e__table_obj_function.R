@@ -182,37 +182,44 @@ e__table_obj_function <- function(box, outer_env = totem,obj_env=inner_env) {
           #####################
           # Get column labels #
           #####################
-          if (is.na(my_row[, "label"])) { pre_y <- "---" }
-          else { pre_y <- my_row[, "label"] }
-          
-          col_length <- max(nchar((outer_env[[session_name]]$data2[[j - 1]])))
-          if (is.na(col_length)) {col_length <- 0}
-            ############################################################
-            # Insert line breaks to prevent labels from being too long #
-            ############################################################
-            #Set max length based on max length of column values
-            max_length <- max(20, col_length)
-            # Split the text into words
-            words <- strsplit(pre_y, " ")[[1]]
-            # Initialize an empty result
-            result <- ""
-            # Track the current line length
-            current_length <- 0      
-            # Loop through each word
-            for (word in words) {
-              # Check if adding the word would exceed the max_length
-              if (current_length + nchar(word) > max_length) {
-                # If so, add a line break and reset current_length
-                result <- paste0(result, " \n", word)
-                current_length <- nchar(word)
-              } else {
-                # Otherwise, add the word to the current line
-                if (current_length > 0) result <- paste0(result, " ")
-                result <- paste0(result, word)
-                current_length <- current_length + nchar(word) + 1
+          if (totem$settings_list$columnlabel | totem$settings_list$columnunique) {
+            if (totem$settings_list$columnlabel) {
+              if (is.na(my_row[, "label"])) { pre_y <- "---" }
+              else { pre_y <- my_row[, "label"] }
+              
+              col_length <- max(nchar((outer_env[[session_name]]$data2[[j - 1]])))
+              if (is.na(col_length)) {col_length <- 0}
+              ############################################################
+              # Insert line breaks to prevent labels from being too long #
+              ############################################################
+              #Set max length based on max length of column values
+              max_length <- max(20, col_length)
+              # Split the text into words
+              words <- strsplit(pre_y, " ")[[1]]
+              # Initialize an empty result
+              result <- ""
+              # Track the current line length
+              current_length <- 0      
+              # Loop through each word
+              for (word in words) {
+                # Check if adding the word would exceed the max_length
+                if (current_length + nchar(word) > max_length) {
+                  # If so, add a line break and reset current_length
+                  result <- paste0(result, " \n", word)
+                  current_length <- nchar(word)
+                } else {
+                  # Otherwise, add the word to the current line
+                  if (current_length > 0) result <- paste0(result, " ")
+                  result <- paste0(result, word)
+                  current_length <- current_length + nchar(word) + 1
+                }
               }
-            }      
-          RGtk2::gtkLabelSetText(obj_env$table_objects_list$allColumns[[j]]$evt$y, paste0(result, " \nU: ", my_row[, "unique"]))          
+            }
+            if (totem$settings_list$columnlabel & totem$settings_list$columnunique) { RGtk2::gtkLabelSetText(obj_env$table_objects_list$allColumns[[j]]$evt$y, paste0(result, " \nU: ", my_row[, "unique"])) }
+            else if (totem$settings_list$columnlabel & !totem$settings_list$columnunique) { RGtk2::gtkLabelSetText(obj_env$table_objects_list$allColumns[[j]]$evt$y, paste0(result, " ")) }
+            else if (!totem$settings_list$columnlabel & totem$settings_list$columnunique) { RGtk2::gtkLabelSetText(obj_env$table_objects_list$allColumns[[j]]$evt$y, paste0("U: ", my_row[, "unique"])) }
+          }
+          
           RGtk2::gtkWidgetSetTooltipText(obj_env$table_objects_list$allColumns[[j]]$evt$evb, my_tool_tip)
           if (my_row[, "class"] == "numeric") {
             RGtk2::gtkWidgetModifyBg(object = obj_env$table_objects_list$allColumns[[j]]$evt$evb, state = "normal", color = "#FFFFFF")
