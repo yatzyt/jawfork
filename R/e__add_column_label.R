@@ -45,8 +45,9 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
     #####################
     # Get column labels #
     #####################
-    if (totem$settings_list$columnlabel | totem$settings_list$columnunique) {
-      if (totem$settings_list$columnlabel) {
+    print(paste0("columnlabel: ", totem$settings_list$columnlabel, "- columnunique: ", totem$settings_list$columnunique))
+    ##if (totem$settings_list$columnlabel | totem$settings_list$columnunique) {
+      ##if (totem$settings_list$columnlabel) {
         data3 <- outer_env[[session_name]]$data3
         my_row <- data3[j - 1, ]
         if (is.na(my_row[, "label"])) { pre_y <- "---" }
@@ -79,17 +80,18 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
             current_length <- current_length + nchar(word) + 1
           }
         }
-      }
+      ##}
       ###########################################
       # Combine column labels and unique values #
       ###########################################
-      if (totem$settings_list$columnlabel & totem$settings_list$columnunique) { y <- RGtk2::gtkLabel(paste0(result, " \n", sec_label)) }
-      else if (totem$settings_list$columnlabel & !totem$settings_list$columnunique) { y <- RGtk2::gtkLabel(paste0(result, " ")) }
-      else if (!totem$settings_list$columnlabel & totem$settings_list$columnunique) { y <- RGtk2::gtkLabel(sec_label) }
-      else { y <- RGtk2::gtkLabel("Nothing") }
+      ##if (totem$settings_list$columnlabel & totem$settings_list$columnunique) { y <- RGtk2::gtkLabel(paste0(result, " \n", sec_label)) }
+      ##else if (totem$settings_list$columnlabel & !totem$settings_list$columnunique) { y <- RGtk2::gtkLabel(paste0(result, " ")) }
+      ##else if (!totem$settings_list$columnlabel & totem$settings_list$columnunique) { y <- RGtk2::gtkLabel(sec_label) }
+      ##else { y <- RGtk2::gtkLabel("Nothing") }
+      y <- RGtk2::gtkLabel(paste0(result, " \n", sec_label))
       y$xalign <- 0
       RGtk2::gtkBoxPackStart(hb, y, F, F, padding = 1)
-    }
+    ##}
   } else {
     y <- RGtk2::gtkLabel("")
     x <- RGtk2::gtkLabel(paste0(label, " "))
