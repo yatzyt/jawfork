@@ -45,8 +45,8 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
     #####################
     # Get column labels #
     #####################
-    if (columnlabel | columnunique) {
-      if (columnlabel) {
+    if (totem$settings_list$columnlabel | totem$settings_list$columnunique) {
+      if (totem$settings_list$columnlabel) {
         data3 <- outer_env[[session_name]]$data3
         my_row <- data3[j - 1, ]
         if (is.na(my_row[, "label"])) { pre_y <- "---" }
@@ -83,9 +83,9 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
       ###########################################
       # Combine column labels and unique values #
       ###########################################
-      if (columnlabel & columnunique) { y <- RGtk2::gtkLabel(paste0(result, " \n", sec_label)) }
-      else if (columnlabel & !columnunique) { y <- RGtk2::gtkLabel(paste0(result, " ")) }
-      else if (!columnlabel & columnunique) { y <- RGtk2::gtkLabel(sec_label) }
+      if (totem$settings_list$columnlabel & totem$settings_list$columnunique) { y <- RGtk2::gtkLabel(paste0(result, " \n", sec_label)) }
+      else if (totem$settings_list$columnlabel & !totem$settings_list$columnunique) { y <- RGtk2::gtkLabel(paste0(result, " ")) }
+      else if (!totem$settings_list$columnlabel & totem$settings_list$columnunique) { y <- RGtk2::gtkLabel(sec_label) }
       y$xalign <- 0
       RGtk2::gtkBoxPackStart(hb, y, F, F, padding = 1)
     }
