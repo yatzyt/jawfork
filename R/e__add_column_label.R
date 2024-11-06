@@ -45,44 +45,50 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
     #####################
     # Get column labels #
     #####################
-    data3 <- outer_env[[session_name]]$data3
-    my_row <- data3[j - 1, ]
-    if (is.na(my_row[, "label"])) { pre_y <- "---" }
-    else { pre_y <- my_row[, "label"] }
-    
-    col_length <- max(nchar((outer_env[[session_name]]$data2[[j - 1]])))
-    if (is.na(col_length)) {col_length <- 0}
-      ############################################################
-      # Insert line breaks to prevent labels from being too long #
-      ############################################################
-      #Set max length based on max length of column values
-      max_length <- max(20, col_length)
-      # Split the text into words
-      words <- strsplit(pre_y, " ")[[1]]
-      # Initialize an empty result
-      result <- ""
-      # Track the current line length
-      current_length <- 0      
-      # Loop through each word
-      for (word in words) {
-        # Check if adding the word would exceed the max_length
-        if (current_length + nchar(word) > max_length) {
-          # If so, add a line break and reset current_length
-          result <- paste0(result, " \n", word)
-          current_length <- nchar(word)
-        } else {
-          # Otherwise, add the word to the current line
-          if (current_length > 0) result <- paste0(result, " ")
-          result <- paste0(result, word)
-          current_length <- current_length + nchar(word) + 1
+    if (columnlabel | columnunique) {
+      if (columnlabel) {
+        data3 <- outer_env[[session_name]]$data3
+        my_row <- data3[j - 1, ]
+        if (is.na(my_row[, "label"])) { pre_y <- "---" }
+        else { pre_y <- my_row[, "label"] }
+        
+        col_length <- max(nchar((outer_env[[session_name]]$data2[[j - 1]])))
+        if (is.na(col_length)) {col_length <- 0}
+        ############################################################
+        # Insert line breaks to prevent labels from being too long #
+        ############################################################
+        #Set max length based on max length of column values
+        max_length <- max(20, col_length)
+        # Split the text into words
+        words <- strsplit(pre_y, " ")[[1]]
+        # Initialize an empty result
+        result <- ""
+        # Track the current line length
+        current_length <- 0      
+        # Loop through each word
+        for (word in words) {
+          # Check if adding the word would exceed the max_length
+          if (current_length + nchar(word) > max_length) {
+            # If so, add a line break and reset current_length
+            result <- paste0(result, " \n", word)
+            current_length <- nchar(word)
+          } else {
+            # Otherwise, add the word to the current line
+            if (current_length > 0) result <- paste0(result, " ")
+            result <- paste0(result, word)
+            current_length <- current_length + nchar(word) + 1
+          }
         }
-      }      
-    ###########################################
-    # Combine column labels and unique values #
-    ###########################################
-    y <- RGtk2::gtkLabel(paste0(result, " \n", sec_label))
-    y$xalign <- 0
-    RGtk2::gtkBoxPackStart(hb, y, F, F, padding = 1)
+      }
+      ###########################################
+      # Combine column labels and unique values #
+      ###########################################
+      if (columnlabel & columnunique) { y <- RGtk2::gtkLabel(paste0(result, " \n", sec_label)) }
+      else if (columnlabel & !columnunique) { y <- RGtk2::gtkLabel(paste0(result, " ")) }
+      else if (!columnlabel & columnunique) { y <- RGtk2::gtkLabel(sec_label) }
+      y$xalign <- 0
+      RGtk2::gtkBoxPackStart(hb, y, F, F, padding = 1)
+    }
   } else {
     y <- RGtk2::gtkLabel("")
     x <- RGtk2::gtkLabel(paste0(label, " "))
