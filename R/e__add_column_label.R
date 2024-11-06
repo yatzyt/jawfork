@@ -86,6 +86,7 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
       if (totem$settings_list$columnlabel & totem$settings_list$columnunique) { y <- RGtk2::gtkLabel(paste0(result, " \n", sec_label)) }
       else if (totem$settings_list$columnlabel & !totem$settings_list$columnunique) { y <- RGtk2::gtkLabel(paste0(result, " ")) }
       else if (!totem$settings_list$columnlabel & totem$settings_list$columnunique) { y <- RGtk2::gtkLabel(sec_label) }
+      else { y <- "Nothing" }
       y$xalign <- 0
       RGtk2::gtkBoxPackStart(hb, y, F, F, padding = 1)
     }
