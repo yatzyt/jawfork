@@ -47,7 +47,6 @@ e__add_column_label <- function(treeviewcolumn, label, j, var_class = NULL, tool
     #####################
     # Get column labels #
     #####################
-    print(paste0("columnlabel: ", totem$settings_list$columnlabel, "- columnunique: ", totem$settings_list$columnunique))
     if (totem$settings_list$columnlabel | totem$settings_list$columnunique) {
       if (totem$settings_list$columnlabel) {
         data3 <- outer_env[[session_name]]$data3
