@@ -41,6 +41,7 @@ e__close_all_windows <- function(session_name,outer_env=totem) {
   allocation <- RGtk2::gtkWidgetGetAllocation(outer_env[[session_name]]$windows$main_window)$allocation
   totem$settings_list$default_sizes$window <- c(allocation$width, allocation$height)
 
+  Sys.sleep(10)
   RGtk2::gtkWidgetDestroy(outer_env[[session_name]]$windows$main_window)
   RGtk2::gtkWidgetDestroy(outer_env[[session_name]]$past_code_window)
   outer_env[[session_name]] <- NULL
