@@ -39,7 +39,8 @@ e__load_dataset <- function(session_name,outer_env=totem) {
     #csv
     }else if(outer_env[[session_name]]$passed_ext=="rds"){
       outer_env[[session_name]]$data1 <- as.data.frame(read.csv(file=outer_env[[session_name]]$sas_file_path)
-                                                       , header = TRUE, sep = ",", skip = 0, stringsAsFactors = FALSE) 
+                                                       , header = TRUE, sep = ",", skip = 0, stringsAsFactors = FALSE)
+      Sys.sleep(5)
       outer_env[[session_name]]$data1_contents <- data.frame(
           "variable" = colnames(outer_env[[session_name]]$data1),
           "length" = NA,
